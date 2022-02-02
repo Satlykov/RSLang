@@ -13,6 +13,7 @@ import { SprintGamePageComponent } from './pages/sprint-game-page/sprint-game-pa
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './components/core/header/header.component';
 import { FooterComponent } from './components/core/footer/footer.component';
+import { MainContentComponent } from './components/core/main-content/main-content.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { FooterComponent } from './components/core/footer/footer.component';
     SprintGamePageComponent,
     HeaderComponent,
     FooterComponent,
+    MainContentComponent,
   ],
   imports: [
     BrowserModule,

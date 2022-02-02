@@ -1,0 +1,29 @@
+<mat-drawer-container style="min-height: calc(100% - 128px)">
+  <mat-drawer #sidenav mode="over" style="min-width: 250px">
+    <mat-nav-list>
+      <a
+        mat-list-item
+        routerLink="/"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        Main
+      </a>
+      <a mat-list-item routerLink="/book" routerLinkActive="active">Book</a>
+      <a mat-list-item routerLink="/sprint-game" routerLinkActive="active">
+        Sprint game
+      </a>
+      <a mat-list-item routerLink="/audio-call-game" routerLinkActive="active">
+        Audio call game
+      </a>
+      <a mat-list-item routerLink="/statistics" routerLinkActive="active">
+        Statistics
+      </a>
+      <a mat-list-item routerLink="/authorization" routerLinkActive="active">
+        <mat-icon style="margin-right: 10px;">login</mat-icon>
+        Sign in
+      </a>
+    </mat-nav-list>
+  </mat-drawer>
+  <router-outlet></router-outlet>
+</mat-drawer-container>
