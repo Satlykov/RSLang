@@ -8,8 +8,7 @@ import { SideNavService } from 'src/app/services/side-nav.service';
   styleUrls: ['./main-content.component.scss'],
 })
 export class MainContentComponent implements OnInit {
-  @ViewChild('sidenav')
-  public sidenav!: MatSidenav;
+  @ViewChild('sidenav') public sidenav!: MatSidenav;
   constructor(private sideNavService: SideNavService) {}
 
   ngOnInit(): void {
