@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SideNavService } from 'src/app/services/side-nav.service';
+import { SideNavService } from 'src/app/services/layout.service';
 
 @Component({
   selector: 'app-header',

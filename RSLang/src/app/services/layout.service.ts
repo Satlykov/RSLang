@@ -5,9 +5,10 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class SideNavService {
+
   constructor() { }
 
-  public sideNavToggleSubject: BehaviorSubject<any> = new BehaviorSubject(null);
+  public sideNavToggleSubject: BehaviorSubject<null> = new BehaviorSubject(null);
 
   public toggle() {
     return this.sideNavToggleSubject.next(null);
