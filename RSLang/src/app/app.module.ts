@@ -11,6 +11,8 @@ import { StatisticsPageComponent } from './pages/statistics-page/statistics-page
 import { AudioCallGamePageComponent } from './pages/audio-call-game-page/audio-call-game-page.component';
 import { SprintGamePageComponent } from './pages/sprint-game-page/sprint-game-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HeaderComponent } from './components/core/header/header.component';
+import { FooterComponent } from './components/core/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -21,8 +23,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     StatisticsPageComponent,
     AudioCallGamePageComponent,
     SprintGamePageComponent,
+    HeaderComponent,
+    FooterComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, MaterialUIModule, BrowserAnimationsModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    MaterialUIModule,
+    BrowserAnimationsModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
