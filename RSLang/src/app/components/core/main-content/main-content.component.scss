@@ -1,3 +1,36 @@
 .active {
   color: #7b7bfa;
 }
+
+@mixin indents {
+  margin: 0;
+  padding: 0;
+}
+
+@mixin headline {
+  @include indents;
+
+  p {
+    font-family: Merienda One, sans-serif;
+    font-size: 52px;
+    letter-spacing: 2px;
+  }
+  header {
+    @include headline;
+  }
+}
+
+@mixin list {
+  @include indents;
+
+  li {
+    font-family: Rubic, sans-serif;
+    font-size: 20px;
+    font-weight: 300;
+    list-style-type: none;
+  }
+
+  nav ul {
+    @include list;
+  }
+}
