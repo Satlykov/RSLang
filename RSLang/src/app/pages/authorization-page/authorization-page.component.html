@@ -1,1 +1,45 @@
-<p>authorization-page works!</p>
+<div class="authoriztion-container">
+  <mat-card>
+    <mat-tab-group>
+      <mat-tab label="Вход">
+        <h3>Вход в аккаунт</h3>
+        <form>
+          <mat-card-content>
+            <mat-form-field color="basic">
+              <mat-label>Email</mat-label>
+              <input matInput placeholder="user@mail.com">
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Пароль</mat-label>
+              <input matInput [type]="hide ? 'password' : 'text'">
+              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+            </mat-form-field>
+          </mat-card-content>
+          <button mat-stroked-button>Войти</button>
+        </form>
+      </mat-tab>
+      <mat-tab label="Регистрация">
+        <h3>Регистрация</h3>
+        <form>
+          <mat-card-content>
+            <mat-form-field>
+              <mat-label>Email</mat-label>
+              <input matInput placeholder="user@mail.com">
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Пароль</mat-label>
+              <input matInput>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Повторите пароль</mat-label>
+              <input matInput>
+            </mat-form-field>
+          </mat-card-content>
+          <button mat-stroked-button>Регестрация</button>
+        </form>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card>
+</div>

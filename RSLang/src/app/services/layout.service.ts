@@ -4,7 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class SideNavService {
+export class LayoutService {
 
   constructor() { }
 

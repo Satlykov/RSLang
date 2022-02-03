@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SideNavService } from 'src/app/services/layout.service';
+import { LayoutService } from 'src/app/services/layout.service';
 
 @Component({
   selector: 'app-header',
@@ -8,7 +8,7 @@ import { SideNavService } from 'src/app/services/layout.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private sidenav: SideNavService) {}
+  constructor(private sidenav: LayoutService) {}
 
   ngOnInit(): void {}
 

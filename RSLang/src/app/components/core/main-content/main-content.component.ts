@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
-import { SideNavService } from 'src/app/services/layout.service';
+import { LayoutService } from 'src/app/services/layout.service';
 
 @Component({
   selector: 'app-main-content',
@@ -9,10 +9,10 @@ import { SideNavService } from 'src/app/services/layout.service';
 })
 export class MainContentComponent implements OnInit {
   @ViewChild('sidenav') public sidenav!: MatSidenav;
-  constructor(private sideNavService: SideNavService) {}
+  constructor(private layoutService: LayoutService) {}
 
   ngOnInit(): void {
-    this.sideNavService.sideNavToggleSubject.subscribe(() => {
+    this.layoutService.sideNavToggleSubject.subscribe(() => {
       if (this.sidenav) this.sidenav.toggle();
     });
   }
