@@ -1,12 +1,8 @@
-
 .spacer {
   flex: 1 1 auto;
 }
 
-//пока не разобралась с импортом миксина, но решила проверить как вышлядят стили на кнопках
-
-button
-{
+button {
   border-radius: 40px;
   border: 1px solid #fa8d62;
   color: #e9f3ff;
@@ -22,9 +18,11 @@ button
   transition-duration: 600ms;
 }
 
-button:hover{
+button:hover {
   transition-duration: 600ms;
   background: linear-gradient(to right, #fa8d62, #438aa8);
   color: #e9f3ff;
   filter: drop-shadow(0 0 0.2rem #438aa8);
 }
+
+/*# sourceMappingURL=header.component.css.map */
