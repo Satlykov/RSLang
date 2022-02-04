@@ -1,3 +1,19 @@
 .active {
-  color: #7b7bfa;
+  color: #428AA8;
+  font-weight: 500;
+}
+
+mat-drawer {
+  background-color: #E8F3FF;
+  color: #575757;
+  min-width: 250px
+}
+
+mat-icon {
+  margin-right: 10px;
+}
+
+mat-drawer-content {
+  width: 100%;
+  min-height: calc(100vh - 128px);
 }
