@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="6bbf114f-ff85-4f2d-a4da-5c00618127d7" name="Changes" comment="Merge branch 'develop' into mixin">
+      <change afterPath="$PROJECT_DIR$/RSLang/src/app/components/core/footer/footer.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RSLang/src/app/components/core/footer/footer.component.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RSLang/src/app/pages/authorization-page/authorization-page.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RSLang/src/app/pages/authorization-page/authorization-page.component.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RSLang/src/app/app.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/RSLang/src/app/app.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RSLang/src/app/components/core/header/header.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/RSLang/src/app/components/core/header/header.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RSLang/src/app/components/core/main-content/main-content.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/RSLang/src/app/components/core/main-content/main-content.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RSLang/src/app/pages/main-page/main-page.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/RSLang/src/app/pages/main-page/main-page.component.html" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="Nastya &lt;62557067+anesthesia92@users.noreply.github.com&gt;" />
+      </list>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="24YlPguKqIbpx8GHnS3BityxEo8" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$USER_HOME$/anesthesia92-JSFE2021Q3/christmas-task" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="watcher.settings" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6bbf114f-ff85-4f2d-a4da-5c00618127d7" name="Changes" comment="" />
+      <created>1643815379237</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1643815379237</updated>
+      <workItem from="1643815380575" duration="4269000" />
+      <workItem from="1643914920973" duration="3611000" />
+      <workItem from="1643977043293" duration="6637000" />
+      <workItem from="1644006592896" duration="99000" />
+    </task>
+    <task id="LOCAL-00001" summary="feat: create a new branch, add mixins">
+      <created>1643824469994</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1643824469995</updated>
+    </task>
+    <task id="LOCAL-00002" summary="feat: move mixins to other components, edit these">
+      <created>1643916121540</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1643916121541</updated>
+    </task>
+    <task id="LOCAL-00003" summary="feat: add styles and mixin for button">
+      <created>1643917882032</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1643917882032</updated>
+    </task>
+    <task id="LOCAL-00004" summary="feat: add mixin's import">
+      <created>1643984131193</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1643984131193</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Merge branch 'develop' into mixin">
+      <created>1643992356556</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1643992356556</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="feat: create a new branch, add mixins" />
+    <MESSAGE value="feat: move mixins to other components, edit these" />
+    <MESSAGE value="feat: add styles and mixin for button" />
+    <MESSAGE value="feat: add mixin's import" />
+    <MESSAGE value="Merge branch 'develop' into mixin" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'develop' into mixin" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
