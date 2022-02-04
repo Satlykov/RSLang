@@ -65,6 +65,7 @@
 }
 
 @mixin button-hover {
+  @include button;
   transition-duration: 600ms;
   background: linear-gradient(to right, #fa8d62, #438aa8);
   color: #e9f3ff;
