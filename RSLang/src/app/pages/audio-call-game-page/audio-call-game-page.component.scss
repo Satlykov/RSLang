@@ -1,0 +1,73 @@
+.container {
+  max-width: 100%;
+  padding: 0 15px;
+}
+.category__container,
+.questions__container {
+  padding: 50px;
+  border-radius: 50px;
+  background-color: aquamarine;
+  margin: 15vh auto;
+  max-width: 25rem;
+  margin-bottom: 10vh;
+}
+.category__title {
+  text-align: center;
+}
+.category__subtitle {
+  font-weight: normal;
+}
+.category__button-container {
+  display: flex;
+}
+.category__button {
+  margin-left: 5px;
+}
+.category__button:nth-child(1) {
+  margin-left: 0;
+  background-color: #80ff00;
+}
+.category__button:nth-child(2) {
+  background-color: #bfff00;
+}
+.category__button:nth-child(3) {
+  background-color: #ffff00;
+}
+.category__button:nth-child(4) {
+  background-color: #ffbf00;
+}
+.category__button:nth-child(5) {
+  background-color: #ff8000;
+}
+.category__button:nth-child(6) {
+  background-color: #ff4000;
+}
+.questions__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.questions__audio {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: url(../../../assets/svg/volume-up-solid.svg) no-repeat;
+  background-size: 60px 60px;
+  padding: 15px;
+  background-position: center;
+  margin-bottom: 50px;
+  cursor: pointer;
+}
+.questions__answer-container {
+  display: flex;
+  justify-content: space-between;
+  max-width: 800px;
+  margin: 0 auto 30px;
+}
+.questions__answer {
+  margin: 0 5px;
+}
+.questions__back {
+  margin-left: 5px;
+}

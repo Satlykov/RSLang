@@ -1,1 +1,69 @@
-<p>audio-call-game-page works!</p>
+<div class="container">
+  <div *ngIf="!isOpened; else questions" class="category__container">
+    <h2 class="category__title">Аудиовызов</h2>
+    <h3 class="category__subtitle">Выберите сложность:</h3>
+    <div class="category__button-container">
+      <button
+        class="category__button"
+        mat-raised-button
+        (click)="showQuestions(1)"
+      >
+        1
+      </button>
+      <button
+        class="category__button"
+        mat-raised-button
+        (click)="showQuestions(2)"
+      >
+        2
+      </button>
+      <button
+        class="category__button"
+        mat-raised-button
+        (click)="showQuestions(3)"
+      >
+        3
+      </button>
+      <button
+        class="category__button"
+        mat-raised-button
+        (click)="showQuestions(4)"
+      >
+        4
+      </button>
+      <button
+        class="category__button"
+        mat-raised-button
+        (click)="showQuestions(5)"
+      >
+        5
+      </button>
+      <button
+        class="category__button"
+        mat-raised-button
+        (click)="showQuestions(6)"
+      >
+        6
+      </button>
+    </div>
+  </div>
+  <ng-template #questions>
+    <div class="questions__container">
+      <div class="questions__audio"></div>
+      <div class="questions__answer-container">
+        <button mat-raised-button class="questions__answer">Ответ</button>
+        <button mat-raised-button class="questions__answer">Ответ</button>
+        <button mat-raised-button class="questions__answer">Ответ</button>
+        <button mat-raised-button class="questions__answer">Ответ</button>
+        <button mat-raised-button class="questions__answer">Ответ</button>
+      </div>
+      <button
+        mat-raised-button
+        (click)="showQuestions(0)"
+        class="questions__back"
+      >
+        Назад
+      </button>
+    </div>
+  </ng-template>
+</div>
