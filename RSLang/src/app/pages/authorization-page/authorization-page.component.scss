@@ -1,0 +1,36 @@
+.authoriztion-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: calc(100vh - 128px);
+  background-color: #E8F3FF;
+  color: #575757;
+}
+
+mat-card {
+  max-width: 400px;
+}
+
+form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+button {
+  background-color: #428AA8;
+  border-color: #428AA8;
+  color: #FFFFFF;
+  transition: all .5s;
+  &:hover {
+    background-color: #FFFFFF;
+    border-color: #428AA8;
+    color: #575757;
+  }
+}
