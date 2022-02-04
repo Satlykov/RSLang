@@ -1,7 +1,17 @@
+@import '../../../app.component';
+
 .spacer {
   flex: 1 1 auto;
 }
 
+
+button {
+  @include button;
+}
+
+button:hover{
+  @include button-hover;
+=======
 mat-toolbar {
   background-color: #428AA8;
   color: #FFFFFF;
