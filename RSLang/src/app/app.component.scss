@@ -9,7 +9,7 @@
 @mixin h1 {
   h1 {
     font-family: Merienda One, sans-serif;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
     color: #e9f3ff;
     font-weight: bold;
   }
@@ -35,6 +35,7 @@
     font-family: Rubic, sans-serif;
     font-weight: 300;
     color: #49494b;
+    padding: 0;
   }
   background-color: #e9f3ff;
 }
@@ -71,3 +72,7 @@
   color: #e9f3ff;
   filter: drop-shadow(0 0 0.2rem #438aa8);
 }
+
+
+
+
