@@ -37,7 +37,7 @@
             Войти
           </button>
           <p *ngIf="!canLogin" style="margin-left: 5px">
-            Проверь праильность данных. Длинна пароля не менее 8 символов.
+            Проверь праильность данных. Длина пароля не менее 8 символов.
           </p>
           <p *ngIf="canLogin" style="margin-left: 5px">Попробуйте войти.</p>
         </form>
@@ -71,14 +71,14 @@
             </mat-form-field>
           </mat-card-content>
           <button mat-stroked-button (click)="regist()" [disabled]="!canRegist">
-            Регестрация
+            Регистрация
           </button>
           <p *ngIf="!canRegist" style="margin-left: 5px">
-            Проверь праильность данных. Длинна пароля не менее 8 символов.
-            Пароль в первой и второй строке должны совпадать.
+            Проверь праильность данных. Длина пароля не менее 8 символов.
+            Пароли в первой и второй строке должны совпадать.
           </p>
           <p *ngIf="canRegist" style="margin-left: 5px">
-            Можно регестрироваться!
+            Можно регистрироваться!
           </p>
         </form>
       </mat-tab>

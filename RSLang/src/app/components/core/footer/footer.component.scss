@@ -1,4 +1,17 @@
+@import '../../../app.component';
+
 mat-toolbar {
-  background-color: #E8F3FF;
-  color: #575757;
+  @include lightTheme;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+@media only screen and (max-width: 650px) {
+  mat-toolbar {
+    justify-content: center;
+    height: auto;
+    padding: 15px 0;
+  }
 }

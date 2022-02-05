@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
+import { Auth } from '../models/interface';
 import { ApiService } from './api.service';
 import { LocalStorageService } from './local-storage.service';
+import { SessionStorageService } from './session-storage.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthorizationService {
-  keyLocalStorage = 'userDataRSLang';
+  authenticated = false;
+  keyStorage = 'userDataRSLang';
   correctRegistEmail = false;
   correctRegistPasworFirst = false;
   correctRegistPasworSecond = false;
@@ -17,7 +20,8 @@ export class AuthorizationService {
 
   constructor(
     private apiService: ApiService,
-    private localStorageService: LocalStorageService
+    private localStorageService: LocalStorageService,
+    private sessionStorageService: SessionStorageService
   ) {}
 
   // General Email Regex (RFC 5322 Official Standard)
@@ -96,8 +100,11 @@ export class AuthorizationService {
         password: password,
       })
       .subscribe((req) => {
-        console.log(req);
-        this.localStorageService.setItem(this.keyLocalStorage, req);
+        if ((req as Auth).message === 'Authenticated') {
+          this.authenticated = true;
+        }
+        this.localStorageService.setItem(this.keyStorage, req);
+        this.sessionStorageService.setItem(this.keyStorage, req);
       });
   }
 
@@ -113,4 +120,3 @@ export class AuthorizationService {
       });
   }
 }
-
