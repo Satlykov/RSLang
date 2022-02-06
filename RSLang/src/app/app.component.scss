@@ -73,6 +73,13 @@
   filter: drop-shadow(0 0 0.2rem #438aa8);
 }
 
+@mixin ul {
+  list-style-type: none;
+  font-family: Rubic, sans-serif;
+  padding: 0;
+  margin: 0;
+}
+
 
 
 
