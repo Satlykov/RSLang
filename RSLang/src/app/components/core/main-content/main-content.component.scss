@@ -1,11 +1,12 @@
+@import '../../../app.component.scss';
+
 .active {
   color: #428AA8;
   font-weight: 500;
 }
 
 mat-drawer {
-  background-color: #E8F3FF;
-  color: #575757;
+  @include lightTheme;
   min-width: 250px
 }
 

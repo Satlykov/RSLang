@@ -11,3 +11,7 @@ button {
 button:hover{
   @include button-hover;
 }
+
+mat-toolbar {
+  @include blueTheme;
+}

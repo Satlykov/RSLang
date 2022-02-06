@@ -7,21 +7,28 @@
         routerLinkActive="active"
         [routerLinkActiveOptions]="{ exact: true }"
       >
+        <mat-icon>home</mat-icon>
         Main
       </a>
-      <a mat-list-item routerLink="/book" routerLinkActive="active">Book</a>
+      <a mat-list-item routerLink="/book" routerLinkActive="active">
+        <mat-icon>auto_stories</mat-icon>
+        Электронная книг
+      </a>
       <a mat-list-item routerLink="/sprint-game" routerLinkActive="active">
-        Sprint game
+        <mat-icon>videogame_asset</mat-icon>
+        Спринт игра
       </a>
       <a mat-list-item routerLink="/audio-call-game" routerLinkActive="active">
-        Audio call game
+        <mat-icon>videogame_asset</mat-icon>
+        Звуковая игра
       </a>
       <a mat-list-item routerLink="/statistics" routerLinkActive="active">
-        Statistics
+        <mat-icon>equalizer</mat-icon>
+        Статистика
       </a>
       <a mat-list-item routerLink="/authorization" routerLinkActive="active">
         <mat-icon>login</mat-icon>
-        Sign in
+        Войти
       </a>
     </mat-nav-list>
   </mat-drawer>
