@@ -134,7 +134,6 @@ export class AuthorizationService {
         (error) => {
           this.spinner = false;
           this.changeSpinnerStatus(this.spinner);
-
         }
       );
   }
@@ -168,7 +167,7 @@ export class AuthorizationService {
   }
 
   checkLogin() {
-    if (this.localStorageService.getItem(this.keyStorage)) {
+    if ((this.localStorageService.getItem(this.keyStorage) as Auth).message === 'Authenticated') {
       this.authenticated = true;
       this.changeAuthenticatedStatus(this.authenticated);
       this.userName = (this.localStorageService.getItem(this.keyStorage) as Auth).name;
