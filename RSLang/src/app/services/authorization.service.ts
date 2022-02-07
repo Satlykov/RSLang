@@ -167,19 +167,10 @@ export class AuthorizationService {
   }
 
   checkLogin() {
-    this.router.navigateByUrl('/');
-    if (
-      this.localStorageService.getItem(this.keyStorage).message ===
-      'Authenticated'
-    ) {
+    if (this.localStorageService.getItem(this.keyStorage) !== null) {
       this.authenticated = true;
       this.changeAuthenticatedStatus(this.authenticated);
       this.userName = this.localStorageService.getItem(this.keyStorage).name;
-      this.getUserName(this.userName);
-    } else {
-      this.authenticated = false;
-      this.changeAuthenticatedStatus(this.authenticated);
-      this.userName = '';
       this.getUserName(this.userName);
     }
   }

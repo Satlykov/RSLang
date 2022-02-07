@@ -7,19 +7,19 @@ import { backendURL } from '../constants/backendURL';
 export class ApiService {
   constructor(private http: HttpClient) {}
 
-  get(options: string) {
-    return this.http.get(backendURL + '/' + options);
+  get(path: string) {
+    return this.http.get(backendURL + '/' + path);
   }
 
-  post(options: string, obj: Object) {
-    return this.http.post(backendURL + '/' + options, obj);
+  post(path: string, obj: Object) {
+    return this.http.post(backendURL + '/' + path, obj);
   }
 
-  delete(options: string) {
-    return this.http.delete<void>(backendURL + '/' + options);
+  delete(path: string) {
+    return this.http.delete<void>(backendURL + '/' + path);
   }
 
-  put(options: string, obj: Object) {
-    return this.http.put(backendURL + '/' + options, obj);
+  put(path: string, obj: Object) {
+    return this.http.put(backendURL + '/' + path, obj);
   }
 }
