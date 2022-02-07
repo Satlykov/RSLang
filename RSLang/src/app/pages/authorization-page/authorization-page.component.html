@@ -1,6 +1,7 @@
 <div class="authoriztion-container">
   <mat-card>
-    <mat-tab-group>
+    <mat-spinner *ngIf="spinner" color="warn"></mat-spinner>
+    <mat-tab-group *ngIf="!spinner">
       <mat-tab label="Вход">
         <h3>Вход в аккаунт</h3>
         <form>
