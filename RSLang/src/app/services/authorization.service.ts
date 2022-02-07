@@ -122,7 +122,7 @@ export class AuthorizationService {
         (req) => {
           this.spinner = false;
           this.changeSpinnerStatus(this.spinner);
-          if ((req as Auth).message === 'Authenticated') {
+          if (req) {
             this.authenticated = true;
             this.changeAuthenticatedStatus(this.authenticated);
             this.router.navigateByUrl('/');
@@ -134,6 +134,7 @@ export class AuthorizationService {
         (error) => {
           this.spinner = false;
           this.changeSpinnerStatus(this.spinner);
+
         }
       );
   }

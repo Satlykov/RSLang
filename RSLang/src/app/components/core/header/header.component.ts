@@ -23,13 +23,11 @@ export class HeaderComponent implements OnInit {
     this.subsStatus = this.authorizationService.authenticatedStatus$.subscribe(
       (status: boolean) => {
         this.authenticated = status;
-        console.log(this.authenticated);
       }
     );
     this.subsName = this.authorizationService.userName$.subscribe(
       (name: string) => {
         this.userName = name;
-        console.log(this.userName);
       }
     )
   }
