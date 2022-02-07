@@ -14,8 +14,7 @@
   <button mat-icon-button routerLink="/authorization" *ngIf="!authenticated">
     <mat-icon>login</mat-icon>
   </button>
-  <h3 class="user-title" *ngIf="authenticated">Hello dear {{userName}}!</h3>
-  <mat-icon *ngIf="authenticated" class="user-title">account_circle</mat-icon>
+  <h3 class="user-title" *ngIf="authenticated">Hi {{userName}}!</h3>
   <button mat-icon-button routerLink="/exit" *ngIf="authenticated">
     <mat-icon>logout</mat-icon>
   </button>
