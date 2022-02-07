@@ -17,6 +17,8 @@ import { SprintGamePageComponent } from './pages/sprint-game-page/sprint-game-pa
 import { HeaderComponent } from './components/core/header/header.component';
 import { FooterComponent } from './components/core/footer/footer.component';
 import { MainContentComponent } from './components/core/main-content/main-content.component';
+import { ExitComponent } from './pages/exit/exit.component';
+import { AboutTeamComponent } from './pages/about-team/about-team.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,8 @@ import { MainContentComponent } from './components/core/main-content/main-conten
     HeaderComponent,
     FooterComponent,
     MainContentComponent,
+    ExitComponent,
+    AboutTeamComponent,
   ],
   imports: [
     BrowserModule,

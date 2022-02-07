@@ -11,7 +11,11 @@
     RS Lang
   </button>
   <span class="spacer"></span>
-  <button mat-icon-button routerLink="/authorization">
+  <button mat-icon-button routerLink="/authorization" *ngIf="!authenticated">
     <mat-icon>login</mat-icon>
+  </button>
+  <h3 class="user-title" *ngIf="authenticated">Hi {{userName}}!</h3>
+  <button mat-icon-button routerLink="/exit" *ngIf="authenticated">
+    <mat-icon>logout</mat-icon>
   </button>
 </mat-toolbar>

@@ -226,6 +226,7 @@ button:focus{
   75%{opacity: 1;}
   100%{top: -100vh; opacity: 0;}
 }
+
 .header{
   position: absolute;
   top: 40%;
@@ -289,6 +290,7 @@ button:focus{
   -o-animation-delay: 22s;
   animation-delay: 22s;
 }
+
 @-webkit-keyframes fadeIn{
   from{opacity: 0;}
   to{opacity: 1;}

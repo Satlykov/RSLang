@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { AuthorizationService } from 'src/app/services/authorization.service';
 @Component({
   selector: 'app-authorization-page',
@@ -7,6 +8,7 @@ import { AuthorizationService } from 'src/app/services/authorization.service';
 })
 export class AuthorizationPageComponent implements OnInit {
   hide = true;
+  spinner = false;
 
   canLogin = false;
   canRegist = false;
@@ -19,9 +21,21 @@ export class AuthorizationPageComponent implements OnInit {
   inputPasswordRegistFirst = '';
   inputPasswordRegistSecond = '';
 
+  private subs: Subscription = new Subscription();
+
   constructor(private authorizationService: AuthorizationService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.subs = this.authorizationService.spinnerStatus$.subscribe(
+      (staus: boolean) => {
+        this.spinner = staus;
+      }
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subs.unsubscribe();
+  }
 
   changeEmailLogin(event: Event) {
     this.inputEmailLogin = this.authorizationService.changeEmailLogin(event);
@@ -62,6 +76,7 @@ export class AuthorizationPageComponent implements OnInit {
         this.inputEmailLogin,
         this.inputPasswordLogin
       );
+      this.spinner = true;
     }
   }
 
@@ -72,6 +87,7 @@ export class AuthorizationPageComponent implements OnInit {
         this.inputEmailRegist,
         this.inputPasswordRegistFirst
       );
+      this.spinner = true;
     }
   }
 }

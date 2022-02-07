@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { Auth } from '../models/interface';
 import { ApiService } from './api.service';
 import { LocalStorageService } from './local-storage.service';
-import { SessionStorageService } from './session-storage.service';
-
+import { Subject } from 'rxjs';
+import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root',
 })
 export class AuthorizationService {
   authenticated = false;
+  spinner = true;
   keyStorage = 'userDataRSLang';
   correctRegistEmail = false;
   correctRegistPasworFirst = false;
@@ -18,10 +19,28 @@ export class AuthorizationService {
   correctLoginEmail = false;
   correctLoginPaswor = false;
 
+  userName = '';
+
+  public authenticatedStatus$ = new Subject<boolean>();
+  public spinnerStatus$ = new Subject<boolean>();
+  public userName$ = new Subject<string>();
+
+  public changeAuthenticatedStatus(status: boolean) {
+    this.authenticatedStatus$.next(status);
+  }
+
+  public changeSpinnerStatus(status: boolean) {
+    this.spinnerStatus$.next(status);
+  }
+
+  public getUserName(name: string) {
+    this.userName$.next(name);
+  }
+
   constructor(
     private apiService: ApiService,
     private localStorageService: LocalStorageService,
-    private sessionStorageService: SessionStorageService
+    private router: Router
   ) {}
 
   // General Email Regex (RFC 5322 Official Standard)
@@ -99,13 +118,24 @@ export class AuthorizationService {
         email: email,
         password: password,
       })
-      .subscribe((req) => {
-        if ((req as Auth).message === 'Authenticated') {
-          this.authenticated = true;
+      .subscribe(
+        (req) => {
+          this.spinner = false;
+          this.changeSpinnerStatus(this.spinner);
+          if (req) {
+            this.authenticated = true;
+            this.changeAuthenticatedStatus(this.authenticated);
+            this.router.navigateByUrl('/');
+            this.userName = (req as Auth).name;
+            this.getUserName(this.userName);
+            this.localStorageService.setItem(this.keyStorage, req);
+          }
+        },
+        (error) => {
+          this.spinner = false;
+          this.changeSpinnerStatus(this.spinner);
         }
-        this.localStorageService.setItem(this.keyStorage, req);
-        this.sessionStorageService.setItem(this.keyStorage, req);
-      });
+      );
   }
 
   regist(name: string, email: string, password: string) {
@@ -115,8 +145,35 @@ export class AuthorizationService {
         email: email,
         password: password,
       })
-      .subscribe((req) => {
-        console.log(req);
-      });
+      .subscribe(
+        (req) => {
+          this.spinner = false;
+          this.changeSpinnerStatus(this.spinner);
+        },
+        (error) => {
+          this.spinner = false;
+          this.changeSpinnerStatus(this.spinner);
+        }
+      );
+  }
+
+  logout() {
+    this.authenticated = false;
+    this.changeAuthenticatedStatus(this.authenticated);
+    this.localStorageService.clear();
+    this.router.navigateByUrl('/');
+    this.userName = '';
+    this.getUserName(this.userName);
+  }
+
+  checkLogin() {
+    if (this.localStorageService.getItem(this.keyStorage)) {
+      this.authenticated = true;
+      this.changeAuthenticatedStatus(this.authenticated);
+      this.userName = (
+        this.localStorageService.getItem(this.keyStorage) as Auth
+      ).name;
+      this.getUserName(this.userName);
+    }
   }
 }

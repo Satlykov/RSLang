@@ -8,13 +8,13 @@
         [routerLinkActiveOptions]="{ exact: true }"
       >
         <mat-icon>home</mat-icon>
-        Main
+        Главная страница
       </a>
       <a mat-list-item routerLink="/book" routerLinkActive="active">
         <mat-icon>auto_stories</mat-icon>
-        Электронная книг
+        Книга
       </a>
-      <a mat-list-item routerLink="/sprint-game" routerLinkActive="active">
+      <a mat-list-item routerLink="/sprint-game" routerLinkActive="active" >
         <mat-icon>videogame_asset</mat-icon>
         Спринт игра
       </a>
@@ -22,13 +22,31 @@
         <mat-icon>videogame_asset</mat-icon>
         Звуковая игра
       </a>
-      <a mat-list-item routerLink="/statistics" routerLinkActive="active">
+      <a mat-list-item routerLink="/statistics" routerLinkActive="active" [disabled]="!authenticated">
         <mat-icon>equalizer</mat-icon>
         Статистика
       </a>
-      <a mat-list-item routerLink="/authorization" routerLinkActive="active">
+      <a mat-list-item routerLink="/team" routerLinkActive="active">
+        <mat-icon>groups</mat-icon>
+        Разработчики
+      </a>
+      <a
+        mat-list-item
+        routerLink="/authorization"
+        routerLinkActive="active"
+        *ngIf="!authenticated"
+      >
         <mat-icon>login</mat-icon>
         Войти
+      </a>
+      <a
+        mat-list-item
+        routerLink="/exit"
+        routerLinkActive="active"
+        *ngIf="authenticated"
+      >
+        <mat-icon>logout</mat-icon>
+        Выход
       </a>
     </mat-nav-list>
   </mat-drawer>

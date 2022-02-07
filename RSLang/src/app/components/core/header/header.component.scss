@@ -15,3 +15,8 @@ button:hover{
 mat-toolbar {
   @include blueTheme;
 }
+
+.user-title {
+  color: #fff;
+  margin: 0 10px;
+}
