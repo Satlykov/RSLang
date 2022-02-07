@@ -168,10 +168,10 @@ export class AuthorizationService {
   }
 
   checkLogin() {
-    if (this.localStorageService.getItem(this.keyStorage) !== null) {
+    if (this.localStorageService.getItem(this.keyStorage)) {
       this.authenticated = true;
       this.changeAuthenticatedStatus(this.authenticated);
-      this.userName = this.localStorageService.getItem(this.keyStorage).name;
+      this.userName = (this.localStorageService.getItem(this.keyStorage) as Auth).name;
       this.getUserName(this.userName);
     }
   }
