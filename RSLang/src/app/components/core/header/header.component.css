@@ -40,4 +40,13 @@ button:hover {
   filter: drop-shadow(0 0 0.2rem #438aa8);
 }
 
+mat-toolbar {
+  background-color: #438aa8;
+}
+mat-toolbar p {
+  font-family: Rubic, sans-serif;
+  font-weight: 300;
+  color: #e9f3ff;
+}
+
 /*# sourceMappingURL=header.component.css.map */
