@@ -16,7 +16,8 @@ export class MainContentComponent implements OnInit {
 
   constructor(
     private layoutService: LayoutService,
-    private authorizationService: AuthorizationService
+    private authorizationService: AuthorizationService,
+
   ) {}
 
   ngOnInit(): void {
