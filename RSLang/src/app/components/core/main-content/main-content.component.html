@@ -6,27 +6,34 @@
         routerLink="/"
         routerLinkActive="active"
         [routerLinkActiveOptions]="{ exact: true }"
+        (click)="this.sidenav.close();"
       >
         <mat-icon>home</mat-icon>
         Главная страница
       </a>
-      <a mat-list-item routerLink="/book" routerLinkActive="active">
+      <a mat-list-item routerLink="/book" routerLinkActive="active" (click)="this.sidenav.close();">
         <mat-icon>auto_stories</mat-icon>
         Книга
       </a>
-      <a mat-list-item routerLink="/sprint-game" routerLinkActive="active" >
+      <a mat-list-item routerLink="/sprint-game" routerLinkActive="active" (click)="this.sidenav.close();">
         <mat-icon>videogame_asset</mat-icon>
-        Спринт игра
+        Спринт
       </a>
-      <a mat-list-item routerLink="/audio-call-game" routerLinkActive="active">
+      <a mat-list-item routerLink="/audio-call-game" routerLinkActive="active" (click)="this.sidenav.close();">
         <mat-icon>videogame_asset</mat-icon>
-        Звуковая игра
+        Аудиовызов
       </a>
-      <a mat-list-item routerLink="/statistics" routerLinkActive="active" [disabled]="!authenticated">
+      <a
+        mat-list-item
+        routerLink="/statistics"
+        routerLinkActive="active"
+        [disabled]="!authenticated"
+        (click)="this.sidenav.close();"
+      >
         <mat-icon>equalizer</mat-icon>
         Статистика
       </a>
-      <a mat-list-item routerLink="/team" routerLinkActive="active">
+      <a mat-list-item routerLink="/team" routerLinkActive="active" (click)="this.sidenav.close();">
         <mat-icon>groups</mat-icon>
         Разработчики
       </a>
@@ -35,6 +42,7 @@
         routerLink="/authorization"
         routerLinkActive="active"
         *ngIf="!authenticated"
+        (click)="this.sidenav.close();"
       >
         <mat-icon>login</mat-icon>
         Войти
@@ -44,6 +52,7 @@
         routerLink="/exit"
         routerLinkActive="active"
         *ngIf="authenticated"
+        (click)="this.sidenav.close();"
       >
         <mat-icon>logout</mat-icon>
         Выход

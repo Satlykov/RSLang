@@ -1,3 +1,5 @@
+@import '../../app.component.scss';
+
 .authoriztion-container {
   display: flex;
   flex-direction: column;
@@ -24,13 +26,9 @@ mat-form-field {
 }
 
 button {
-  background-color: #428AA8;
-  border-color: #428AA8;
-  color: #FFFFFF;
-  transition: all .5s;
-  &:hover {
-    background-color: #FFFFFF;
-    border-color: #428AA8;
-    color: #575757;
-  }
+  @include button;
+}
+
+button:hover {
+  @include button-hover;
 }
