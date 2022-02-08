@@ -1,1 +1,50 @@
-<p>sprint-game-page works!</p>
+<div class="sprint-game-container">
+  <mat-progress-spinner
+    class="example-margin"
+    color="warn"
+    [value]="valueSpinner"
+    *ngIf="startSecondStatus"
+  >
+  </mat-progress-spinner>
+  <span class="start-second" *ngIf="startSecondStatus">{{ startSecond }}</span>
+  <button
+    mat-stroked-button
+    class="start-game"
+    (click)="startSprint()"
+    *ngIf="!sprintStatus && !startSecondStatus"
+  >
+    Начать "Спринт"
+  </button>
+  <mat-card *ngIf="sprintStatus">
+    <span class="second-title">
+      <span class="second">{{ gameSecond }}</span> сек
+    </span>
+    <mat-progress-bar
+      mode="determinate"
+      [value]="100 - ((gameSecond / 60) * 100)"
+      color="warn"
+    ></mat-progress-bar>
+    <span class="points-sprint">0</span>
+    <div class="status-mistake">
+      <!-- <mat-icon style="color: green">check_circle</mat-icon> -->
+      <mat-icon>radio_button_unchecked</mat-icon>
+      <mat-icon>radio_button_unchecked</mat-icon>
+      <mat-icon>radio_button_unchecked</mat-icon>
+    </div>
+    <h4 class="title-card">+<span>20</span> очков за слово</h4>
+    <div class="stars-status">
+      <mat-icon style="color: gold">star_rate</mat-icon>
+      <mat-icon>star_border</mat-icon>
+      <mat-icon>star_border</mat-icon>
+      <mat-icon>star_border</mat-icon>
+      <mat-icon>star_border</mat-icon>
+    </div>
+    <h2 class="en-word">Word</h2>
+    <h3 class="ru-word">Слово</h3>
+    <div class="line"></div>
+    <div class="btn-container">
+      <button mat-stroked-button class="false-word">Неверно</button>
+      <button mat-stroked-button class="true-word">Верно</button>
+    </div>
+  </mat-card>
+</div>
