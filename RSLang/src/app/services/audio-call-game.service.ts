@@ -8,11 +8,21 @@ import { Word } from '../models/interface';
 })
 export class AudioCallGameService {
 
+  private maxPage = 29;
+  private minPage = 0;
+
   constructor(
     private apiService: ApiService
   ) {}
 
-  getQuestions() {
-    return this.apiService.get('words?group=5&page=1')
+  getQuestions(group: number):Observable<Object> {
+    const path = this.getPath(group);
+    return this.apiService.get(path)
   }
+
+  getPath(group: number):string{
+  const page = Math.floor(Math.random() * (this.maxPage - this.minPage + 1)) + this.minPage
+  return `words?group=${group}&page=${page}`
+  }
+
 }

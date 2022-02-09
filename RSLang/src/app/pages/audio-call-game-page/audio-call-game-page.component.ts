@@ -10,40 +10,38 @@ import { AudioCallGameService } from 'src/app/services/audio-call-game.service';
 })
 export class AudioCallGamePageComponent implements OnInit {
 
-  public isOpened:boolean = false
-  public id: number = 0
-  // public temp: string = ''
-  // public temp2: string = ''
+  public isOpened:boolean = false;
+  public id: number = 0;
+  public currentWordsPack: Word[] = [];
+  private forRandomAnsers: String[] = [];
 
   constructor(
-  private aduioCallGameService: AudioCallGameService,
-  private http: HttpClient
+  private audioCallGameService: AudioCallGameService,
   ) {}
 
   ngOnInit(): void {
-    // this.http.get<Word[]>('https://rslangsteam.herokuapp.com/words?group=5&page=1')
-    //   .subscribe(response =>{
-        // const words = JSON.parse(JSON.stringify(response)) ;
-        // console.log(words[0])
-        // this.temp = words[0].audio
-      //   console.log(response)
-      //   const words = response
-      //   const temp = words[0]
-      //   console.log(temp)
-      // })
-    this.aduioCallGameService.getQuestions()
-    .subscribe(response =>{
-      console.log(response)
-    })
-    console.log('hi')
+    this.getRandomAnswers();
   }
 
   public showQuestions(id: number):void {
+    this.currentWordsPack = []
     this.isOpened = !this.isOpened
-    console.log(id)
+    this.audioCallGameService.getQuestions(id)
+      .subscribe(response =>{
+        const data = response as Word[];
+        data.forEach(element => this.currentWordsPack.push(element))
+      })
+    console.log(this.currentWordsPack)
   }
 
-  public checkResponse():void{
-
+  private getRandomAnswers():void {
+    for(let id = 0; id<=5; id++){
+      this.audioCallGameService.getQuestions(id)
+        .subscribe(response =>{
+          const words = response as Word[];
+          words.forEach(element => this.forRandomAnsers.push(element.word))
+        })
+    }
+    this.forRandomAnsers = [...new Set(this.forRandomAnsers)]
   }
 }

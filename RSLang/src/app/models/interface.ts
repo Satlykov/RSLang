@@ -19,6 +19,7 @@ export interface Word {
   wordTranslate: string;
   textMeaningTranslate: string;
   textExampleTranslate: string;
+  answersOptions?: string[];
 }
 
 export interface UserWord {
