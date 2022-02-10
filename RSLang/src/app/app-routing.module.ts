@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AboutAppComponent } from './pages/about-app/about-app.component';
 import { AboutTeamComponent } from './pages/about-team/about-team.component';
 import { AudioCallGamePageComponent } from './pages/audio-call-game-page/audio-call-game-page.component';
 import { AuthorizationPageComponent } from './pages/authorization-page/authorization-page.component';
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'audio-call-game', component: AudioCallGamePageComponent },
   { path: 'statistics', component: StatisticsPageComponent },
   { path: 'team', component: AboutTeamComponent },
+  { path: 'about-app', component: AboutAppComponent },
 ];
 
 @NgModule({

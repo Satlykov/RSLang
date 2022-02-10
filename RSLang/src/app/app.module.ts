@@ -20,6 +20,7 @@ import { MainContentComponent } from './components/core/main-content/main-conten
 import { ExitComponent } from './pages/exit/exit.component';
 import { AboutTeamComponent } from './pages/about-team/about-team.component';
 import { TokenInterceptor } from './classes/token.interceptor';
+import { AboutAppComponent } from './pages/about-app/about-app.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { TokenInterceptor } from './classes/token.interceptor';
     MainContentComponent,
     ExitComponent,
     AboutTeamComponent,
+    AboutAppComponent,
   ],
   imports: [
     BrowserModule,
