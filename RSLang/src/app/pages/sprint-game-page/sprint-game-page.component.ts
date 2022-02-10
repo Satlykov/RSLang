@@ -37,12 +37,12 @@ export class SprintGamePageComponent implements OnInit {
   private subsPercent: Subscription = new Subscription();
 
   levels = [
-    { value: 'group=0', viewValue: 'Уровень 1' },
-    { value: 'group=1', viewValue: 'Уровень 2' },
-    { value: 'group=2', viewValue: 'Уровень 3' },
-    { value: 'group=3', viewValue: 'Уровень 4' },
-    { value: 'group=4', viewValue: 'Уровень 5' },
-    { value: 'group=5', viewValue: 'Уровень 6' },
+    { value: 'group=0', viewValue: 'A1 Elementary' },
+    { value: 'group=1', viewValue: 'A2 Pre-Intermediate' },
+    { value: 'group=2', viewValue: 'B1 IIntermediate' },
+    { value: 'group=3', viewValue: 'B2 Upper-Intermediate' },
+    { value: 'group=4', viewValue: 'C1 Advanced' },
+    { value: 'group=5', viewValue: 'C2 Proficiency' },
   ];
 
   constructor(private sprintGameService: SprintGameService) {}

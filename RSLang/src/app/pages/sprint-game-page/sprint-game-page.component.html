@@ -15,12 +15,13 @@
   >
     Начать "Спринт"
   </button>
+  <h2 *ngIf="!sprintStatus && !startSecondStatus && !endSprint">Выбери свой уровень английского:</h2>
   <mat-form-field
     appearance="fill"
     color="warn"
     *ngIf="!sprintStatus && !startSecondStatus && !endSprint"
   >
-    <mat-label>Выберите сложность:</mat-label>
+    <mat-label>Выберите уровень:</mat-label>
     <mat-select [(value)]="selected">
       <mat-option *ngFor="let level of levels" [value]="level.value">{{
         level.viewValue
