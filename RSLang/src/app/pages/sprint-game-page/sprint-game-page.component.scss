@@ -101,3 +101,8 @@ mat-form-field {
 .close:hover {
   @include button-hover;
 }
+
+.sound {
+  transform: scale(2);
+  cursor: pointer;
+}

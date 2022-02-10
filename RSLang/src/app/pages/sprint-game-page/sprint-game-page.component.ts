@@ -1,5 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { backendURL } from 'src/app/constants/backendURL';
 import { Word } from 'src/app/models/interface';
 import { SprintGameService } from 'src/app/services/sprint-game.service';
 @Component({
@@ -27,6 +28,7 @@ export class SprintGamePageComponent implements OnInit {
   score = 0;
   pointsForAnswer = 10;
   percent = 0;
+  soundEfect = true;
 
   private subsWords: Subscription = new Subscription();
   private subsStreak: Subscription = new Subscription();
@@ -152,6 +154,13 @@ export class SprintGamePageComponent implements OnInit {
 
   cheackAnswer(answer: boolean) {
     this.sprintGameService.cheackAnswer(answer, this.translateWord);
+    if (this.soundEfect) {
+      if (answer === this.translateWord) {
+        this.correct();
+      } else {
+        this.wrong();
+      }
+    }
     this.nextWord();
   }
 
@@ -162,6 +171,29 @@ export class SprintGamePageComponent implements OnInit {
       this.page += 1;
       this.getWords();
     }
+  }
+
+  sound() {
+    let audio = new Audio();
+    audio.src = `${backendURL}/${
+      (this.wordsSprint[this.indexWord] as Word).audio
+    }`;
+    audio.load();
+    audio.play();
+  }
+
+  correct() {
+    let audio = new Audio();
+    audio.src = '../../../assets/mp3/correct.mp3';
+    audio.load();
+    audio.play();
+  }
+
+  wrong() {
+    let audio = new Audio();
+    audio.src = '../../../assets/mp3/wrong.mp3';
+    audio.load();
+    audio.play();
   }
 
   closeSprint() {

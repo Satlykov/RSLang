@@ -80,6 +80,7 @@
       <mat-icon class="star" *ngIf="star < 5">star_border</mat-icon>
     </div>
     <h2 class="en-word">{{ enWord }}</h2>
+    <mat-icon class="sound" (click)="sound()">record_voice_over</mat-icon>
     <h3 class="ru-word">{{ ruWord }}</h3>
     <div class="line"></div>
     <div class="btn-container">
@@ -91,6 +92,14 @@
         <mat-icon>arrow_back</mat-icon>
         Неверно
       </button>
+      <mat-slide-toggle
+        color="warn"
+        [(ngModel)]="soundEfect"
+        style="color: black;"
+      >
+        <mat-icon *ngIf="soundEfect" style="margin-top: 5px;">volume_up</mat-icon>
+        <mat-icon *ngIf="!soundEfect" style="margin-top: 5px;">volume_off</mat-icon>
+      </mat-slide-toggle>
       <button mat-stroked-button class="true-word" (click)="cheackAnswer(true)">
         Верно
         <mat-icon>arrow_forward</mat-icon>
