@@ -76,7 +76,6 @@ export class SprintGameService {
     this.getStreak(this.streakAnswers);
     this.getMultiplier();
     this.getScore(this.score);
-    console.log(this.answers, this.correctAnswers);
     return answer === translateWord;
   }
 

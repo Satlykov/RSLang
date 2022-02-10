@@ -9,6 +9,7 @@ import { ExitComponent } from './pages/exit/exit.component';
 import { MainPageComponent } from './pages/main-page/main-page.component';
 import { SprintGamePageComponent } from './pages/sprint-game-page/sprint-game-page.component';
 import { StatisticsPageComponent } from './pages/statistics-page/statistics-page.component';
+import { WordListComponent } from './pages/word-list/word-list.component';
 
 const routes: Routes = [
   { path: '', component: MainPageComponent },
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'statistics', component: StatisticsPageComponent },
   { path: 'team', component: AboutTeamComponent },
   { path: 'about-app', component: AboutAppComponent },
+  { path: 'word-list', component: WordListComponent },
 ];
 
 @NgModule({
