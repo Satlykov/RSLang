@@ -88,22 +88,24 @@
         class="false-word"
         (click)="cheackAnswer(false)"
       >
+        <mat-icon>arrow_back</mat-icon>
         Неверно
       </button>
       <button mat-stroked-button class="true-word" (click)="cheackAnswer(true)">
         Верно
+        <mat-icon>arrow_forward</mat-icon>
       </button>
     </div>
   </mat-card>
   <mat-card *ngIf="endSprint">
-    <h2>
-      Твой результат:
-    </h2>
+    <h2>Твой результат:</h2>
     <span class="end-score">{{ score }}</span>
     <h2>Процент правильных:</h2>
     <mat-progress-spinner [value]="percent" style="position: relative">
     </mat-progress-spinner>
-    <h3 style="position: relative; bottom: 5rem;">{{percent}}%</h3>
-    <button mat-stroked-button class="close" (click)="closeSprint()">Закрыть</button>
+    <h3 style="position: relative; bottom: 5rem">{{ percent }}%</h3>
+    <button mat-stroked-button class="close" (click)="closeSprint()">
+      Закрыть
+    </button>
   </mat-card>
 </div>
