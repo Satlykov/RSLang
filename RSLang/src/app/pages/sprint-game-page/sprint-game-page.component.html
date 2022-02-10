@@ -11,14 +11,14 @@
     mat-stroked-button
     class="start-game"
     (click)="startSprint()"
-    *ngIf="!sprintStatus && !startSecondStatus"
+    *ngIf="!sprintStatus && !startSecondStatus && !endSprint"
   >
     Начать "Спринт"
   </button>
   <mat-form-field
     appearance="fill"
     color="warn"
-    *ngIf="!sprintStatus && !startSecondStatus"
+    *ngIf="!sprintStatus && !startSecondStatus && !endSprint"
   >
     <mat-label>Выберите сложность:</mat-label>
     <mat-select [(value)]="selected">
@@ -58,7 +58,7 @@
       >
     </div>
     <h4 class="title-card">
-      +<span>{{ pointsForAnswer * star }}</span> очков за слово
+      +<span>{{ pointsForAnswer * star }}</span> очков за слово!
     </h4>
     <div>
       <mat-icon class="star" style="color: gold">star_rate</mat-icon>
@@ -94,5 +94,16 @@
         Верно
       </button>
     </div>
+  </mat-card>
+  <mat-card *ngIf="endSprint">
+    <h2>
+      Твой результат:
+    </h2>
+    <span class="end-score">{{ score }}</span>
+    <h2>Процент правильных:</h2>
+    <mat-progress-spinner [value]="percent" style="position: relative">
+    </mat-progress-spinner>
+    <h3 style="position: relative; bottom: 5rem;">{{percent}}%</h3>
+    <button mat-stroked-button class="close" (click)="closeSprint()">Закрыть</button>
   </mat-card>
 </div>

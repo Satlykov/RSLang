@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Word } from 'src/app/models/interface';
 import { SprintGameService } from 'src/app/services/sprint-game.service';
@@ -12,6 +12,7 @@ export class SprintGamePageComponent implements OnInit {
   valueSpinner = 0;
   startSecond = 5;
   startSecondStatus = false;
+  endSprint = false;
   gameSecond = 60;
   selected = 'group=0';
   wordsSprint: Word[] = [];
@@ -25,10 +26,13 @@ export class SprintGamePageComponent implements OnInit {
   star = 1;
   score = 0;
   pointsForAnswer = 10;
+  percent = 0;
 
   private subsWords: Subscription = new Subscription();
   private subsStreak: Subscription = new Subscription();
   private subsScore: Subscription = new Subscription();
+  private subsSecond: Subscription = new Subscription();
+  private subsPercent: Subscription = new Subscription();
 
   levels = [
     { value: 'group=0', viewValue: 'Уровень 1' },
@@ -40,6 +44,19 @@ export class SprintGamePageComponent implements OnInit {
   ];
 
   constructor(private sprintGameService: SprintGameService) {}
+
+  @HostListener('window:keyup', ['$event'])
+  keyEvent(event: KeyboardEvent) {
+    if (this.sprintStatus) {
+      if (event.key === 'ArrowLeft') {
+        this.cheackAnswer(false);
+      }
+
+      if (event.key === 'ArrowRight') {
+        this.cheackAnswer(true);
+      }
+    }
+  }
 
   ngOnInit(): void {
     this.subsWords = this.sprintGameService.sprintWords$.subscribe(
@@ -56,14 +73,28 @@ export class SprintGamePageComponent implements OnInit {
         }
       }
     );
-    this.subsScore = this.sprintGameService.score$.subscribe((score: number) => {
-      this.score = score;
-    })
+    this.subsScore = this.sprintGameService.score$.subscribe(
+      (score: number) => {
+        this.score = score;
+      }
+    );
+    this.subsSecond = this.sprintGameService.second$.subscribe((second) => {
+      this.gameSecond = second;
+      if (this.gameSecond === 0) {
+        this.sprintStatus = false;
+        this.endSprint = true;
+      }
+    });
+    this.subsPercent = this.sprintGameService.percent$.subscribe((percent) => {
+      this.percent = percent;
+    });
   }
 
   ngOnDestroy(): void {
     this.subsWords.unsubscribe();
     this.subsStreak.unsubscribe();
+    this.subsScore.unsubscribe();
+    this.subsSecond.unsubscribe();
   }
 
   startSprint() {
@@ -73,12 +104,7 @@ export class SprintGamePageComponent implements OnInit {
       this.wordToComponetn();
       this.startSecondStatus = false;
       this.sprintStatus = true;
-      const gameSecondInterval = setInterval(() => {
-        this.gameSecond -= 1;
-        if (this.gameSecond === 0) {
-          clearInterval(gameSecondInterval);
-        }
-      }, 1000);
+      this.sprintGameService.stopWatch();
     }, 5500);
   }
 
@@ -136,5 +162,25 @@ export class SprintGamePageComponent implements OnInit {
       this.page += 1;
       this.getWords();
     }
+  }
+
+  closeSprint() {
+    this.sprintGameService.closeSprint();
+    this.sprintStatus = false;
+    this.valueSpinner = 0;
+    this.startSecond = 5;
+    this.startSecondStatus = false;
+    this.endSprint = false;
+    this.enWord = '';
+    this.ruWord = '';
+    this.translateWord = true;
+    this.indexWord = 0;
+    this.indexTranslate = 0;
+    this.page = 0;
+    this.pointsForAnswer = 10;
+    this.gameSecond = 60;
+    this.streakAnswers = 0;
+    this.score = 0;
+    this.star = 1;
   }
 }

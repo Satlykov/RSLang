@@ -7,10 +7,14 @@ import { ApiService } from './api.service';
   providedIn: 'root',
 })
 export class SprintGameService {
+  gameSecond = 60;
   sprintStatus = false;
   wordsSprint: Word[] = [];
   numberWord = 0;
   streakAnswers = 0;
+  answers = 0;
+  correctAnswers = 0;
+  percent = 100;
   score = 0;
   multiplier = 1;
   pointsForAnswer = 10 * this.multiplier;
@@ -18,6 +22,8 @@ export class SprintGameService {
   public sprintWords$ = new Subject<Word[]>();
   public streak$ = new Subject<number>();
   public score$ = new Subject<number>();
+  public second$ = new Subject<number>();
+  public percent$ = new Subject<number>();
 
   public getWordsSprint(wordsSprint: Word[]) {
     this.sprintWords$.next(wordsSprint);
@@ -29,6 +35,14 @@ export class SprintGameService {
 
   public getScore(score: number) {
     this.score$.next(score);
+  }
+
+  public getSecond(second: number) {
+    this.second$.next(second);
+  }
+
+  public getPercent(percent: number) {
+    this.percent$.next(percent);
   }
 
   constructor(private api: ApiService) {}
@@ -51,15 +65,45 @@ export class SprintGameService {
   }
 
   cheackAnswer(answer: boolean, translateWord: boolean) {
+    this.answers += 1;
     if (answer === translateWord) {
       this.streakAnswers += 1;
       this.score += 10 * this.multiplier;
+      this.correctAnswers += 1;
     } else {
       this.streakAnswers = 0;
     }
     this.getStreak(this.streakAnswers);
     this.getMultiplier();
     this.getScore(this.score);
+    console.log(this.answers, this.correctAnswers);
     return answer === translateWord;
+  }
+
+  stopWatch() {
+    let second = 60;
+    const stopWatchSeconds = setInterval(() => {
+      second -= 1;
+      if (second === 0) {
+        this.percent =  Math.floor((this.correctAnswers / this.answers) * 100);
+        clearInterval(stopWatchSeconds);
+        this.getPercent(this.percent);
+      }
+      this.gameSecond = second;
+      this.getSecond(this.gameSecond);
+    }, 1000);
+  }
+
+  closeSprint() {
+    this.gameSecond = 60;
+    this.sprintStatus = false;
+    this.wordsSprint = [];
+    this.numberWord = 0;
+    this.streakAnswers = 0;
+    this.answers = 0;
+    this.correctAnswers = 0;
+    this.percent = 100;
+    this.score = 0;
+    this.multiplier = 1;
   }
 }
