@@ -1,7 +1,28 @@
 @import url("https://fonts.googleapis.com/css2?family=Neucha&family=Rubik:wght@300;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Neucha&family=Rubik:ital,wght@0,300;0,700;1,300&display=swap");
-.spacer {
-  flex: 1 1 auto;
+.authoriztion-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: calc(100vh - 128px);
+  background-color: #E8F3FF;
+  color: #575757;
+}
+
+mat-card {
+  max-width: 400px;
+}
+
+form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+mat-form-field {
+  width: 100%;
 }
 
 button {
@@ -40,22 +61,4 @@ button:hover {
   filter: drop-shadow(0 0 0.2rem #438aa8);
 }
 
-mat-toolbar {
-  background-color: #438aa8;
-}
-mat-toolbar p {
-  font-family: Rubic, sans-serif;
-  font-weight: 300;
-  color: #e9f3ff;
-}
-
-.user-title {
-  color: #fff;
-  margin: 0 10px;
-}
-
-.logo {
-  margin-left: 10px;
-}
-
-/*# sourceMappingURL=header.component.css.map */
+/*# sourceMappingURL=authorization-page.component.css.map */
