@@ -14,7 +14,7 @@ export class SprintGameService {
   streakAnswers = 0;
   answers = 0;
   correctAnswers = 0;
-  percent = 100;
+  percent = 0;
   score = 0;
   multiplier = 1;
   pointsForAnswer = 10 * this.multiplier;
@@ -84,7 +84,10 @@ export class SprintGameService {
     const stopWatchSeconds = setInterval(() => {
       second -= 1;
       if (second === 0) {
-        this.percent =  Math.floor((this.correctAnswers / this.answers) * 100);
+        this.percent = Math.floor((this.correctAnswers / this.answers) * 100);
+        if (this.correctAnswers === 0) {
+          this.percent = 0;
+        }
         clearInterval(stopWatchSeconds);
         this.getPercent(this.percent);
       }
@@ -101,7 +104,7 @@ export class SprintGameService {
     this.streakAnswers = 0;
     this.answers = 0;
     this.correctAnswers = 0;
-    this.percent = 100;
+    this.percent = 0;
     this.score = 0;
     this.multiplier = 1;
   }

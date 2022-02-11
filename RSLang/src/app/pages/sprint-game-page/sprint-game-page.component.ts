@@ -97,6 +97,7 @@ export class SprintGamePageComponent implements OnInit {
     this.subsStreak.unsubscribe();
     this.subsScore.unsubscribe();
     this.subsSecond.unsubscribe();
+    this.closeSprint();
   }
 
   startSprint() {
