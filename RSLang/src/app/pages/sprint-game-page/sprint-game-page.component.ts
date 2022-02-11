@@ -33,7 +33,6 @@ export class SprintGamePageComponent implements OnInit {
   private subsWords: Subscription = new Subscription();
   private subsStreak: Subscription = new Subscription();
   private subsScore: Subscription = new Subscription();
-  private subsSecond: Subscription = new Subscription();
   private subsPercent: Subscription = new Subscription();
 
   levels = [
@@ -80,23 +79,16 @@ export class SprintGamePageComponent implements OnInit {
         this.score = score;
       }
     );
-    this.subsSecond = this.sprintGameService.second$.subscribe((second) => {
-      this.gameSecond = second;
-      if (this.gameSecond === 0) {
-        this.sprintStatus = false;
-        this.endSprint = true;
-      }
-    });
     this.subsPercent = this.sprintGameService.percent$.subscribe((percent) => {
       this.percent = percent;
     });
+
   }
 
   ngOnDestroy(): void {
     this.subsWords.unsubscribe();
     this.subsStreak.unsubscribe();
     this.subsScore.unsubscribe();
-    this.subsSecond.unsubscribe();
     this.subsPercent.unsubscribe();
     this.closeSprint();
   }

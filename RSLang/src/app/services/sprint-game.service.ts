@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { interval } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { Word } from '../models/interface';
 import { ApiService } from './api.service';
 
@@ -22,7 +24,6 @@ export class SprintGameService {
   public sprintWords$ = new Subject<Word[]>();
   public streak$ = new Subject<number>();
   public score$ = new Subject<number>();
-  public second$ = new Subject<number>();
   public percent$ = new Subject<number>();
 
   public getWordsSprint(wordsSprint: Word[]) {
@@ -35,10 +36,6 @@ export class SprintGameService {
 
   public getScore(score: number) {
     this.score$.next(score);
-  }
-
-  public getSecond(second: number) {
-    this.second$.next(second);
   }
 
   public getPercent(percent: number) {
@@ -79,7 +76,7 @@ export class SprintGameService {
     return answer === translateWord;
   }
 
-  stopWatch() {
+  /* stopWatch() {
     let second = 60;
     const stopWatchSeconds = setInterval(() => {
       second -= 1;
@@ -94,6 +91,11 @@ export class SprintGameService {
       this.gameSecond = second;
       this.getSecond(this.gameSecond);
     }, 1000);
+  } */
+
+  stopWatch() {
+    const takeSecond$ = interval(1000).pipe(take(61));
+    takeSecond$.subscribe((x) => (this.gameSecond = 60 - x));
   }
 
   closeSprint() {
