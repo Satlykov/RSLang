@@ -9,11 +9,15 @@
         (click)="this.sidenav.close();"
       >
         <mat-icon>home</mat-icon>
-        Главная страница
+        Главная
       </a>
       <a mat-list-item routerLink="/book" routerLinkActive="active" (click)="this.sidenav.close();">
         <mat-icon>auto_stories</mat-icon>
-        Книга
+        Учебник
+      </a>
+      <a mat-list-item routerLink="/word-list" routerLinkActive="active" (click)="this.sidenav.close();">
+        <mat-icon>translate</mat-icon>
+        Словарь
       </a>
       <a mat-list-item routerLink="/sprint-game" routerLinkActive="active" (click)="this.sidenav.close();">
         <mat-icon>videogame_asset</mat-icon>
@@ -36,6 +40,10 @@
       <a mat-list-item routerLink="/team" routerLinkActive="active" (click)="this.sidenav.close();">
         <mat-icon>groups</mat-icon>
         Разработчики
+      </a>
+      <a mat-list-item routerLink="/about-app" routerLinkActive="active" (click)="this.sidenav.close();">
+        <mat-icon>school</mat-icon>
+        RS Lang
       </a>
       <a
         mat-list-item

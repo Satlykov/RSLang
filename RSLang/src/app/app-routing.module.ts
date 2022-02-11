@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AboutAppComponent } from './pages/about-app/about-app.component';
 import { AboutTeamComponent } from './pages/about-team/about-team.component';
 import { AudioCallGamePageComponent } from './pages/audio-call-game-page/audio-call-game-page.component';
 import { AuthorizationPageComponent } from './pages/authorization-page/authorization-page.component';
@@ -8,6 +9,7 @@ import { ExitComponent } from './pages/exit/exit.component';
 import { MainPageComponent } from './pages/main-page/main-page.component';
 import { SprintGamePageComponent } from './pages/sprint-game-page/sprint-game-page.component';
 import { StatisticsPageComponent } from './pages/statistics-page/statistics-page.component';
+import { WordListComponent } from './pages/word-list/word-list.component';
 
 const routes: Routes = [
   { path: '', component: MainPageComponent },
@@ -18,6 +20,8 @@ const routes: Routes = [
   { path: 'audio-call-game', component: AudioCallGamePageComponent },
   { path: 'statistics', component: StatisticsPageComponent },
   { path: 'team', component: AboutTeamComponent },
+  { path: 'about-app', component: AboutAppComponent },
+  { path: 'word-list', component: WordListComponent },
 ];
 
 @NgModule({

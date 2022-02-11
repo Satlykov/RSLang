@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { backendURL } from 'src/app/constants/backendURL';
+import { Word } from 'src/app/models/interface';
 import { SprintGameService } from 'src/app/services/sprint-game.service';
 @Component({
   selector: 'app-sprint-game-page',
@@ -10,23 +13,102 @@ export class SprintGamePageComponent implements OnInit {
   valueSpinner = 0;
   startSecond = 5;
   startSecondStatus = false;
+  endSprint = false;
   gameSecond = 60;
+  selected = 'group=0';
+  wordsSprint: Word[] = [];
+  enWord = '';
+  ruWord = '';
+  translateWord = true;
+  indexWord = 0;
+  indexTranslate = 0;
+  page = 0;
+  streakAnswers = 0;
+  star = 1;
+  score = 0;
+  pointsForAnswer = 10;
+  percent = 0;
+  soundEfect = true;
+
+  private subsWords: Subscription = new Subscription();
+  private subsStreak: Subscription = new Subscription();
+  private subsScore: Subscription = new Subscription();
+  private subsSecond: Subscription = new Subscription();
+  private subsPercent: Subscription = new Subscription();
+
+  levels = [
+    { value: 'group=0', viewValue: 'A1 Elementary' },
+    { value: 'group=1', viewValue: 'A2 Pre-Intermediate' },
+    { value: 'group=2', viewValue: 'B1 IIntermediate' },
+    { value: 'group=3', viewValue: 'B2 Upper-Intermediate' },
+    { value: 'group=4', viewValue: 'C1 Advanced' },
+    { value: 'group=5', viewValue: 'C2 Proficiency' },
+  ];
 
   constructor(private sprintGameService: SprintGameService) {}
 
-  ngOnInit(): void {}
+  @HostListener('window:keyup', ['$event'])
+  keyEvent(event: KeyboardEvent) {
+    if (this.sprintStatus) {
+      if (event.key === 'ArrowLeft') {
+        this.cheackAnswer(false);
+      }
+
+      if (event.key === 'ArrowRight') {
+        this.cheackAnswer(true);
+      }
+    }
+  }
+
+  ngOnInit(): void {
+    this.subsWords = this.sprintGameService.sprintWords$.subscribe(
+      (words: Word[]) => {
+        this.wordsSprint = words;
+      }
+    );
+    this.subsStreak = this.sprintGameService.streak$.subscribe(
+      (streak: number) => {
+        this.streakAnswers = streak;
+        this.star = Math.floor(streak / 3) + 1;
+        if (this.star > 5) {
+          this.star = 5;
+        }
+      }
+    );
+    this.subsScore = this.sprintGameService.score$.subscribe(
+      (score: number) => {
+        this.score = score;
+      }
+    );
+    this.subsSecond = this.sprintGameService.second$.subscribe((second) => {
+      this.gameSecond = second;
+      if (this.gameSecond === 0) {
+        this.sprintStatus = false;
+        this.endSprint = true;
+      }
+    });
+    this.subsPercent = this.sprintGameService.percent$.subscribe((percent) => {
+      this.percent = percent;
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.subsWords.unsubscribe();
+    this.subsStreak.unsubscribe();
+    this.subsScore.unsubscribe();
+    this.subsSecond.unsubscribe();
+    this.subsPercent.unsubscribe();
+    this.closeSprint();
+  }
 
   startSprint() {
+    this.getWords();
     this.startSeconds();
     setTimeout(() => {
+      this.wordToComponetn();
       this.startSecondStatus = false;
       this.sprintStatus = true;
-      const gameSecondInterval = setInterval(() => {
-        this.gameSecond -= 1;
-        if (this.gameSecond === 0) {
-          clearInterval(gameSecondInterval);
-        }
-      }, 1000);
+      this.sprintGameService.stopWatch();
     }, 5500);
   }
 
@@ -41,5 +123,98 @@ export class SprintGamePageComponent implements OnInit {
         clearInterval(myInterval);
       }
     }, 1000);
+  }
+
+  getWords() {
+    this.sprintGameService.getWords(this.selected, this.page);
+  }
+
+  wordToComponetn() {
+    this.enWord = (this.wordsSprint[this.indexWord] as Word).word;
+    this.ruWord = (
+      this.wordsSprint[this.getTranslateIndex()] as Word
+    ).wordTranslate;
+  }
+
+  getTranslateIndex() {
+    if (Math.random() >= 0.5) {
+      this.indexTranslate = this.indexWord;
+      this.translateWord = true;
+    } else {
+      this.translateWord = false;
+      this.indexTranslate = this.getRandom(this.wordsSprint.length);
+      while (this.indexWord === this.indexTranslate) {
+        this.indexTranslate = this.getRandom(this.wordsSprint.length);
+      }
+    }
+    return this.indexTranslate;
+  }
+
+  getRandom(max: number) {
+    return Math.floor(Math.random() * (max - 1));
+  }
+
+  cheackAnswer(answer: boolean) {
+    this.sprintGameService.cheackAnswer(answer, this.translateWord);
+    if (this.soundEfect) {
+      if (answer === this.translateWord) {
+        this.correct();
+      } else {
+        this.wrong();
+      }
+    }
+    this.nextWord();
+  }
+
+  nextWord() {
+    this.indexWord += 1;
+    this.wordToComponetn();
+    if (this.indexWord === this.wordsSprint.length - 10) {
+      this.page += 1;
+      this.getWords();
+    }
+  }
+
+  sound() {
+    let audio = new Audio();
+    audio.src = `${backendURL}/${
+      (this.wordsSprint[this.indexWord] as Word).audio
+    }`;
+    audio.load();
+    audio.play();
+  }
+
+  correct() {
+    let audio = new Audio();
+    audio.src = '../../../assets/mp3/correct.mp3';
+    audio.load();
+    audio.play();
+  }
+
+  wrong() {
+    let audio = new Audio();
+    audio.src = '../../../assets/mp3/wrong.mp3';
+    audio.load();
+    audio.play();
+  }
+
+  closeSprint() {
+    this.sprintGameService.closeSprint();
+    this.sprintStatus = false;
+    this.valueSpinner = 0;
+    this.startSecond = 5;
+    this.startSecondStatus = false;
+    this.endSprint = false;
+    this.enWord = '';
+    this.ruWord = '';
+    this.translateWord = true;
+    this.indexWord = 0;
+    this.indexTranslate = 0;
+    this.page = 0;
+    this.pointsForAnswer = 10;
+    this.gameSecond = 60;
+    this.streakAnswers = 0;
+    this.score = 0;
+    this.star = 1;
   }
 }
