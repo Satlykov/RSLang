@@ -4,24 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6bbf114f-ff85-4f2d-a4da-5c00618127d7" name="Changes" comment="/">
-      <change afterPath="$PROJECT_DIR$/RSLang/src/app/pages/about-team/about-team.component.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RSLang/src/app/pages/about-team/about-team.component.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RSLang/src/app/pages/audio-call-game-page/audio-call-game-page.component.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RSLang/src/app/pages/audio-call-game-page/audio-call-game-page.component.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RSLang/src/app/pages/authorization-page/authorization-page.component.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RSLang/src/app/pages/authorization-page/authorization-page.component.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RSLang/src/app/pages/exit/exit.component.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RSLang/src/app/pages/exit/exit.component.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RSLang/src/app/pages/main-page/main-page.component.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RSLang/src/app/pages/main-page/main-page.component.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RSLang/src/app/pages/sprint-game-page/sprint-game-page.component.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RSLang/src/app/pages/sprint-game-page/sprint-game-page.component.css.map" afterDir="false" />
+    <list default="true" id="6bbf114f-ff85-4f2d-a4da-5c00618127d7" name="Changes" comment="feat: add images to img folder">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSLang/src/app/components/core/footer/footer.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/RSLang/src/app/components/core/footer/footer.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSLang/src/app/components/core/header/header.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/RSLang/src/app/components/core/header/header.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSLang/src/app/components/core/header/header.component.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/RSLang/src/app/components/core/header/header.component.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RSLang/src/app/components/core/main-content/main-content.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/RSLang/src/app/components/core/main-content/main-content.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RSLang/src/app/app.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/RSLang/src/app/app.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RSLang/src/app/pages/main-page/main-page.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/RSLang/src/app/pages/main-page/main-page.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RSLang/src/app/pages/main-page/main-page.component.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/RSLang/src/app/pages/main-page/main-page.component.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RSLang/src/app/pages/main-page/main-page.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/RSLang/src/app/pages/main-page/main-page.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RSLang/src/app/pages/main-page/main-page.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/RSLang/src/app/pages/main-page/main-page.component.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -84,7 +72,9 @@
       <workItem from="1644090159824" duration="131000" />
       <workItem from="1644157665430" duration="9174000" />
       <workItem from="1644237894597" duration="1431000" />
-      <workItem from="1644506699320" duration="5762000" />
+      <workItem from="1644506699320" duration="5801000" />
+      <workItem from="1644593400975" duration="1731000" />
+      <workItem from="1644682720462" duration="6075000" />
     </task>
     <task id="LOCAL-00001" summary="feat: create a new branch, add mixins">
       <created>1643824469994</created>
@@ -177,7 +167,21 @@
       <option name="project" value="LOCAL" />
       <updated>1644507146305</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="init: change sizes main-page, start make about-page">
+      <created>1644575713623</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1644575713623</updated>
+    </task>
+    <task id="LOCAL-00015" summary="feat: add images to img folder">
+      <created>1644594532861</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1644594532861</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -207,7 +211,9 @@
     <MESSAGE value="feat: add list to arrows-img" />
     <MESSAGE value="feat: add routerLink to main's page button, delete css files" />
     <MESSAGE value="/" />
-    <option name="LAST_COMMIT_MESSAGE" value="/" />
+    <MESSAGE value="init: change sizes main-page, start make about-page" />
+    <MESSAGE value="feat: add images to img folder" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: add images to img folder" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
