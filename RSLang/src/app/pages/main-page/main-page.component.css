@@ -4,7 +4,7 @@
   width: 100%;
   display: flex;
   align-content: center;
-  min-height: calc(100vh - 128px);
+  flex-direction: column;
   background: radial-gradient(#e9f3ff, #428AA8);
   -webkit-animation: fadeIn 1 1s ease-out;
   -moz-animation: fadeIn 1 1s ease-out;
@@ -14,14 +14,60 @@
 .main-container__home {
   margin: 0 auto;
   display: flex;
+  min-height: calc(100vh - 64px);
   align-content: space-around;
   width: inherit;
   flex-wrap: wrap;
   height: inherit;
   overflow: hidden;
-  max-width: 100rem;
   align-items: stretch;
   justify-content: space-evenly;
+}
+.main-container__about {
+  min-height: 100vh;
+  display: flex;
+  width: 100%;
+}
+
+.container {
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  grid-template-rows: repeat(2, 1fr);
+  gap: 0 0;
+  width: 90%;
+  grid-auto-flow: column;
+  grid-template-areas: "A B" "C D";
+  align-items: center;
+  align-content: space-evenly;
+  justify-items: center;
+}
+
+.A {
+  grid-area: A;
+}
+
+.B {
+  grid-area: B;
+}
+
+.C {
+  grid-area: C;
+}
+
+.D {
+  grid-area: D;
+}
+
+.grid {
+  width: 26rem;
+  height: 20rem;
+  background-color: #438aa8;
+}
+.grid p {
+  font-family: Rubic, sans-serif;
+  font-weight: 300;
+  color: #e9f3ff;
 }
 
 .welcome-section {
@@ -46,8 +92,8 @@
   font-weight: bold;
 }
 .welcome-section__title {
-  max-width: 32rem;
-  font-size: 2rem;
+  max-width: 33rem;
+  font-size: 1.9rem;
   line-height: 60px;
 }
 .welcome-section__text {
