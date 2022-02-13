@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { interval } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { Word } from '../models/interface';
@@ -46,8 +46,8 @@ export class SprintGameService {
 
   getWords(selected: string, page: number) {
     this.api.get(`words?${selected}&page=${page}`).subscribe(
-      (req) => {
-        this.wordsSprint.push(...(req as Word[]));
+      (res) => {
+        this.wordsSprint.push(...(res as Word[]));
         this.getWordsSprint(this.wordsSprint);
       },
       (error) => console.log(error)
@@ -70,36 +70,22 @@ export class SprintGameService {
     } else {
       this.streakAnswers = 0;
     }
+    this.percent = Math.floor((this.correctAnswers / this.answers) * 100);
+    if (this.correctAnswers === 0) {
+      this.percent = 0;
+    }
     this.getStreak(this.streakAnswers);
     this.getMultiplier();
     this.getScore(this.score);
+    this.getPercent(this.percent);
     return answer === translateWord;
   }
 
-  /* stopWatch() {
-    let second = 60;
-    const stopWatchSeconds = setInterval(() => {
-      second -= 1;
-      if (second === 0) {
-        this.percent = Math.floor((this.correctAnswers / this.answers) * 100);
-        if (this.correctAnswers === 0) {
-          this.percent = 0;
-        }
-        clearInterval(stopWatchSeconds);
-        this.getPercent(this.percent);
-      }
-      this.gameSecond = second;
-      this.getSecond(this.gameSecond);
-    }, 1000);
-  } */
-
-  stopWatch() {
-    const takeSecond$ = interval(1000).pipe(take(61));
-    takeSecond$.subscribe((x) => (this.gameSecond = 60 - x));
+  stopWatch(sec: number): Observable<number> {
+    return interval(1000).pipe(take(sec + 1));
   }
 
   closeSprint() {
-    this.gameSecond = 60;
     this.sprintStatus = false;
     this.wordsSprint = [];
     this.numberWord = 0;
