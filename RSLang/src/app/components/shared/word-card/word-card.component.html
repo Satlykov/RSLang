@@ -3,19 +3,48 @@
     class="img-container"
     style="
       background-image: linear-gradient(to top, #438aa8 0%, transparent 70%),
-        url(https://rslangsteam.herokuapp.com/files/01_0010.jpg);
+        url(https://rslangsteam.herokuapp.com/{{ card.image }});
     "
   ></div>
   <div class="text-container">
-    <h2 class="word"></h2>
-    <button mat-icon-button class="btn-pronounce">
+    <h2 class="word">{{ card.word }}</h2>
+    <button
+      mat-icon-button
+      class="btn-pronounce"
+      (click)="playWord(card.audio)"
+    >
       <mat-icon>record_voice_over</mat-icon>
     </button>
-    <span class="translation">утка [dʌk]</span>
-    <p>A duck is a small water bird.</p>
-    <p style="font-style: italic;">People feed ducks at the lake.</p>
+    <span class="translation"
+      >{{ card.wordTranslate }} {{ card.transcription }}</span
+    >
+    <div class="en-text-container">
+      <p class="en-text" [innerHTML]="card.textMeaning"></p>
+      <button
+        mat-icon-button
+        class="btn-pronounce"
+        (click)="playWord(card.audioMeaning)"
+      >
+        <mat-icon>record_voice_over</mat-icon>
+      </button>
+    </div>
+    <div class="en-text-container">
+      <p
+        class="en-text"
+        style="font-style: italic"
+        [innerHTML]="card.textExample"
+      ></p>
+      <button
+        mat-icon-button
+        class="btn-pronounce"
+        (click)="playWord(card.audioExample)"
+      >
+        <mat-icon>record_voice_over</mat-icon>
+      </button>
+    </div>
+
     <div class="line"></div>
-    <p>Утка - маленькая водяная птица.</p>
-    <p style="font-style: italic;">Люди кормят уток у озера</p>
+    <p [innerHTML]="card.textMeaningTranslate"></p>
+    <p style="font-style: italic" [innerHTML]="card.textExampleTranslate"></p>
   </div>
 </mat-card>

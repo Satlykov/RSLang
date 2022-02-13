@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Word } from 'src/app/models/interface';
 import { ElectronicBookService } from 'src/app/services/electronic-book.service';
 
@@ -19,20 +19,17 @@ export class ElectronicBookPageComponent implements OnInit {
     { value: 'group=5', viewValue: 'C2 Proficiency' },
   ];
 
-  public cards: Word[] = [];
+  public cards!: Observable<any>;
 
   numberPage = 0;
+  plusPage = true;
+  minusPage = false;
 
   private subsCards: Subscription = new Subscription();
 
   constructor(private electronicBookService: ElectronicBookService) {}
 
   ngOnInit(): void {
-    this.subsCards = this.electronicBookService.cardsBook$.subscribe(
-      (cards: Word[]) => {
-        this.cards = cards;
-      }
-    );
     this.getCards();
   }
 
@@ -41,6 +38,48 @@ export class ElectronicBookPageComponent implements OnInit {
   }
 
   getCards() {
-    this.electronicBookService.getCards(this.selected, this.numberPage);
+    this.cards = this.electronicBookService.getCards(
+      this.selected,
+      this.numberPage
+    );
+  }
+
+  setNumberPage(num: number) {
+    this.numberPage = num;
+    this.getCards();
+    this.checkPage();
+  }
+
+  plusNumberPage() {
+    if (this.numberPage !== 29) {
+      this.numberPage += 1;
+      this.getCards();
+    }
+    this.checkPage();
+  }
+
+  minusNumberPage() {
+    if (this.numberPage !== 0) {
+      this.numberPage -= 1;
+      this.getCards();
+    }
+    this.checkPage();
+  }
+
+  checkPage() {
+    if (this.numberPage === 29) {
+      this.plusPage = false;
+    } else {
+      this.plusPage = true;
+    }
+    if (this.numberPage === 0) {
+      this.minusPage = false;
+    } else {
+      this.minusPage = true;
+    }
+  }
+
+  changeLevel() {
+    this.getCards();
   }
 }
