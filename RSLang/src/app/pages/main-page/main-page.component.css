@@ -41,6 +41,7 @@
   align-items: center;
   align-content: space-evenly;
   justify-items: center;
+  overflow: hidden;
 }
 
 .A {
@@ -63,13 +64,121 @@
   width: 26rem;
   height: 20rem;
   background-color: #438aa8;
+  border-radius: 15%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
 }
 .grid p {
   font-family: Rubic, sans-serif;
   font-weight: 300;
   color: #e9f3ff;
 }
+.grid-title {
+  color: #e9f3ff;
+  text-align: center;
+  padding-top: 20px;
+  font-size: 26px;
+}
+.grid-text {
+  text-align: center;
+  font-size: 20px;
+  line-height: 25px;
+  margin: 0;
+}
 
+.grid:hover {
+  width: 26.5rem;
+  height: 20.5rem;
+  transition-duration: 700ms;
+}
+
+.grid:first-child::before {
+  content: "";
+  display: block;
+  position: absolute;
+  border-radius: 15%;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: 0.1;
+  background-repeat: no-repeat;
+  background-position: 50% 0;
+  background-size: cover;
+  background-image: url("../../../assets/img/PC.jpg");
+}
+
+.grid:nth-child(2)::before {
+  content: "";
+  display: block;
+  position: absolute;
+  border-radius: 15%;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: 0.1;
+  background-repeat: no-repeat;
+  background-position: 50% 0;
+  background-size: cover;
+  background-image: url("../../../assets/img/learning.jpg");
+}
+
+.grid:nth-child(3)::before {
+  background-image: url("../../../assets/img/music.jpg");
+  content: "";
+  display: block;
+  position: absolute;
+  border-radius: 15%;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: 0.1;
+  background-repeat: no-repeat;
+  background-position: 50% 0;
+  background-size: cover;
+}
+
+.grid:last-child::before {
+  content: "";
+  display: block;
+  position: absolute;
+  border-radius: 15%;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: 0.1;
+  background-repeat: no-repeat;
+  background-position: 50% 0;
+  background-size: cover;
+  background-image: url("../../../assets/img/people.jpg");
+}
+
+@media only screen and (max-width: 920px) {
+  .container {
+    grid-template-areas: "A" "B" "C" "D";
+    row-gap: 15px;
+    margin-bottom: 10px;
+  }
+
+  .grid {
+    width: 22rem;
+    height: 16rem;
+  }
+
+  .grid:hover {
+    width: 23rem;
+    height: 17rem;
+    transition-duration: 700ms;
+  }
+}
 .welcome-section {
   background-color: #438aa8;
   display: flex;
