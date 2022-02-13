@@ -56,6 +56,11 @@
         <button mat-raised-button class="questions__answer">Ответ</button>
         <button mat-raised-button class="questions__answer">Ответ</button>
         <button mat-raised-button class="questions__answer">Ответ</button>
+        <div class="" *ngIf="questionsList.length">
+          <div class="" *ngFor="let question of questionsList">
+            {{ question.image }}
+          </div>
+        </div>
       </div>
       <button
         mat-raised-button

@@ -7,6 +7,7 @@ import { AudioCallGameService } from 'src/app/services/audio-call-game.service';
 /*Вопросики:
 Как все это перенести в сервис, что должно быть в компоненте, что в сервисе?
 Можно ли юзать один и тот же сабжект в разных подписках?
+Что такое горячий и холодный обсервбл
 */
 
 @Component({
@@ -18,51 +19,34 @@ export class AudioCallGamePageComponent implements OnInit, OnDestroy {
 
   public isOpened = false;
   public id = 0;
-  public currentWordsPack: Word[] = [];
-  private randomWords: String[] = [];
-  private randomWordsSubject = new Subject<void>();
-
+  public questionsList: Word[] = [];
+  private randomWords: string[] = [];
   private unsubscribe$ = new Subject<void>();
-
-  get temp$():Observable<void>{
-    return this.randomWordsSubject.asObservable()
-  }
 
   constructor(
   private audioCallGameService: AudioCallGameService,
   ) {}
 
   ngOnInit(): void {
-    this.getRandomWords();
-    this.randomWordsSubject
+    this.audioCallGameService.randomWords$
       .pipe(
-        takeUntil(this.unsubscribe$)
+        takeUntil(this.unsubscribe$),
+        take(1)
       )
-      .subscribe(()=>{
-      this.getRandomOptions()
+      .subscribe(randomWords => {
+        this.randomWords = randomWords;
+        console.log(this.randomWords)
       })
+    this.audioCallGameService.loadRandomWords();
   }
+
 
   ngOnDestroy():void {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
   }
 
-  private getRandomWords():void {
-    for(let id = 0; id<=5; id++){
-      this.audioCallGameService.getQuestions(id)
-        .pipe(
-          take(1)
-        )
-        .subscribe(response =>{
-          const words = response as Word[];
-          words.forEach(element => this.randomWords.push(element.word))
-          if(this.randomWords.length === 120){
-            this.randomWordsSubject.next();
-          }
-        })
-    }
-  }
+
 
   private getRandomOptions():String[] {
     const randomOptions: String[] = [];
@@ -76,20 +60,15 @@ export class AudioCallGamePageComponent implements OnInit, OnDestroy {
   }
 
   public showQuestions(id: number):void {
-  this.currentWordsPack = []
-  this.isOpened = !this.isOpened
-  this.audioCallGameService.getQuestions(id)
-    .pipe(
-      take(1)
-    )
-    .subscribe(response =>{
-      const data = response as Word[];
-      data.forEach(element => this.currentWordsPack.push(element));
-      // if(this.currentWordsPack.length === 20){
-      //   this.randomWordsSubject.next();
-      // }
-      console.log(this.currentWordsPack)
-    })
+    this.questionsList = [];
+    this.isOpened = !this.isOpened
+    this.audioCallGameService.getQuestionsList(id);
+      this.audioCallGameService.questionsList$
+      .pipe(
+        take(1)
+      )
+      .subscribe( questionsList => {
+        this.questionsList = questionsList;
+      })
   }
-
 }
