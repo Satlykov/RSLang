@@ -29,6 +29,7 @@ export class SprintGamePageComponent implements OnInit {
   pointsForAnswer = 10;
   percent = 0;
   soundEfect = true;
+  spinerTime = 5500;
 
   private subsWords: Subscription = new Subscription();
   private subsStreak: Subscription = new Subscription();
@@ -63,6 +64,7 @@ export class SprintGamePageComponent implements OnInit {
     this.subsWords = this.sprintGameService.sprintWords$.subscribe(
       (words: Word[]) => {
         this.wordsSprint = words;
+        console.log(words[0])
       }
     );
     this.subsStreak = this.sprintGameService.streak$.subscribe(
@@ -82,7 +84,6 @@ export class SprintGamePageComponent implements OnInit {
     this.subsPercent = this.sprintGameService.percent$.subscribe((percent) => {
       this.percent = percent;
     });
-
   }
 
   ngOnDestroy(): void {
@@ -100,11 +101,19 @@ export class SprintGamePageComponent implements OnInit {
       this.wordToComponetn();
       this.startSecondStatus = false;
       this.sprintStatus = true;
-      this.sprintGameService.stopWatch();
-    }, 5500);
+      this.sprintGameService.stopWatch(60).subscribe((sec: number) => {
+        this.gameSecond = 60 - sec;
+        if (this.gameSecond === 0) {
+          this.stopSprint();
+        }
+      });
+    }, this.spinerTime);
   }
 
-  stopSprint() {}
+  stopSprint() {
+    this.sprintStatus = false;
+    this.endSprint = true;
+  }
 
   startSeconds() {
     this.startSecondStatus = true;
@@ -173,6 +182,7 @@ export class SprintGamePageComponent implements OnInit {
       (this.wordsSprint[this.indexWord] as Word).audio
     }`;
     audio.load();
+    audio.volume = 0.5;
     audio.play();
   }
 
@@ -180,6 +190,7 @@ export class SprintGamePageComponent implements OnInit {
     let audio = new Audio();
     audio.src = '../../../assets/mp3/correct.mp3';
     audio.load();
+    audio.volume = 0.1;
     audio.play();
   }
 
@@ -187,6 +198,7 @@ export class SprintGamePageComponent implements OnInit {
     let audio = new Audio();
     audio.src = '../../../assets/mp3/wrong.mp3';
     audio.load();
+    audio.volume = 0.1;
     audio.play();
   }
 

@@ -1,1 +1,57 @@
-<p>electronic-book-page works!</p>
+<div class="book-container">
+  <mat-toolbar>
+    <div class="game-btn-container">
+      <button mat-stroked-button class="btn-game">
+        <mat-icon>videogame_asset</mat-icon>"Спринт"
+      </button>
+      <button mat-stroked-button class="btn-game">
+        <mat-icon>videogame_asset</mat-icon>"Аудиовызов"
+      </button>
+    </div>
+    <div class="pagination-container">
+      <button mat-icon-button>
+        <mat-icon>keyboard_double_arrow_left</mat-icon>
+      </button>
+      <button mat-icon-button><mat-icon>keyboard_arrow_left</mat-icon></button>
+      <span style="cursor: default"> <span>01</span>/<span>30</span></span>
+      <button mat-icon-button><mat-icon>keyboard_arrow_right</mat-icon></button>
+      <button mat-icon-button>
+        <mat-icon>keyboard_double_arrow_right</mat-icon>
+      </button>
+    </div>
+    <div class="selected-container">
+      <span class="selected-title">Уровень:</span>
+      <mat-form-field>
+        <mat-select [(value)]="selected">
+          <mat-option *ngFor="let level of levels" [value]="level.value">{{
+            level.viewValue
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </mat-toolbar>
+  <div class="words-container">
+    <!-- <app-word-card *ngFor="let card of cards"></app-word-card> -->
+    <mat-card *ngFor="let card of cards">
+      <div
+        class="img-container"
+        style="
+          background-image: linear-gradient(to top, #438aa8 0%, transparent 70%),
+            url(https://rslangsteam.herokuapp.com/{{ card.image }});
+        "
+      ></div>
+      <div class="text-container">
+        <h2 class="word">{{ card.word }}</h2>
+        <button mat-icon-button class="btn-pronounce">
+          <mat-icon>record_voice_over</mat-icon>
+        </button>
+        <span class="translation">{{card.wordTranslate}} {{ card.transcription }}</span>
+        <p>{{ card.textMeaning }}</p>
+        <p style="font-style: italic">{{ card.textExample }}</p>
+        <div class="line"></div>
+        <p>{{ card.textMeaningTranslate }}</p>
+        <p style="font-style: italic">{{ card.textMeaning }}</p>
+      </div>
+    </mat-card>
+  </div>
+</div>
