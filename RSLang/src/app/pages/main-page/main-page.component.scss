@@ -3,7 +3,6 @@ $white: #e9f3ff;
 $orange: #fa8d62;
 $blue: #428AA8;
 
-
 @mixin about-images {
   content: '';
   display: block;
@@ -42,18 +41,38 @@ $blue: #428AA8;
     align-items: stretch;
     justify-content: space-evenly;
   }
-  &__about{
+  &__about {
     min-height: 100vh;
     display: flex;
     width: 100%;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    .about-title {
+      display: flex;
+      align-items: center;
+      height: 10rem;
+      &__main {
+        color: #49494b;
+        cursor: pointer;
+        font-size: 30px;
+        height: 4rem;
+        text-shadow: 1px 1px 1px $white, 0 0 1em $blue;
+        margin: 0;
+        letter-spacing: 2px;
+      }
+    }
+  }
+  &__video {
+    min-height: 100vh;
+    display: flex;
   }
 }
 .container {
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
   grid-template-rows: repeat(2, 1fr);
-  gap: 0 0;
+  gap: 4rem 0;
   width: 90%;
   grid-auto-flow: column;
   grid-template-areas:
@@ -137,6 +156,9 @@ $blue: #428AA8;
     width: 23rem;
     height: 17rem;
     transition-duration: 700ms;
+  }
+  .about-title__main {
+    display: none;
   }
 }
 .welcome-section {
