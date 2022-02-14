@@ -18,8 +18,9 @@ import { HeaderComponent } from './components/core/header/header.component';
 import { FooterComponent } from './components/core/footer/footer.component';
 import { MainContentComponent } from './components/core/main-content/main-content.component';
 import { ExitComponent } from './pages/exit/exit.component';
-import { AboutTeamComponent } from './pages/about-team/about-team.component';
 import { TokenInterceptor } from './classes/token.interceptor';
+import { WordListComponent } from './pages/word-list/word-list.component';
+import { WordCardComponent } from './components/shared/word-card/word-card.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { TokenInterceptor } from './classes/token.interceptor';
     FooterComponent,
     MainContentComponent,
     ExitComponent,
-    AboutTeamComponent,
+    WordListComponent,
+    WordCardComponent,
   ],
   imports: [
     BrowserModule,

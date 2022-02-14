@@ -143,7 +143,6 @@ $title: 1px 1px 1px $white, 0 0 1em $blue;
   @include about-images;
   background-image: url('../../../assets/img/people.jpg');
 }
-
 .title {
   color: #49494b;
   cursor: pointer;
@@ -152,6 +151,10 @@ $title: 1px 1px 1px $white, 0 0 1em $blue;
   text-shadow: $title;
   margin: 0;
   letter-spacing: 2px;
+}
+.grid:last-child::before {
+  @include about-images;
+  background-image: url('../../../assets/img/people.jpg');
 }
 @media only screen and (max-width: 920px) {
   .container {

@@ -185,7 +185,6 @@
   background-size: cover;
   background-image: url("../../../assets/img/people.jpg");
 }
-
 .title {
   color: #49494b;
   cursor: pointer;
@@ -213,7 +212,6 @@
     height: 17rem;
     transition-duration: 700ms;
   }
-
   .about-title__main {
     display: none;
   }
