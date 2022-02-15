@@ -16,6 +16,7 @@ export class AudioCallGamePageComponent implements OnInit, OnDestroy {
 
   public isOpened = false;
   public isAnswered = false;
+  public isCorrect = false;
   public id = 0;
   public questionsList: Word[] = [];
   private randomWords: string[] = [];
@@ -67,6 +68,7 @@ export class AudioCallGamePageComponent implements OnInit, OnDestroy {
 
   public showQuestions(id: number):void {
     if(id === 7){
+      this.currentIndex = 0;
       this.questionsList = [];
       this.isOpened = !this.isOpened
       return
@@ -103,10 +105,11 @@ export class AudioCallGamePageComponent implements OnInit, OnDestroy {
   public checkAnswer(answer: string):void {
     this.isAnswered = !this.isAnswered
     if( this.currentQuestion.wordTranslate === answer){
-      console.log(true)
+      this.isCorrect = true;
     }else{
-      console.log(false)
+      this.isCorrect = false;
     }
+    console.log(this.isCorrect)
   }
 
   public nextQuestion():void {
@@ -119,4 +122,5 @@ export class AudioCallGamePageComponent implements OnInit, OnDestroy {
       this.isOpened = !this.isOpened
     }
   }
+
 }

@@ -59,6 +59,28 @@
   margin-bottom: 50px;
   cursor: pointer;
 }
+.questions__audio-correct {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: url(../../../assets/svg/correct.png) no-repeat;
+  background-size: 60px 60px;
+  padding: 15px;
+  background-position: center;
+  margin-bottom: 50px;
+  cursor: pointer;
+}
+.questions__audio-incorrect {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: url(../../../assets/svg/incorrect.png) no-repeat;
+  background-size: 60px 60px;
+  padding: 15px;
+  background-position: center;
+  margin-bottom: 50px;
+  cursor: pointer;
+}
 .questions__answer-container {
   display: flex;
   justify-content: space-between;

@@ -50,7 +50,13 @@
   <ng-template #questions>
     <div class="questions__container">
       <div
-        class="questions__audio"
+        [ngClass]="
+          !isAnswered
+            ? 'questions__audio'
+            : isCorrect
+            ? 'questions__audio-correct'
+            : 'questions__audio-incorrect'
+        "
         (click)="generateAudio(currentQuestion.audio)"
       ></div>
       <div class="questions__answer-container">
@@ -97,20 +103,20 @@
       </div>
       <div class="questions__controll">
         <button
-        mat-raised-button
-        (click)="showQuestions(7)"
-        class="questions__back"
-      >
-        К категориям
-      </button>
-      <button
-        [disabled]="!isAnswered"
-        mat-raised-button
-        (click)="nextQuestion()"
-        class="questions__forward"
-      >
-        След. вопрос
-      </button>
+          mat-raised-button
+          (click)="showQuestions(7)"
+          class="questions__back"
+        >
+          К категориям
+        </button>
+        <button
+          [disabled]="!isAnswered"
+          mat-raised-button
+          (click)="nextQuestion()"
+          class="questions__forward"
+        >
+          След. вопрос
+        </button>
       </div>
     </div>
   </ng-template>
