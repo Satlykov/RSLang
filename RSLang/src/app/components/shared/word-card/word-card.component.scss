@@ -1,6 +1,6 @@
 mat-card {
-  min-width: 320px;
-  min-height: 400px;
+  width: 320px;
+  min-height: 450px;
   padding: 0;
   background: #438aa8;
   margin: 10px 0;
@@ -16,8 +16,7 @@ mat-card {
   }
 
   .text-container {
-    position: absolute;
-    top: 100px;
+    margin: -130px 0 0 0;
     width: 100%;
     padding: 16px;
     box-sizing: border-box;
@@ -29,6 +28,9 @@ mat-card {
       margin: 0;
       text-align: right;
       text-shadow: 1px 2px 3px #49494b;
+      background-color: #ffffff8e;
+      border-radius: 4px;
+      padding: 3px 8px;
     }
 
     .btn-pronounce {
@@ -44,8 +46,14 @@ mat-card {
       text-shadow: 1px 2px 3px #49494b;
     }
 
+    .en-text-container {
+      width: 100%;
+    }
+
     p {
       margin: 5px 0;
+      width: 100%;
+      text-align: left;
     }
 
     .line {
@@ -54,6 +62,13 @@ mat-card {
       background-color: #49494b;
       margin: 5px 0;
     }
+
+  }
+
+  .en-text-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
   }
 
 }
