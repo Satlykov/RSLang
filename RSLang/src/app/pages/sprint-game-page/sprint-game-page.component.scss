@@ -79,3 +79,26 @@ mat-progress-bar {
   margin-top: -5.5rem;
   margin-bottom: 2rem;
 }
+
+.star {
+  transform: scale(2);
+  margin: 0 1rem;
+}
+
+.end-score {
+  font-size: 4.5rem;
+  color: green;
+}
+
+.close {
+  @include button;
+}
+
+.close:hover {
+  @include button-hover;
+}
+
+.sound {
+  transform: scale(2);
+  cursor: pointer;
+}
