@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { AuthorizationService } from 'src/app/services/authorization.service';
 import { ElectronicBookService } from 'src/app/services/electronic-book.service';
+import { Router } from '@angular/router';
+import { SprintGamePageComponent } from '../sprint-game-page/sprint-game-page.component';
+import { SprintGameService } from 'src/app/services/sprint-game.service';
 
 @Component({
   selector: 'app-electronic-book-page',
@@ -42,7 +45,9 @@ export class ElectronicBookPageComponent implements OnInit {
 
   constructor(
     private electronicBookService: ElectronicBookService,
-    private authorizationService: AuthorizationService
+    private authorizationService: AuthorizationService,
+    private router: Router,
+    private sprintGameService: SprintGameService,
   ) {}
 
   ngOnInit(): void {
@@ -99,5 +104,11 @@ export class ElectronicBookPageComponent implements OnInit {
   changeLevel() {
     this.backColor = this.backColors[+this.selected.split('=')[1]];
     this.getCards();
+  }
+
+  startSprint() {
+    this.sprintGameService.fromBook = true;
+    this.sprintGameService.selected = this.selected;
+    this.router.navigateByUrl('/sprint-game');
   }
 }

@@ -25,6 +25,7 @@
         routerLink="/word-list"
         routerLinkActive="active"
         (click)="this.sidenav.close()"
+        [disabled]="!authenticated"
       >
         <mat-icon>translate</mat-icon>
         Словарь
