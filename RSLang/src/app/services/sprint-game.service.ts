@@ -23,6 +23,7 @@ export class SprintGameService {
   pointsForAnswer = 10 * this.multiplier;
   fromBook = false;
   selected = '';
+  numberPage = 0;
 
   public sprintWords$ = new Subject<Word[]>();
   public streak$ = new Subject<number>();

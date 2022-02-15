@@ -64,7 +64,7 @@ export class SprintGamePageComponent implements OnInit {
     this.subsWords = this.sprintGameService.sprintWords$.subscribe(
       (words: Word[]) => {
         this.wordsSprint = words;
-        console.log(words[0])
+        console.log(words[0]);
       }
     );
     this.subsStreak = this.sprintGameService.streak$.subscribe(
@@ -84,7 +84,7 @@ export class SprintGamePageComponent implements OnInit {
     this.subsPercent = this.sprintGameService.percent$.subscribe((percent) => {
       this.percent = percent;
     });
-    this.FromBook()
+    this.fromBook();
   }
 
   ngOnDestroy(): void {
@@ -95,9 +95,10 @@ export class SprintGamePageComponent implements OnInit {
     this.closeSprint();
   }
 
-  startSprint(select?: string) {
-    if (select) {
+  startSprint(select?: string, page?: number) {
+    if (select && page) {
       this.selected = select;
+      this.page = page;
     }
     this.getWords();
     this.startSeconds();
@@ -131,6 +132,9 @@ export class SprintGamePageComponent implements OnInit {
   }
 
   getWords() {
+    if (this.page === 30) {
+      this.page = 0;
+    }
     this.sprintGameService.getWords(this.selected, this.page);
   }
 
@@ -206,10 +210,12 @@ export class SprintGamePageComponent implements OnInit {
     audio.play();
   }
 
-  FromBook() {
-    console.log(this.sprintGameService.fromBook, this.sprintGameService.selected)
-    if (this.sprintGameService.fromBook && this.sprintGameService.selected.length !== 0) {
-      this.startSprint(this.sprintGameService.selected);
+  fromBook() {
+    if (this.sprintGameService.fromBook) {
+      this.startSprint(
+        this.sprintGameService.selected,
+        this.sprintGameService.numberPage
+      );
     }
   }
 

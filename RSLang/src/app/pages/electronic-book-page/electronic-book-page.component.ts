@@ -109,6 +109,7 @@ export class ElectronicBookPageComponent implements OnInit {
   startSprint() {
     this.sprintGameService.fromBook = true;
     this.sprintGameService.selected = this.selected;
+    this.sprintGameService.numberPage = this.numberPage;
     this.router.navigateByUrl('/sprint-game');
   }
 }
