@@ -114,6 +114,12 @@
 .main-container__team .team-people__info-job {
   letter-spacing: 2px;
 }
+.main-container__team .team-people__info .developer__photo {
+  border: #e9f3ff 2px solid;
+  width: 50%;
+  height: 98%;
+  border-radius: inherit;
+}
 
 .container {
   margin: 0 auto;

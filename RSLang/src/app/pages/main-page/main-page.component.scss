@@ -116,6 +116,12 @@ $title: 1px 1px 1px $white, 0 0 1em $blue;
         &-job {
           letter-spacing: 2px;
         }
+        .developer__photo {
+          border: $white 2px solid;
+          width: 50%;
+          height: 98%;
+          border-radius: inherit;
+        }
       }
     }
   }
@@ -633,7 +639,7 @@ button:focus {
   .team-people {
     width: 95%!important;
     &__info {
-      height: 32%!important;;
+      height: 32%!important;
     }
   }
 }
