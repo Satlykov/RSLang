@@ -65,6 +65,7 @@
   flex-direction: column;
   width: inherit;
   align-items: center;
+  justify-content: space-evenly;
 }
 .main-container__team .team-people {
   margin: 0 auto;
@@ -819,6 +820,31 @@ button:focus {
   .team-people__info {
     height: 32% !important;
   }
+}
+.arrow-down {
+  width: 64px;
+  height: 64px;
+  transition-duration: 500ms;
+}
+
+.arrow-down:hover {
+  filter: drop-shadow(16px 16px 20px #428AA8) invert(75%);
+  transition-duration: 500ms;
+}
+
+.arrow-top {
+  width: 32px;
+  height: 32px;
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+}
+
+.arrow-top:hover {
+  filter: drop-shadow(10px 10px 10px #428AA8) invert(90%);
+  width: 33px;
+  height: 33px;
+  transition-duration: 500ms;
 }
 
 /*# sourceMappingURL=main-page.component.css.map */

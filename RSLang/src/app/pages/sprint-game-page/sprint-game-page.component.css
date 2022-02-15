@@ -124,4 +124,55 @@ mat-progress-bar {
   margin-bottom: 2rem;
 }
 
+.star {
+  transform: scale(2);
+  margin: 0 1rem;
+}
+
+.end-score {
+  font-size: 4.5rem;
+  color: green;
+}
+
+.close {
+  border-radius: 40px;
+  border: 1px solid #fa8d62;
+  color: #e9f3ff;
+  background-color: #fa8d62;
+  text-align: center;
+  vertical-align: middle;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Rubic, sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+  transition-duration: 600ms;
+}
+
+.close:hover {
+  border-radius: 40px;
+  border: 1px solid #fa8d62;
+  color: #e9f3ff;
+  background-color: #fa8d62;
+  text-align: center;
+  vertical-align: middle;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Rubic, sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+  transition-duration: 600ms;
+  transition-duration: 600ms;
+  background: linear-gradient(to right, #fa8d62, #438aa8);
+  color: #e9f3ff;
+  filter: drop-shadow(0 0 0.2rem #438aa8);
+}
+
+.sound {
+  transform: scale(2);
+  cursor: pointer;
+}
+
 /*# sourceMappingURL=sprint-game-page.component.css.map */

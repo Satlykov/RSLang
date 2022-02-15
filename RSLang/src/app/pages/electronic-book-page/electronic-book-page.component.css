@@ -1,0 +1,185 @@
+@import url("https://fonts.googleapis.com/css2?family=Neucha&family=Rubik:wght@300;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Neucha&family=Rubik:ital,wght@0,300;0,700;1,300&display=swap");
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: darkgrey;
+}
+
+::-webkit-scrollbar-thumb {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.book-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: calc(100vh - 128px);
+  background-color: #e9f3ff;
+}
+.book-container p {
+  font-family: Rubic, sans-serif;
+  font-weight: 300;
+  color: #49494b;
+  padding: 0;
+}
+
+.words-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
+  min-height: calc(100vh - 192px);
+  box-sizing: border-box;
+  padding: 16px;
+}
+.words-container mat-card {
+  min-width: 320px;
+  min-height: 470px;
+  padding: 0;
+  background: #438aa8;
+  margin: 10px;
+  cursor: default;
+}
+.words-container mat-card .img-container {
+  width: 100%;
+  height: 200px;
+  background-position: center;
+  background-size: cover;
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+.words-container mat-card .text-container {
+  position: absolute;
+  top: 100px;
+  width: 100%;
+  padding: 16px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.words-container mat-card .text-container .word {
+  margin: 0;
+  text-align: right;
+  text-shadow: 1px 2px 3px #49494b;
+}
+.words-container mat-card .text-container .btn-pronounce {
+  margin: 0;
+}
+.words-container mat-card .text-container .translation {
+  margin: 5px 0;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #fff;
+  text-shadow: none;
+  text-shadow: 1px 2px 3px #49494b;
+}
+.words-container mat-card .text-container p {
+  margin: 5px 0;
+}
+.words-container mat-card .text-container .line {
+  height: 2px;
+  width: 100%;
+  background-color: #49494b;
+  margin: 5px 0;
+}
+
+mat-toolbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: #438aa8;
+  color: #fff;
+}
+mat-toolbar p {
+  font-family: Rubic, sans-serif;
+  font-weight: 300;
+  color: #e9f3ff;
+}
+
+.selected-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 280px;
+}
+
+.selected-title {
+  cursor: default;
+}
+
+.game-btn-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  min-width: 300px;
+}
+
+.btn-game {
+  border-radius: 40px;
+  border: 1px solid #fa8d62;
+  color: #e9f3ff;
+  background-color: #fa8d62;
+  text-align: center;
+  vertical-align: middle;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Rubic, sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+  transition-duration: 600ms;
+}
+
+.btn-game:hover {
+  border-radius: 40px;
+  border: 1px solid #fa8d62;
+  color: #e9f3ff;
+  background-color: #fa8d62;
+  text-align: center;
+  vertical-align: middle;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Rubic, sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+  transition-duration: 600ms;
+  transition-duration: 600ms;
+  background: linear-gradient(to right, #fa8d62, #438aa8);
+  color: #e9f3ff;
+  filter: drop-shadow(0 0 0.2rem #438aa8);
+}
+
+mat-icon {
+  margin-right: 10px;
+}
+
+.pagination-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 250px;
+}
+.pagination-container button {
+  transition: all 0.5s;
+}
+.pagination-container button:hover {
+  color: #49494b;
+}
+.pagination-container button:active {
+  transform: scale(0.5);
+}
+
+/*# sourceMappingURL=electronic-book-page.component.css.map */

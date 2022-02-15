@@ -20,7 +20,7 @@ $title: 1px 1px 1px $white, 0 0 1em $blue;
   background-position: 50% 0;
   background-size: cover;
 }
-.main-container{
+.main-container {
   width: 100%;
   display: flex;
   align-content: center;
@@ -72,6 +72,7 @@ $title: 1px 1px 1px $white, 0 0 1em $blue;
     flex-direction: column;
     width: inherit;
     align-items: center;
+    justify-content: space-evenly;
     .team-people {
       margin: 0 auto;
       width: 80%;
@@ -111,7 +112,6 @@ $title: 1px 1px 1px $white, 0 0 1em $blue;
           color: $white;
           font-size: 20px;
           line-height: 40px;
-
         }
         &-job {
           letter-spacing: 2px;
@@ -293,7 +293,7 @@ $title: 1px 1px 1px $white, 0 0 1em $blue;
   transform: scale(1.6);
   left: 15%;
 }
-.x3{
+.x3 {
   -webkit-animation: floatUp 2.5s infinite linear;
   -moz-animation: floatUp 2.5s infinite linear;
   -o-animation: floatUp 2.5s infinite linear;
@@ -304,7 +304,7 @@ $title: 1px 1px 1px $white, 0 0 1em $blue;
   transform: scale(.5);
   left: -15%;
 }
-.x4{
+.x4 {
   -webkit-animation: floatUp 4.5s infinite linear;
   -moz-animation: floatUp 4.5s infinite linear;
   -o-animation: floatUp 4.5s infinite linear;
@@ -315,7 +315,7 @@ $title: 1px 1px 1px $white, 0 0 1em $blue;
   transform: scale(1.2);
   left: -34%;
 }
-.x5{
+.x5 {
   -webkit-animation: floatUp 8s infinite linear;
   -moz-animation: floatUp 8s infinite linear;
   -o-animation: floatUp 8s infinite linear;
@@ -326,7 +326,7 @@ $title: 1px 1px 1px $white, 0 0 1em $blue;
   transform: scale(2.2);
   left: -57%;
 }
-.x6{
+.x6 {
   -webkit-animation: floatUp 3s infinite linear;
   -moz-animation: floatUp 3s infinite linear;
   -o-animation: floatUp 3s infinite linear;
@@ -337,7 +337,7 @@ $title: 1px 1px 1px $white, 0 0 1em $blue;
   transform: scale(.8);
   left: -81%;
 }
-.x7{
+.x7 {
   -webkit-animation: floatUp 5.3s infinite linear;
   -moz-animation: floatUp 5.3s infinite linear;
   -o-animation: floatUp 5.3s infinite linear;
@@ -348,7 +348,7 @@ $title: 1px 1px 1px $white, 0 0 1em $blue;
   transform: scale(3.2);
   left: 37%;
 }
-.x8{
+.x8 {
   -webkit-animation: floatUp 4.7s infinite linear;
   -moz-animation: floatUp 4.7s infinite linear;
   -o-animation: floatUp 4.7s infinite linear;
@@ -359,7 +359,7 @@ $title: 1px 1px 1px $white, 0 0 1em $blue;
   transform: scale(1.7);
   left: 62%;
 }
-.x9{
+.x9 {
   -webkit-animation: floatUp 4.1s infinite linear;
   -moz-animation: floatUp 4.1s infinite linear;
   -o-animation: floatUp 4.1s infinite linear;
@@ -370,17 +370,17 @@ $title: 1px 1px 1px $white, 0 0 1em $blue;
   transform: scale(0.9);
   left: 85%;
 }
-button:focus{
+button:focus {
   outline: none;
 }
-@-webkit-keyframes floatUp{
+@-webkit-keyframes floatUp {
   0%{top: 100vh; opacity: 0;}
   25%{opacity: 1;}
   50%{top: 0; opacity: .8;}
   75%{opacity: 1;}
   100%{top: -100vh; opacity: 0;}
 }
-@-moz-keyframes floatUp{
+@-moz-keyframes floatUp {
   0%{top: 100vh; opacity: 0;}
   25%{opacity: 1;}
   50%{top: 0; opacity: .8;}
@@ -394,7 +394,7 @@ button:focus{
   75%{opacity: 1;}
   100%{top: -100vh; opacity: 0;}
 }
-@keyframes floatUp{
+@keyframes floatUp {
   0%{top: 100vh; opacity: 0;}
   25%{opacity: 1;}
   50%{top: 0; opacity: .8;}
@@ -402,7 +402,7 @@ button:focus{
   100%{top: -100vh; opacity: 0;}
 }
 
-.header{
+.header {
   position: absolute;
   top: 40%;
   left: 50%;
@@ -412,16 +412,16 @@ button:focus{
   color: white;
   font-size: 2em;
 }
-#head1, #head2,#head3, #head4, #head5{
+#head1, #head2,#head3, #head4, #head5 {
   opacity: 0;
 }
-#head1{
+#head1 {
   -webkit-animation: fadeOut 1 5s ease-in;
   -moz-animation: fadeOut 1 5s ease-in;
   -o-animation: fadeOut 1 5s ease-in;
   animation: fadeOut 1 5s ease-in;
 }
-#head2{
+#head2 {
   -webkit-animation: fadeOut 1 5s ease-in;
   -moz-animation: fadeOut 1 5s ease-in;
   -o-animation: fadeOut 1 5s ease-in;
@@ -431,7 +431,7 @@ button:focus{
   -o-animation-delay: 6s;
   animation-delay: 6s;
 }
-#head3{
+#head3 {
   -webkit-animation: fadeOut 1 5s ease-in;
   -moz-animation: fadeOut 1 5s ease-in;
   -o-animation: fadeOut 1 5s ease-in;
@@ -441,7 +441,7 @@ button:focus{
   -o-animation-delay: 12s;
   animation-delay: 12s;
 }
-#head4{
+#head4 {
   -webkit-animation: fadeOut 1 5s ease-in;
   -moz-animation: fadeOut 1 5s ease-in;
   -o-animation: fadeOut 1 5s ease-in;
@@ -451,7 +451,7 @@ button:focus{
   -o-animation-delay: 17s;
   animation-delay: 17s;
 }
-#head5{
+#head5 {
   -webkit-animation: finalFade 1 5s ease-in;
   -moz-animation: finalFade 1 5s ease-in;
   -o-animation: finalFade 1 5s ease-in;
@@ -467,26 +467,50 @@ button:focus{
 }
 
 @-webkit-keyframes fadeIn{
-  from{opacity: 0;}
-  to{opacity: 1;}
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 @-moz-keyframes fadeIn{
-  from{opacity: 0;}
-  to{opacity: 1;}
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
-@-o-keyframes fadeIn{
-  from{opacity: 0;}
-  to{opacity: 1;}
+@-o-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
-@keyframes fadeIn{
-  from{opacity: 0;}
-  to{opacity: 1;}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 @-webkit-keyframes fadeOut{
-  0%{opacity: 0;}
-  30%{opacity: 1;}
-  80%{opacity: .9;}
-  100%{opacity: 0;}
+  0% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  80% {
+    opacity: .9;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 @-moz-keyframes fadeOut {
   0% {
@@ -503,11 +527,19 @@ button:focus{
   }
 }
 
-@-o-keyframes fadeOut{
-  0%{opacity: 0;}
-  30%{opacity: 1;}
-  80%{opacity: .9;}
-  100%{opacity: 0;}
+@-o-keyframes fadeOut {
+  0% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  80% {
+    opacity: .9;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 @keyframes fadeOut{
   0%{opacity: 0;}
@@ -535,17 +567,33 @@ button:focus{
     opacity: 1;
   }
 }
-@-o-keyframes finalFade{
-  0%{opacity: 0;}
-  30%{opacity: 1;}
-  80%{opacity: .9;}
-  100%{opacity: 1;}
+@-o-keyframes finalFade {
+  0% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  80% {
+    opacity: .9;
+  }
+  100% {
+    opacity: 1;
+  }
 }
-@keyframes finalFade{
-  0%{opacity: 0;}
-  30%{opacity: 1;}
-  80%{opacity: .9;}
-  100%{opacity: 1;}
+@keyframes finalFade {
+  0% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  80% {
+    opacity: .9;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 #footer{
   font-family: 'Roboto', sans-serif;
@@ -588,4 +636,26 @@ button:focus{
       height: 32%!important;;
     }
   }
+}
+.arrow-down {
+  width: 64px;
+  height: 64px;
+  transition-duration: 500ms;
+}
+.arrow-down:hover {
+  filter: drop-shadow(16px 16px 20px $blue) invert(75%);
+  transition-duration: 500ms;
+}
+.arrow-top {
+  width: 32px;
+  height: 32px;
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+}
+.arrow-top:hover {
+  filter: drop-shadow(10px 10px 10px $blue) invert(90%);
+  width: 33px;
+  height: 33px;
+  transition-duration: 500ms;
 }
