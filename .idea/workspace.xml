@@ -4,6 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+    <list default="true" id="6bbf114f-ff85-4f2d-a4da-5c00618127d7" name="Changes" comment="feat: add new grid's description">
+      <change afterPath="$PROJECT_DIR$/RSLang/src/favicon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     <list default="true" id="6bbf114f-ff85-4f2d-a4da-5c00618127d7" name="Changes" comment="feat: add grid-layout">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RSLang/src/app/app.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/RSLang/src/app/app.component.scss" afterDir="false" />
@@ -77,6 +80,7 @@
       <workItem from="1644008843060" duration="4252000" />
       <workItem from="1644090159824" duration="131000" />
       <workItem from="1644157665430" duration="9174000" />
+      <workItem from="1644237894597" duration="1299000" />
       <workItem from="1644237894597" duration="1431000" />
       <workItem from="1644506699320" duration="5801000" />
       <workItem from="1644593400975" duration="1731000" />
@@ -160,20 +164,21 @@
       <option name="project" value="LOCAL" />
       <updated>1644166713290</updated>
     </task>
-    <task id="LOCAL-00012" summary="feat: add routerLink to main's page button, delete css files">
-      <created>1644244355678</created>
+    <task id="LOCAL-00012" summary="feat: add favicon">
+      <created>1644835087160</created>
       <option name="number" value="00012" />
       <option name="presentableId" value="LOCAL-00012" />
       <option name="project" value="LOCAL" />
-      <updated>1644244355678</updated>
+      <updated>1644835087160</updated>
     </task>
-    <task id="LOCAL-00013" summary="/">
-      <created>1644507146305</created>
+    <task id="LOCAL-00013" summary="feat: add new grid's description">
+      <created>1644860286365</created>
       <option name="number" value="00013" />
       <option name="presentableId" value="LOCAL-00013" />
       <option name="project" value="LOCAL" />
-      <updated>1644507146305</updated>
+      <updated>1644860286365</updated>
     </task>
+    <option name="localTasksCounter" value="14" />
     <task id="LOCAL-00014" summary="init: change sizes main-page, start make about-page">
       <created>1644575713623</created>
       <option name="number" value="00014" />
@@ -223,6 +228,9 @@
     <MESSAGE value="feat: add main page ui and styles" />
     <MESSAGE value="feat: add animation, change colors" />
     <MESSAGE value="feat: add list to arrows-img" />
+    <MESSAGE value="feat: add favicon" />
+    <MESSAGE value="feat: add new grid's description" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: add new grid's description" />
     <MESSAGE value="feat: add routerLink to main's page button, delete css files" />
     <MESSAGE value="/" />
     <MESSAGE value="init: change sizes main-page, start make about-page" />
