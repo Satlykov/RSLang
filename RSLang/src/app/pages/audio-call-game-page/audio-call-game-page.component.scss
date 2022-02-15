@@ -8,7 +8,7 @@
   border-radius: 50px;
   background-color: aquamarine;
   margin: 15vh auto;
-  max-width: 25rem;
+  max-width: 30rem;
   margin-bottom: 10vh;
 }
 .category__title {
@@ -63,11 +63,17 @@
   display: flex;
   justify-content: space-between;
   max-width: 800px;
-  margin: 0 auto 30px;
+  margin-bottom: 30px;
 }
 .questions__answer {
   margin: 0 5px;
 }
+.questions__controll{
+  display:flex
+}
 .questions__back {
-  margin-left: 5px;
+margin-right: 10px;
+}
+.questions__forward{
+margin-left: 10px;
 }
