@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
+import { AuthorizationService } from 'src/app/services/authorization.service';
 import { ElectronicBookService } from 'src/app/services/electronic-book.service';
 
 @Component({
@@ -39,10 +40,14 @@ export class ElectronicBookPageComponent implements OnInit {
 
   private subsCards: Subscription = new Subscription();
 
-  constructor(private electronicBookService: ElectronicBookService) {}
+  constructor(
+    private electronicBookService: ElectronicBookService,
+    private authorizationService: AuthorizationService
+  ) {}
 
   ngOnInit(): void {
     this.getCards();
+    this.authenticated = this.authorizationService.checkLogin();
   }
 
   ngOnDestroy(): void {
