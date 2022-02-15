@@ -30,6 +30,10 @@
         <mat-icon>keyboard_double_arrow_right</mat-icon>
       </button>
     </div>
+    <button mat-stroked-button class="btn-game" *ngIf="authenticated">
+      <mat-icon>school</mat-icon>
+      "Сложные слова"
+    </button>
     <div class="selected-container">
       <span class="selected-title">Уровень:</span>
       <mat-form-field>
