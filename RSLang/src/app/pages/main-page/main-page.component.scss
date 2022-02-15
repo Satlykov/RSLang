@@ -52,7 +52,6 @@ $title: 1px 1px 1px $white, 0 0 1em $blue;
     .about-title {
       display: flex;
       align-items: center;
-      height: 10rem;
     }
   }
   &__video {
@@ -67,11 +66,58 @@ $title: 1px 1px 1px $white, 0 0 1em $blue;
       background-color: rgb(233, 243, 255, 0.5);
     }
   }
-  &__people {
+  &__team {
     min-height: 100vh;
     display: flex;
-    align-items: flex-start;
-    justify-content: center;
+    flex-direction: column;
+    width: inherit;
+    align-items: center;
+    .team-people {
+      margin: 0 auto;
+      width: 80%;
+      display: flex;
+      flex-direction: column;
+      height: 85vh;
+      justify-content: space-around;
+      &__info {
+        height: 30%;
+        background: linear-gradient(45deg, rgba(66, 138, 168, .8), rgba(233, 243, 255, .8)), url(../../../assets/img/blue4.jpg);
+        border: $orange solid 3px;
+        display: flex;
+        border-radius: 10px;
+        .content {
+          display: flex;
+          width: 50%;
+          flex-direction: column;
+          padding-left: 10px;
+          justify-content: center;
+        }
+        &-name {
+          @include link;
+          color: $white;
+          font-weight: bold;
+          font-size: 26px;
+          letter-spacing: 2px;
+          display: flex;
+          img {
+            width: 32px;
+            height: 32px;
+            padding-left: 5px;
+          }
+        }
+        p {
+          @include link;
+          margin: 0;
+          color: $white;
+          font-size: 20px;
+          line-height: 40px;
+
+        }
+        &-job {
+          letter-spacing: 2px;
+        }
+      }
+    }
   }
 }
 .container {
@@ -143,7 +189,6 @@ $title: 1px 1px 1px $white, 0 0 1em $blue;
   @include about-images;
   background-image: url('../../../assets/img/people.jpg');
 }
-
 .title {
   color: #49494b;
   cursor: pointer;
@@ -153,29 +198,7 @@ $title: 1px 1px 1px $white, 0 0 1em $blue;
   margin: 0;
   letter-spacing: 2px;
 }
-@media only screen and (max-width: 920px) {
-  .container {
-    grid-template-areas:
-     "A"
-     "B"
-     "C"
-     "D";
-    row-gap: 15px;
-    margin-bottom: 10px;
-  }
-  .grid {
-    width: 22rem;
-    height: 16rem;
-  }
-  .grid:hover {
-    width: 23rem;
-    height: 17rem;
-    transition-duration: 700ms;
-  }
-  .about-title__main {
-    display: none;
-  }
-}
+
 .welcome-section {
   @include blueTheme;
   @include h1;
@@ -249,7 +272,7 @@ $title: 1px 1px 1px $white, 0 0 1em $blue;
   right: 0;
   margin: auto;
 }
-.x1{
+.x1 {
   -webkit-animation: floatUp 4s infinite linear;
   -moz-animation: floatUp 4s infinite linear;
   -o-animation: floatUp 4s infinite linear;
@@ -259,7 +282,7 @@ $title: 1px 1px 1px $white, 0 0 1em $blue;
   -o-transform: scale(1.0);
   transform: scale(1.0);
 }
-.x2{
+.x2 {
   -webkit-animation: floatUp 7s infinite linear;
   -moz-animation: floatUp 7s infinite linear;
   -o-animation: floatUp 7s infinite linear;
@@ -532,4 +555,37 @@ button:focus{
   -webkit-transform: translate(95vw,90vh);
   -moz-transform: translate(95vw,90vh);
   transform: translate(95vw,90vh);
+}
+.html {
+  scroll-behavior: smooth;
+}
+
+@media only screen and (max-width: 920px) {
+  .container {
+    grid-template-areas:
+     "A"
+     "B"
+     "C"
+     "D";
+    row-gap: 15px;
+    margin-bottom: 10px;
+  }
+  .grid {
+    width: 22rem;
+    height: 16rem;
+  }
+  .grid:hover {
+    width: 23rem;
+    height: 17rem;
+    transition-duration: 700ms;
+  }
+  .about-title__main {
+    display: none;
+  }
+  .team-people {
+    width: 95%!important;
+    &__info {
+      height: 32%!important;;
+    }
+  }
 }

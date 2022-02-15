@@ -4,13 +4,33 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6bbf114f-ff85-4f2d-a4da-5c00618127d7" name="Changes" comment="feat: add new grid's description">
-      <change afterPath="$PROJECT_DIR$/RSLang/src/favicon.png" afterDir="false" />
+    <list default="true" id="6bbf114f-ff85-4f2d-a4da-5c00618127d7" name="Changes" comment="feat: add new blocks">
+      <change afterPath="$PROJECT_DIR$/RSLang/src/assets/img/blue4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RSLang/src/assets/img/github.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RSLang/src/favicon-16x16.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RSLang/src/favicon-32x32.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RSLang/src/app/app.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/RSLang/src/app/app.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RSLang/src/app/components/core/footer/footer.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/RSLang/src/app/components/core/footer/footer.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RSLang/src/app/components/core/footer/footer.component.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/RSLang/src/app/components/core/footer/footer.component.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RSLang/src/app/components/core/header/header.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/RSLang/src/app/components/core/header/header.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RSLang/src/app/components/core/header/header.component.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/RSLang/src/app/components/core/header/header.component.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RSLang/src/app/components/core/main-content/main-content.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/RSLang/src/app/components/core/main-content/main-content.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RSLang/src/app/components/core/main-content/main-content.component.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/RSLang/src/app/components/core/main-content/main-content.component.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RSLang/src/app/pages/authorization-page/authorization-page.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/RSLang/src/app/pages/authorization-page/authorization-page.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RSLang/src/app/pages/authorization-page/authorization-page.component.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/RSLang/src/app/pages/authorization-page/authorization-page.component.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RSLang/src/app/pages/exit/exit.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/RSLang/src/app/pages/exit/exit.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RSLang/src/app/pages/exit/exit.component.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/RSLang/src/app/pages/exit/exit.component.css.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RSLang/src/app/pages/main-page/main-page.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/RSLang/src/app/pages/main-page/main-page.component.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RSLang/src/app/pages/main-page/main-page.component.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/RSLang/src/app/pages/main-page/main-page.component.css.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RSLang/src/app/pages/main-page/main-page.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/RSLang/src/app/pages/main-page/main-page.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RSLang/src/app/pages/main-page/main-page.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/RSLang/src/app/pages/main-page/main-page.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RSLang/src/app/pages/sprint-game-page/sprint-game-page.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/RSLang/src/app/pages/sprint-game-page/sprint-game-page.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RSLang/src/app/pages/sprint-game-page/sprint-game-page.component.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/RSLang/src/app/pages/sprint-game-page/sprint-game-page.component.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RSLang/src/assets/img/60311d434a8ae.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RSLang/src/assets/img/vector.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RSLang/src/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/RSLang/src/favicon.ico" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,6 +92,8 @@
       <workItem from="1644090159824" duration="131000" />
       <workItem from="1644157665430" duration="9174000" />
       <workItem from="1644237894597" duration="1299000" />
+      <workItem from="1644931737481" duration="1286000" />
+      <workItem from="1644934228194" duration="7829000" />
     </task>
     <task id="LOCAL-00001" summary="feat: create a new branch, add mixins">
       <created>1643824469994</created>
@@ -164,7 +186,14 @@
       <option name="project" value="LOCAL" />
       <updated>1644860286365</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="feat: add new blocks">
+      <created>1644861865890</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1644861865890</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -194,7 +223,8 @@
     <MESSAGE value="feat: add list to arrows-img" />
     <MESSAGE value="feat: add favicon" />
     <MESSAGE value="feat: add new grid's description" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: add new grid's description" />
+    <MESSAGE value="feat: add new blocks" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: add new blocks" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
