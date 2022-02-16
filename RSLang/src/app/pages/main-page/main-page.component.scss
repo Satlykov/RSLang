@@ -117,10 +117,8 @@ $title: 1px 1px 1px $white, 0 0 1em $blue;
           letter-spacing: 2px;
         }
         .developer__photo {
-          border: $white 2px solid;
           width: 50%;
-          height: 98%;
-          border-radius: inherit;
+          height: 99%;
         }
       }
     }
@@ -203,6 +201,10 @@ $title: 1px 1px 1px $white, 0 0 1em $blue;
   text-shadow: $title;
   margin: 0;
   letter-spacing: 2px;
+}
+.photo-developer {
+  height: inherit;
+  border: solid 2px $white;
 }
 
 .welcome-section {
@@ -380,34 +382,74 @@ button:focus {
   outline: none;
 }
 @-webkit-keyframes floatUp {
-  0%{top: 100vh; opacity: 0;}
-  25%{opacity: 1;}
-  50%{top: 0; opacity: .8;}
-  75%{opacity: 1;}
-  100%{top: -100vh; opacity: 0;}
+  0% {
+    top: 100vh; opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  50% {
+    top: 0; opacity: .8;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    top: -100vh; opacity: 0;
+  }
 }
 @-moz-keyframes floatUp {
-  0%{top: 100vh; opacity: 0;}
-  25%{opacity: 1;}
-  50%{top: 0; opacity: .8;}
-  75%{opacity: 1;}
-  100%{top: -100vh; opacity: 0;}
+  0% {
+    top: 100vh; opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  50% {
+    top: 0; opacity: .8;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    top: -100vh; opacity: 0;
+  }
 }
 @-o-keyframes floatUp{
-  0%{top: 100vh; opacity: 0;}
-  25%{opacity: 1;}
-  50%{top: 0; opacity: .8;}
-  75%{opacity: 1;}
-  100%{top: -100vh; opacity: 0;}
+  0% {
+    top: 100vh; opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  50% {
+    top: 0; opacity: .8;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    top: -100vh; opacity: 0;
+  }
 }
 @keyframes floatUp {
-  0%{top: 100vh; opacity: 0;}
-  25%{opacity: 1;}
-  50%{top: 0; opacity: .8;}
-  75%{opacity: 1;}
-  100%{top: -100vh; opacity: 0;}
+  0% {
+    top: 100vh; opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  50% {
+    top: 0; opacity: .8;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    top: -100vh;
+    opacity: 0;
+  }
 }
-
 .header {
   position: absolute;
   top: 40%;
@@ -547,17 +589,33 @@ button:focus {
     opacity: 0;
   }
 }
-@keyframes fadeOut{
-  0%{opacity: 0;}
-  30%{opacity: 1;}
-  80%{opacity: .9;}
-  100%{opacity: 0;}
+@keyframes fadeOut {
+  0% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  80% {
+    opacity: .9;
+  }
+  100% {
+    opacity: 0;
+  }
 }
-@-webkit-keyframes finalFade{
-  0%{opacity: 0;}
-  30%{opacity: 1;}
-  80%{opacity: .9;}
-  100%{opacity: 1;}
+@-webkit-keyframes finalFade {
+  0% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  80% {
+    opacity: .9;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 @-moz-keyframes finalFade {
   0% {
@@ -601,7 +659,7 @@ button:focus {
     opacity: 1;
   }
 }
-#footer{
+#footer {
   font-family: 'Roboto', sans-serif;
   font-size: 1.2em;
   color: white;
@@ -613,7 +671,6 @@ button:focus {
 .html {
   scroll-behavior: smooth;
 }
-
 @media only screen and (max-width: 920px) {
   .container {
     grid-template-areas:
@@ -641,6 +698,15 @@ button:focus {
     &__info {
       height: 32%!important;
     }
+  }
+  .photo-developer {
+    width: inherit;
+    height: auto;
+  }
+}
+@media only screen and (max-width: 520px) {
+  .team-people__info {
+    flex-wrap: wrap;
   }
 }
 .arrow-down {

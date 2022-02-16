@@ -115,10 +115,8 @@
   letter-spacing: 2px;
 }
 .main-container__team .team-people__info .developer__photo {
-  border: #e9f3ff 2px solid;
   width: 50%;
-  height: 98%;
-  border-radius: inherit;
+  height: 99%;
 }
 
 .container {
@@ -260,6 +258,11 @@
   text-shadow: 1px 1px 1px #e9f3ff, 0 0 1em #428AA8;
   margin: 0;
   letter-spacing: 2px;
+}
+
+.photo-developer {
+  height: inherit;
+  border: solid 2px #e9f3ff;
 }
 
 .welcome-section {
@@ -825,6 +828,16 @@ button:focus {
   }
   .team-people__info {
     height: 32% !important;
+  }
+
+  .photo-developer {
+    width: inherit;
+    height: auto;
+  }
+}
+@media only screen and (max-width: 520px) {
+  .team-people__info {
+    flex-wrap: wrap;
   }
 }
 .arrow-down {
