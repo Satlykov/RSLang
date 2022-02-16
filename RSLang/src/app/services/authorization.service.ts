@@ -120,7 +120,6 @@ export class AuthorizationService {
       })
       .subscribe(
         (req) => {
-          console.log((req as Auth).refreshToken);
           this.spinner = false;
           this.changeSpinnerStatus(this.spinner);
           if (req) {

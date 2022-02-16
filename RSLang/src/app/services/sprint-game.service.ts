@@ -3,6 +3,7 @@ import { Observable, Subject } from 'rxjs';
 import { interval } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { Word } from '../models/interface';
+import { SprintGamePageComponent } from '../pages/sprint-game-page/sprint-game-page.component';
 import { ApiService } from './api.service';
 
 @Injectable({
@@ -20,6 +21,8 @@ export class SprintGameService {
   score = 0;
   multiplier = 1;
   pointsForAnswer = 10 * this.multiplier;
+  fromBook = false;
+  selected = '';
 
   public sprintWords$ = new Subject<Word[]>();
   public streak$ = new Subject<number>();
