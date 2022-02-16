@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { catchError, Observable, of, Subscription, switchMap } from 'rxjs';
 import { AuthorizationService } from 'src/app/services/authorization.service';
 import { ElectronicBookService } from 'src/app/services/electronic-book.service';
 import { Router } from '@angular/router';
 import { SprintGameService } from 'src/app/services/sprint-game.service';
+import { Paginated, Word } from 'src/app/models/interface';
 
 @Component({
   selector: 'app-electronic-book-page',
@@ -17,7 +18,7 @@ export class ElectronicBookPageComponent implements OnInit {
   levels = [
     { value: 'group=0', viewValue: 'A1 Elementary' },
     { value: 'group=1', viewValue: 'A2 Pre-Intermediate' },
-    { value: 'group=2', viewValue: 'B1 IIntermediate' },
+    { value: 'group=2', viewValue: 'B1 Intermediate' },
     { value: 'group=3', viewValue: 'B2 Upper-Intermediate' },
     { value: 'group=4', viewValue: 'C1 Advanced' },
     { value: 'group=5', viewValue: 'C2 Proficiency' },
@@ -58,25 +59,30 @@ export class ElectronicBookPageComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.subsCards.unsubscribe();
-
   }
 
   getCards() {
-    /* if (this.authenticated) {
-      this.cards = this.electronicBookService.getCardsUser(
-        this.userID,
-        this.selected
-      );
+    if (this.authenticated) {
+      this.cards = this.electronicBookService
+        .getCardsUser(this.userID, this.selected.split('=')[1], this.numberPage)
+        .pipe(
+          switchMap((cards) =>
+            of((cards as Array<Paginated>)[0].paginatedResults)
+          ),
+          catchError((err) => {
+            console.log(err);
+          /*   if (err.status === 401) {
+              console.log(err);
+            } */
+            return [];
+          })
+        );
     } else {
       this.cards = this.electronicBookService.getCards(
         this.selected,
         this.numberPage
       );
-    } */
-    this.cards = this.electronicBookService.getCards(
-      this.selected,
-      this.numberPage
-    );
+    }
   }
 
   setNumberPage(num: number) {

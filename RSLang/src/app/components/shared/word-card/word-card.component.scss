@@ -1,10 +1,14 @@
 mat-card {
   width: 320px;
-  min-height: 450px;
+  min-height: 470px;
   padding: 0;
   background: #438aa8;
   margin: 10px 0;
   cursor: default;
+
+  &.hard {
+    box-shadow:  0px 0px 50px 10px #e00202f6;
+  }
 
   .img-container {
     width: 100%;
@@ -78,4 +82,8 @@ mat-card {
   left: 5px;
   position: absolute;
   transform: scale(1.4);
+}
+
+.btn-all {
+  margin-bottom: 10px;
 }

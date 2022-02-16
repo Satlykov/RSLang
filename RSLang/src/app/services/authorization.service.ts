@@ -197,4 +197,10 @@ export class AuthorizationService {
   getUserID() {
     return this.userID;
   }
+
+ /*  refreshToken() {
+    if (this.localStorageService.getItem(this.keyStorage)) {
+      const refreshToken = this.localStorageService.getItem(this.keyStorage).refreshToken;
+    }
+  } */
 }

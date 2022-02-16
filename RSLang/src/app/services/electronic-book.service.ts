@@ -12,7 +12,7 @@ export class ElectronicBookService {
     return this.api.get(`words?${selected}&page=${page}`);
   }
 
-  getCardsUser(userID: string, selected: string): Observable<Object> {
-    return this.api.get(`users/${userID}/aggregatedWords?${selected}`);
+  getCardsUser(userID: string, selected: string, page: number): Observable<Object> {
+    return this.api.get(`users/${userID}/aggregatedWords?wordsPerPage=20&filter={"$and": [{"group": ${selected}}, {"page": ${page}}]}`);
   }
 }

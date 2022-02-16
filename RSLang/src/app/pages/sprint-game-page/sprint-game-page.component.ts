@@ -64,7 +64,6 @@ export class SprintGamePageComponent implements OnInit {
     this.subsWords = this.sprintGameService.sprintWords$.subscribe(
       (words: Word[]) => {
         this.wordsSprint = words;
-        console.log(words[0]);
       }
     );
     this.subsStreak = this.sprintGameService.streak$.subscribe(

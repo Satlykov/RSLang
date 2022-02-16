@@ -35,7 +35,7 @@
       "Словарь"
     </button>
     <div class="selected-container">
-      <span class="selected-title">Уровень:</span>
+      <span class="selected-title">Уровени:</span>
       <mat-form-field>
         <mat-select [(value)]="selected" (valueChange)="changeLevel()">
           <mat-option *ngFor="let level of levels" [value]="level.value">{{

@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+
 import { backendURL } from 'src/app/constants/backendURL';
-import { UserWord, Word } from 'src/app/models/interface';
+import { Word } from 'src/app/models/interface';
 import { AuthorizationService } from 'src/app/services/authorization.service';
 import { UserWordService } from 'src/app/services/user-word.service';
 
@@ -21,6 +22,7 @@ export class WordCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.authenticated = this.authorizationService.authenticated;
+    this.cheakHard();
   }
 
   playWord(src: string) {
@@ -36,25 +38,32 @@ export class WordCardComponent implements OnInit {
       difficulty: 'hard',
       optional: {},
     };
-    this.hard = true;
-    this.userWordService.postUserWord(this.card.id, obj).subscribe((res) => {
-      console.log(res);
-    });
+
+    this.userWordService.postUserWord(this.card._id, obj).subscribe(
+      () => {
+        this.hard = true;
+      },
+      (error) => {
+        this.hard = false;
+      }
+    );
   }
 
   deletHard() {
-    this.hard = false;
-    this.userWordService.deleteUserWord(this.card.id).subscribe((res) => {
-      console.log(res);
-    });
+    this.userWordService.deleteUserWord(this.card._id).subscribe(
+      () => {
+        this.hard = false;
+      },
+      (error) => {
+        this.hard = true;
+      }
+    );
   }
 
   cheakHard() {
-    this.userWordService.getUserWord(this.card.id).subscribe((word) => {
-      if ((word as UserWord).difficulty === 'hard') {
-        this.hard = true;
-      }
-    });
+    if (this.card.userWord) {
+      this.hard = this.card.userWord.difficulty === 'hard';
+    }
   }
 
   toggleHard() {
@@ -63,5 +72,24 @@ export class WordCardComponent implements OnInit {
     } else {
       this.addToHard();
     }
+  }
+
+  playAll() {
+    let audioN = new Audio();
+    const tracks = [this.card.audio, this.card.audioMeaning, this.card.audioExample];
+    let current = 0;
+    if ('pause' in audioN) audioN.pause();
+    audioN.src = backendURL + '/' + tracks[current];
+    audioN.load();
+    audioN.volume = 0.5;
+    audioN.play();
+    audioN.onended = function () {
+      current++;
+      audioN.src = backendURL + '/' + tracks[current];
+      audioN.load();
+      audioN.volume = 0.5;
+      audioN.play();
+      if (current >= tracks.length) return;
+    };
   }
 }
