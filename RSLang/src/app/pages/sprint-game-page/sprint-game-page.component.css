@@ -1,5 +1,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Neucha&family=Rubik:wght@300;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Neucha&family=Rubik:ital,wght@0,300;0,700;1,300&display=swap");
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: darkgrey;
+}
+
+::-webkit-scrollbar-thumb {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
 .start-game {
   font-size: 3rem;
   padding: 1.5rem 2rem;
@@ -110,6 +122,57 @@ mat-progress-bar {
   font-size: 4rem;
   margin-top: -5.5rem;
   margin-bottom: 2rem;
+}
+
+.star {
+  transform: scale(2);
+  margin: 0 1rem;
+}
+
+.end-score {
+  font-size: 4.5rem;
+  color: green;
+}
+
+.close {
+  border-radius: 40px;
+  border: 1px solid #fa8d62;
+  color: #e9f3ff;
+  background-color: #fa8d62;
+  text-align: center;
+  vertical-align: middle;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Rubic, sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+  transition-duration: 600ms;
+}
+
+.close:hover {
+  border-radius: 40px;
+  border: 1px solid #fa8d62;
+  color: #e9f3ff;
+  background-color: #fa8d62;
+  text-align: center;
+  vertical-align: middle;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Rubic, sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+  transition-duration: 600ms;
+  transition-duration: 600ms;
+  background: linear-gradient(to right, #fa8d62, #438aa8);
+  color: #e9f3ff;
+  filter: drop-shadow(0 0 0.2rem #438aa8);
+}
+
+.sound {
+  transform: scale(2);
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=sprint-game-page.component.css.map */
