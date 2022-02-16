@@ -1,53 +1,115 @@
-<div class="container">
-  <div *ngIf="!isOpened; else questions" class="category__container">
-    <h2 class="category__title">Аудиовызов</h2>
-    <h3 class="category__subtitle">Выберите сложность:</h3>
-    <div class="category__button-container">
+<div class="container" [ngSwitch]="section">
+  <ng-template ngSwitchCase="question">
+    <div class="category__container">
+      <h2 class="category__title">Аудиовызов</h2>
+      <h3 class="category__subtitle">Выберите сложность:</h3>
+      <div class="category__button-container">
+        <button
+          class="category__button"
+          mat-raised-button
+          (click)="showQuestions(0)"
+        >
+          A2
+        </button>
+        <button
+          class="category__button"
+          mat-raised-button
+          (click)="showQuestions(1)"
+        >
+          A1
+        </button>
+        <button
+          class="category__button"
+          mat-raised-button
+          (click)="showQuestions(2)"
+        >
+          B2
+        </button>
+        <button
+          class="category__button"
+          mat-raised-button
+          (click)="showQuestions(3)"
+        >
+          B1
+        </button>
+        <button
+          class="category__button"
+          mat-raised-button
+          (click)="showQuestions(4)"
+        >
+          C2
+        </button>
+        <button
+          class="category__button"
+          mat-raised-button
+          (click)="showQuestions(5)"
+        >
+          C1
+        </button>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template ngSwitchCase="statistic">
+    <div class="statistic__container">
+      <h2 class="statistic__header">Результаты игры</h2>
+      <div class="statistic__main">
+        <div class="statistic__correct correct__container">
+          <div class="audio__container">
+            <div *ngFor="let audio of statistic.correct.audioPath">
+              <div class="correct__audio" (click)="generateAudio(audio)"></div>
+            </div>
+          </div>
+          <div class="word__container">
+            <div
+              class="correct__word"
+              *ngFor="let word of statistic.correct.word"
+            >
+              {{ word }}
+            </div>
+          </div>
+          <div class="translation__container">
+            <div
+              class="correct__translation"
+              *ngFor="let translation of statistic.correct.translation"
+            >
+              {{ translation }}
+            </div>
+          </div>
+        </div>
+        <div class="statistic__incorrect incorrect__container">
+          <div class="audio__container">
+            <div *ngFor="let audio of statistic.incorrect.audioPath">
+              <div class="incorrect__audio" (click)="generateAudio(audio)"></div>
+            </div>
+          </div>
+          <div class="word__container">
+            <div
+              class="incorrect__word"
+              *ngFor="let word of statistic.incorrect.word"
+            >
+              {{ word }}
+            </div>
+          </div>
+          <div class="translation__container">
+            <div
+              class="incorrect__translation"
+              *ngFor="let translation of statistic.incorrect.translation"
+            >
+              {{ translation }}
+            </div>
+          </div>
+        </div>
+      </div>
       <button
-        class="category__button"
         mat-raised-button
-        (click)="showQuestions(0)"
+        (click)="showQuestions(7)"
+        class="questions__back"
       >
-        1
-      </button>
-      <button
-        class="category__button"
-        mat-raised-button
-        (click)="showQuestions(1)"
-      >
-        2
-      </button>
-      <button
-        class="category__button"
-        mat-raised-button
-        (click)="showQuestions(2)"
-      >
-        3
-      </button>
-      <button
-        class="category__button"
-        mat-raised-button
-        (click)="showQuestions(3)"
-      >
-        4
-      </button>
-      <button
-        class="category__button"
-        mat-raised-button
-        (click)="showQuestions(4)"
-      >
-        5
-      </button>
-      <button
-        class="category__button"
-        mat-raised-button
-        (click)="showQuestions(5)"
-      >
-        6
+        Категории
       </button>
     </div>
-  </div>
-  <ng-template #questions>
+  </ng-template>
+  <ng-template ngSwitchCase="answers">
     <div class="questions__container">
       <div
         [ngClass]="
@@ -107,7 +169,7 @@
           (click)="showQuestions(7)"
           class="questions__back"
         >
-          К категориям
+          Категории
         </button>
         <button
           [disabled]="!isAnswered"

@@ -1,7 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subject, take, takeUntil } from 'rxjs';
-import { Word } from 'src/app/models/interface';
+import { Subject, take, takeUntil } from 'rxjs';
+import { Word, AudioGameStatictic } from 'src/app/models/interface';
 import { AudioCallGameService } from 'src/app/services/audio-call-game.service';
 import * as _ from 'lodash';
 import { backendURL } from 'src/app/constants/backendURL'
@@ -14,9 +13,11 @@ import { backendURL } from 'src/app/constants/backendURL'
 })
 export class AudioCallGamePageComponent implements OnInit, OnDestroy {
 
+  public section = 'question';
   public isOpened = false;
   public isAnswered = false;
   public isCorrect = false;
+  public showStatistic = false;
   public id = 0;
   public questionsList: Word[] = [];
   private randomWords: string[] = [];
@@ -36,10 +37,22 @@ export class AudioCallGamePageComponent implements OnInit, OnDestroy {
     wordTranslate:'',
     textMeaningTranslate:'',
     textExampleTranslate:'',
-    answersOptions:['word1','word1','word1','word1','word1']
+    answersOptions:['','','','','']
   };
   private currentIndex: number = 0;
   public backendURL = backendURL;
+  public statistic: AudioGameStatictic = {
+    correct : {
+      word: [],
+      translation: [],
+      audioPath: [],
+    },
+    incorrect : {
+      word: [],
+      translation: [],
+      audioPath: [],
+    }
+  }
 
 
   constructor(
@@ -68,13 +81,25 @@ export class AudioCallGamePageComponent implements OnInit, OnDestroy {
 
   public showQuestions(id: number):void {
     if(id === 7){
+      this.statistic = {
+        correct:{
+          word: [],
+          translation: [],
+          audioPath: [],
+        },
+        incorrect:{
+          word: [],
+          translation: [],
+          audioPath: [],
+        }
+      }
       this.currentIndex = 0;
       this.questionsList = [];
-      this.isOpened = !this.isOpened
+      this.section = 'question';
       return
     }
     this.questionsList = [];
-    this.isOpened = !this.isOpened
+    this.section = 'answers';
     this.audioCallGameService.getQuestionsList(id);
       this.audioCallGameService.questionsList$
       .pipe(
@@ -103,13 +128,21 @@ export class AudioCallGamePageComponent implements OnInit, OnDestroy {
   }
 
   public checkAnswer(answer: string):void {
+    const correct = this.statistic.correct;
+    const incorrect = this.statistic.incorrect;
+    const currentQuestion = this.currentQuestion;
     this.isAnswered = !this.isAnswered
     if( this.currentQuestion.wordTranslate === answer){
       this.isCorrect = true;
+      correct.word.push(currentQuestion.word);
+      correct.translation.push(currentQuestion.wordTranslate);
+      correct.audioPath.push(currentQuestion.audio);
     }else{
       this.isCorrect = false;
+      incorrect.word.push(currentQuestion.word);
+      incorrect.translation.push(currentQuestion.wordTranslate);
+      incorrect.audioPath.push(currentQuestion.audio);
     }
-    console.log(this.isCorrect)
   }
 
   public nextQuestion():void {
@@ -119,7 +152,7 @@ export class AudioCallGamePageComponent implements OnInit, OnDestroy {
       this.generateQuestion(this.questionsList,this.currentIndex)
     }else{
       this.currentIndex = 0;
-      this.isOpened = !this.isOpened
+      this.section = 'statistic';
     }
   }
 
