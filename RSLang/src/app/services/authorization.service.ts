@@ -4,6 +4,7 @@ import { ApiService } from './api.service';
 import { LocalStorageService } from './local-storage.service';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
+import { UserWordService } from './user-word.service';
 @Injectable({
   providedIn: 'root',
 })
@@ -20,6 +21,7 @@ export class AuthorizationService {
   correctLoginPaswor = false;
 
   userName = '';
+  userID = '';
 
   public authenticatedStatus$ = new Subject<boolean>();
   public spinnerStatus$ = new Subject<boolean>();
@@ -40,7 +42,8 @@ export class AuthorizationService {
   constructor(
     private apiService: ApiService,
     private localStorageService: LocalStorageService,
-    private router: Router
+    private router: Router,
+    private userWordService: UserWordService,
   ) {}
 
   // General Email Regex (RFC 5322 Official Standard)
@@ -127,6 +130,8 @@ export class AuthorizationService {
             this.changeAuthenticatedStatus(this.authenticated);
             this.router.navigateByUrl('/');
             this.userName = (req as Auth).name;
+            this.userID = (req as Auth).userId;
+            this.userWordService.userID = this.userID;
             this.getUserName(this.userName);
             this.localStorageService.setItem(this.keyStorage, req);
           }
@@ -174,6 +179,10 @@ export class AuthorizationService {
         this.localStorageService.getItem(this.keyStorage) as Auth
       ).name;
       this.getUserName(this.userName);
+      this.userID = (
+        this.localStorageService.getItem(this.keyStorage) as Auth
+      ).userId;
+      this.userWordService.userID = this.userID;
       return true;
     }
     return false;
@@ -183,5 +192,9 @@ export class AuthorizationService {
     if (this.localStorageService.getItem(this.keyStorage)) {
       return this.localStorageService.getItem(this.keyStorage).token;
     }
+  }
+
+  getUserID() {
+    return this.userID;
   }
 }

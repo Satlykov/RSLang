@@ -11,4 +11,8 @@ export class ElectronicBookService {
   getCards(selected: string, page: number): Observable<Object> {
     return this.api.get(`words?${selected}&page=${page}`);
   }
+
+  getCardsUser(userID: string, selected: string): Observable<Object> {
+    return this.api.get(`users/${userID}/aggregatedWords?${selected}`);
+  }
 }

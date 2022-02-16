@@ -3,7 +3,6 @@ import { Observable, Subscription } from 'rxjs';
 import { AuthorizationService } from 'src/app/services/authorization.service';
 import { ElectronicBookService } from 'src/app/services/electronic-book.service';
 import { Router } from '@angular/router';
-import { SprintGamePageComponent } from '../sprint-game-page/sprint-game-page.component';
 import { SprintGameService } from 'src/app/services/sprint-game.service';
 
 @Component({
@@ -13,6 +12,7 @@ import { SprintGameService } from 'src/app/services/sprint-game.service';
 })
 export class ElectronicBookPageComponent implements OnInit {
   authenticated = false;
+  userID = '';
   selected: string = 'group=0';
   levels = [
     { value: 'group=0', viewValue: 'A1 Elementary' },
@@ -47,19 +47,32 @@ export class ElectronicBookPageComponent implements OnInit {
     private electronicBookService: ElectronicBookService,
     private authorizationService: AuthorizationService,
     private router: Router,
-    private sprintGameService: SprintGameService,
+    private sprintGameService: SprintGameService
   ) {}
 
   ngOnInit(): void {
-    this.getCards();
     this.authenticated = this.authorizationService.checkLogin();
+    this.userID = this.authorizationService.getUserID();
+    this.getCards();
   }
 
   ngOnDestroy(): void {
     this.subsCards.unsubscribe();
+
   }
 
   getCards() {
+    /* if (this.authenticated) {
+      this.cards = this.electronicBookService.getCardsUser(
+        this.userID,
+        this.selected
+      );
+    } else {
+      this.cards = this.electronicBookService.getCards(
+        this.selected,
+        this.numberPage
+      );
+    } */
     this.cards = this.electronicBookService.getCards(
       this.selected,
       this.numberPage

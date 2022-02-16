@@ -1,44 +1,25 @@
 <mat-card>
-  <div
-    class="img-container"
-    style="
-      background-image: linear-gradient(to top, #438aa8 0%, transparent 70%),
-        url(https://rslangsteam.herokuapp.com/{{ card.image }});
-    "
-  ></div>
+  <button mat-icon-button class="btn-icon" (click)="toggleHard()" *ngIf="authenticated">
+    <mat-icon style="color: #ffffffe0" *ngIf="!hard">flash_off</mat-icon>
+    <mat-icon style="color: #e0bf02ee"  *ngIf="hard">flash_on</mat-icon>
+  </button>
+  <div class="img-container" style="background-image: linear-gradient(to top, #438aa8 0%, transparent 70%),
+        url(https://rslangsteam.herokuapp.com/{{ card.image }});"></div>
   <div class="text-container">
     <h2 class="word">{{ card.word }}</h2>
-    <button
-      mat-icon-button
-      class="btn-pronounce"
-      (click)="playWord(card.audio)"
-    >
+    <button mat-icon-button class="btn-pronounce" (click)="playWord(card.audio)">
       <mat-icon>record_voice_over</mat-icon>
     </button>
-    <span class="translation"
-      >{{ card.wordTranslate }} {{ card.transcription }}</span
-    >
+    <span class="translation">{{ card.wordTranslate }} {{ card.transcription }}</span>
     <div class="en-text-container">
       <p class="en-text" [innerHTML]="card.textMeaning"></p>
-      <button
-        mat-icon-button
-        class="btn-pronounce"
-        (click)="playWord(card.audioMeaning)"
-      >
+      <button mat-icon-button class="btn-pronounce" (click)="playWord(card.audioMeaning)">
         <mat-icon>record_voice_over</mat-icon>
       </button>
     </div>
     <div class="en-text-container">
-      <p
-        class="en-text"
-        style="font-style: italic"
-        [innerHTML]="card.textExample"
-      ></p>
-      <button
-        mat-icon-button
-        class="btn-pronounce"
-        (click)="playWord(card.audioExample)"
-      >
+      <p class="en-text" style="font-style: italic" [innerHTML]="card.textExample"></p>
+      <button mat-icon-button class="btn-pronounce" (click)="playWord(card.audioExample)">
         <mat-icon>record_voice_over</mat-icon>
       </button>
     </div>
