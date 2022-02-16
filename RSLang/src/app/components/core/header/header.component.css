@@ -49,4 +49,13 @@ mat-toolbar p {
   color: #e9f3ff;
 }
 
+.user-title {
+  color: #fff;
+  margin: 0 10px;
+}
+
+.logo {
+  margin-left: 10px;
+}
+
 /*# sourceMappingURL=header.component.css.map */

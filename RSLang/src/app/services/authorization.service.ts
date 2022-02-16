@@ -174,6 +174,14 @@ export class AuthorizationService {
         this.localStorageService.getItem(this.keyStorage) as Auth
       ).name;
       this.getUserName(this.userName);
+      return true;
+    }
+    return false;
+  }
+
+  getToken() {
+    if (this.localStorageService.getItem(this.keyStorage)) {
+      return this.localStorageService.getItem(this.keyStorage).token;
     }
   }
 }

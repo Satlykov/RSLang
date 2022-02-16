@@ -22,14 +22,12 @@
     color: #e9f3ff;
   }
 }
-
 @mixin h3 {
   h3 {
     font-family: Merienda One, sans-serif;
     color: #e9f3ff;
   }
 }
-
 @mixin lightTheme {
   p {
     font-family: Rubic, sans-serif;
@@ -39,14 +37,13 @@
   }
   background-color: #e9f3ff;
 }
-
 @mixin blueTheme {
   p {
     font-family: Rubic, sans-serif;
     font-weight: 300;
     color: #e9f3ff;
   }
-  background-color: #438aa8
+  background-color: #438aa8;
 }
 
 @mixin button {

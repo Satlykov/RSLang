@@ -1,0 +1,104 @@
+@import '../../app.component.scss';
+
+.start-game {
+  font-size: 3rem;
+  padding: 1.5rem 2rem;
+  color: #fff;
+  @include button;
+  &:hover {
+    @include button-hover;
+  }
+}
+
+.sprint-game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: calc(100vh - 128px);
+  @include lightTheme;
+}
+
+mat-card {
+  min-width: 19rem;
+  width: 40%;
+  min-height: 25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.btn-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: #fff;
+
+  .true-word {
+    background-color: green;
+    font-size: 1.7rem;
+    padding: .2rem .5rem;
+  }
+
+  .false-word {
+    background-color: red;
+    font-size: 1.7rem;
+    padding: .2rem .5rem;
+  }
+}
+
+.line {
+  min-height: 2px;
+  width: 100%;
+  background-color: #49494b;
+  margin-bottom: 1rem;
+}
+
+.points-sprint {
+  color:green;
+  font-size: 2rem;
+}
+
+.second {
+  font-size: 3rem;
+}
+
+.second-title {
+  font-size: 2rem;
+}
+
+mat-progress-bar {
+  margin: 1rem;
+}
+
+.start-second {
+  font-size: 4rem;
+  margin-top: -5.5rem;
+  margin-bottom: 2rem;
+}
+
+.star {
+  transform: scale(2);
+  margin: 0 1rem;
+}
+
+.end-score {
+  font-size: 4.5rem;
+  color: green;
+}
+
+.close {
+  @include button;
+}
+
+.close:hover {
+  @include button-hover;
+}
+
+.sound {
+  transform: scale(2);
+  cursor: pointer;
+}

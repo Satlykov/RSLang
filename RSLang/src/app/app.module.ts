@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { MaterialUIModule } from './material-ui/material-ui.module';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -18,7 +18,9 @@ import { HeaderComponent } from './components/core/header/header.component';
 import { FooterComponent } from './components/core/footer/footer.component';
 import { MainContentComponent } from './components/core/main-content/main-content.component';
 import { ExitComponent } from './pages/exit/exit.component';
-import { AboutTeamComponent } from './pages/about-team/about-team.component';
+import { TokenInterceptor } from './classes/token.interceptor';
+import { WordListComponent } from './pages/word-list/word-list.component';
+import { WordCardComponent } from './components/shared/word-card/word-card.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,8 @@ import { AboutTeamComponent } from './pages/about-team/about-team.component';
     FooterComponent,
     MainContentComponent,
     ExitComponent,
-    AboutTeamComponent,
+    WordListComponent,
+    WordCardComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,7 +48,13 @@ import { AboutTeamComponent } from './pages/about-team/about-team.component';
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      multi: true,
+      useClass: TokenInterceptor,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
