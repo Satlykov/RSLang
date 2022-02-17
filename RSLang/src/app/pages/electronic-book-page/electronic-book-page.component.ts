@@ -4,7 +4,7 @@ import { AuthorizationService } from 'src/app/services/authorization.service';
 import { ElectronicBookService } from 'src/app/services/electronic-book.service';
 import { Router } from '@angular/router';
 import { SprintGameService } from 'src/app/services/sprint-game.service';
-import { Paginated } from 'src/app/models/interface';
+import { Paginated, Word } from 'src/app/models/interface';
 
 @Component({
   selector: 'app-electronic-book-page',
@@ -15,6 +15,8 @@ export class ElectronicBookPageComponent implements OnInit {
   authenticated = false;
   userID = '';
   selected: string = 'group=0';
+  canPlay = true;
+
   levels = [
     { value: 'group=0', viewValue: 'A1 Elementary' },
     { value: 'group=1', viewValue: 'A2 Pre-Intermediate' },
@@ -71,12 +73,21 @@ export class ElectronicBookPageComponent implements OnInit {
           ),
           catchError((err) => {
             console.log(err);
-          /*   if (err.status === 401) {
+            /*   if (err.status === 401) {
               console.log(err);
             } */
             return [];
           })
         );
+      this.cards.subscribe((cards) => {
+        const index = cards.findIndex((card: Word) => card.userWord === undefined);
+        if (index === -1) {
+          this.canPlay = false;
+        } else {
+          this.canPlay = true;
+        }
+      }
+      );
     } else {
       this.cards = this.electronicBookService.getCards(
         this.selected,
