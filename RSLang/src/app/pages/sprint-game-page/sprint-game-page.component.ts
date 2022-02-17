@@ -248,6 +248,7 @@ export class SprintGamePageComponent implements OnInit {
         this.sprintGameService.numberPage
       );
     }
+    this.sprintGameService.fromBook = false;
   }
 
   closeSprint() {

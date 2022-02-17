@@ -51,12 +51,8 @@ export class ElectronicBookPageComponent implements OnInit {
     private electronicBookService: ElectronicBookService,
     private authorizationService: AuthorizationService,
     private router: Router,
-<<<<<<< HEAD
-    private sprintGameService: SprintGameService
-=======
     private sprintGameService: SprintGameService,
     private audioGameService: AudioCallGameService
->>>>>>> 2d4e9922ffc6654a155f02b64d735cafe8e76a1b
   ) {}
 
   ngOnInit(): void {

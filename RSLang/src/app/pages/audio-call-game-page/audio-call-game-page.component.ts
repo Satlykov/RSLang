@@ -52,6 +52,7 @@ export class AudioCallGamePageComponent implements OnInit, OnDestroy {
   private unsubscribe$ = new Subject<void>();
   public currentQuestion: Word = {
     id: '1',
+    _id: '1',
     group: 1,
     page: 1,
     word: 'word',
