@@ -1,17 +1,18 @@
 .container {
   max-width: 100%;
   padding: 0 15px;
-  // background: url(../../../assets/img/callGameBg.jpg) no-repeat;
-  // min-height: calc(100vh - 128px);
+  min-height: calc(100vh - 128px);
 }
 .category__container,
 .questions__container {
   padding: 50px;
   border-radius: 50px;
   background-color: aquamarine;
-  margin: 15vh auto;
-  max-width: 30rem;
+  max-width: 800px;
   margin-bottom: 10vh;
+  position: relative;
+  left: 25%;
+  top: 20vh;
 }
 .category__title {
   text-align: center;
@@ -107,11 +108,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 500px;
-  margin: 100px auto 0;
-
+  min-width: 500px;
 }
 .statistic__header {
+  margin-top: 100px;
 }
 .correct__container{
   display: flex;
@@ -124,6 +124,8 @@
   display: flex;
   margin-bottom: 50px;
   min-height: 300px;
+  border-radius: 20px;
+  background-color: aquamarine;
 }
 .audio__container,
 .translation__container,
@@ -132,11 +134,15 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  border: 2px solid red;
   min-width: 33%;
 }
 .audio__container{
   align-items: center;
+  min-width: 10%;
+}
+.word__container,
+.translation__container{
+  width: 15rem;
 }
 .correct__audio,
 .incorrect__audio {
@@ -146,12 +152,17 @@
   background: url(../../../assets/svg/volume-up-solid.svg) no-repeat;
   background-position: center;
   cursor: pointer;
+  padding: 5px 0;
 }
-.correct__word {
+.correct__word,
+.incorrect__word,
+.correct__translation,
+.incorrect__translation {
+  white-space: nowrap;
   line-height: 20px;
+  padding: 5px 0;
 }
 .correct__translation {
-  line-height: 20px;
 }
 .incorrect__container {
   display: flex;
@@ -161,8 +172,6 @@
   min-width: 150px;
 }
 .incorrect__word {
-  line-height: 20px;
 }
 .incorrect__translation {
-  line-height: 20px;
 }

@@ -1,9 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, HostListener } from '@angular/core';
 import { Subject, take, takeUntil } from 'rxjs';
 import { Word, AudioGameStatictic } from 'src/app/models/interface';
 import { AudioCallGameService } from 'src/app/services/audio-call-game.service';
 import * as _ from 'lodash';
-import { backendURL } from 'src/app/constants/backendURL'
+import { backendURL } from 'src/app/constants/backendURL';
+import { sections, KEY_CODE } from 'src/app/enums.ts/enums';
 
 
 @Component({
@@ -13,7 +14,34 @@ import { backendURL } from 'src/app/constants/backendURL'
 })
 export class AudioCallGamePageComponent implements OnInit, OnDestroy {
 
-  public section = 'question';
+  @HostListener('window:keyup', ['$event'])
+  keyEvent(event: KeyboardEvent) {
+    if(this.section === sections.answers){
+      if(event.keyCode === KEY_CODE.first && !this.isAnswered){
+        this.checkAnswer(this.currentQuestion.answersOptions![0]);
+      }
+      if(event.keyCode === KEY_CODE.second && !this.isAnswered){
+        this.checkAnswer(this.currentQuestion.answersOptions![1]);
+      }
+      if(event.keyCode === KEY_CODE.third && !this.isAnswered){
+        this.checkAnswer(this.currentQuestion.answersOptions![2]);
+      }
+      if(event.keyCode === KEY_CODE.forth && !this.isAnswered){
+        this.checkAnswer(this.currentQuestion.answersOptions![3]);
+      }
+      if(event.keyCode === KEY_CODE.fifth && !this.isAnswered){
+        this.checkAnswer(this.currentQuestion.answersOptions![4]);
+      }
+      if(event.keyCode === KEY_CODE.back){
+        this.showQuestions(7);
+      }
+      if(event.keyCode === KEY_CODE.confirm){
+        this.nextQuestion();
+      }
+    }
+  }
+
+  public section = sections.questions;
   public isOpened = false;
   public isAnswered = false;
   public isCorrect = false;
@@ -52,7 +80,20 @@ export class AudioCallGamePageComponent implements OnInit, OnDestroy {
       translation: [],
       audioPath: [],
     }
+
   }
+
+  backColors = [
+    'linear-gradient(90deg, rgba(36,29,253,1) 0%, rgba(39,255,0,1) 100%)',
+    'linear-gradient(90deg, rgba(34,102,195,1) 0%, rgba(253,247,45,1) 100%)',
+    'linear-gradient(90deg, rgba(253,85,29,1) 0%, rgba(252,176,69,1) 100%)',
+    'linear-gradient(90deg, rgba(175,29,253,1) 0%, rgba(69,252,225,1) 100%)',
+    'linear-gradient(90deg, rgba(253,29,109,1) 0%, rgba(69,239,252,1) 100%)',
+    'linear-gradient(90deg, rgba(253,29,29,1) 0%, rgba(69,252,179,1) 100%)',
+    'radial-gradient(circle, rgba(244,251,63,1) 0%, rgba(252,70,70,1) 100%)',
+  ];
+
+  backColor = this.backColors[1];
 
 
   constructor(
@@ -67,9 +108,9 @@ export class AudioCallGamePageComponent implements OnInit, OnDestroy {
       )
       .subscribe(randomWords => {
         this.randomWords = randomWords;
-        console.log(this.randomWords)
       })
     this.audioCallGameService.loadRandomWords();
+    this.startFromBook();
   }
 
 
@@ -79,8 +120,8 @@ export class AudioCallGamePageComponent implements OnInit, OnDestroy {
   }
 
 
-  public showQuestions(id: number):void {
-    if(id === 7){
+  public showQuestions(group: number, page?: number|undefined):void {
+    if(group === 7){
       this.statistic = {
         correct:{
           word: [],
@@ -95,12 +136,12 @@ export class AudioCallGamePageComponent implements OnInit, OnDestroy {
       }
       this.currentIndex = 0;
       this.questionsList = [];
-      this.section = 'question';
+      this.section = sections.questions;
       return
     }
     this.questionsList = [];
-    this.section = 'answers';
-    this.audioCallGameService.getQuestionsList(id);
+    this.section = sections.answers;
+    this.audioCallGameService.getQuestionsList(group,page);
       this.audioCallGameService.questionsList$
       .pipe(
         take(1)
@@ -152,8 +193,14 @@ export class AudioCallGamePageComponent implements OnInit, OnDestroy {
       this.generateQuestion(this.questionsList,this.currentIndex)
     }else{
       this.currentIndex = 0;
-      this.section = 'statistic';
+      this.section = sections.statistic;
     }
   }
 
+  public startFromBook(): void {
+    if(this.audioCallGameService.fromBook){
+      this.showQuestions(this.audioCallGameService.dataFromBook.group,this.audioCallGameService.dataFromBook.page)
+      this.section = sections.answers
+    }
+  }
 }

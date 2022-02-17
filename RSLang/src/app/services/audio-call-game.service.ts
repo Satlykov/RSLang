@@ -13,6 +13,11 @@ export class AudioCallGameService {
   private randomWords: string[] = [];
   private randomWordsSubject = new Subject<string[]>();
   private questionsListSubject = new Subject<Word[]>();
+  public fromBook = false;
+  public dataFromBook = {
+    group:0,
+    page:0
+  }
 
   get randomWords$(): Observable<string[]> {
     return this.randomWordsSubject.asObservable();
@@ -27,8 +32,13 @@ export class AudioCallGameService {
 
 
 
-  public getQuestions(group: number):Observable<Object> {
-    const path = this.getPath(group);
+  public getQuestions(group: number, page?: number|undefined):Observable<Object> {
+    let path = ''
+    if(page !== undefined){
+      path = `words?group=${group}&page=${page}`
+    }else{
+      path = this.getPath(group);
+    }
     return this.apiService.get(path)
   }
 
@@ -36,8 +46,8 @@ export class AudioCallGameService {
     this.getRandomWords()
   }
 
-  public getQuestionsList(group : number): void {
-    this.getQuestions(group)
+  public getQuestionsList(group : number, page?: number|undefined): void {
+    this.getQuestions(group,page)
       .pipe(
         take(1)
       )
