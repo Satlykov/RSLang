@@ -1,64 +1,105 @@
-<div class="container">
-  <div *ngIf="!isOpened; else questions" class="category__container">
-    <h2 class="category__title">Аудиовызов</h2>
-    <h3 class="category__subtitle">Выберите сложность:</h3>
-    <div class="category__button-container">
-      <button
-        class="category__button"
-        mat-raised-button
-        (click)="showQuestions(0)"
-      >
-        1
-      </button>
-      <button
-        class="category__button"
-        mat-raised-button
-        (click)="showQuestions(1)"
-      >
-        2
-      </button>
-      <button
-        class="category__button"
-        mat-raised-button
-        (click)="showQuestions(2)"
-      >
-        3
-      </button>
-      <button
-        class="category__button"
-        mat-raised-button
-        (click)="showQuestions(3)"
-      >
-        4
-      </button>
-      <button
-        class="category__button"
-        mat-raised-button
-        (click)="showQuestions(4)"
-      >
-        5
-      </button>
-      <button
-        class="category__button"
-        mat-raised-button
-        (click)="showQuestions(5)"
-      >
-        6
-      </button>
+<div class="container" [ngSwitch]="section" [style.background]="backColor">
+  <ng-template ngSwitchCase="question">
+    <div class="category__container">
+      <h2 class="category__title">Аудиовызов</h2>
+      <h3 class="category__subtitle">Выберите сложность:</h3>
+      <div class="category__button-container">
+        <button
+          class="category__button"
+          mat-raised-button
+          (click)="showQuestions(0)"
+        >
+          A1 Elementary
+        </button>
+        <button
+          class="category__button"
+          mat-raised-button
+          (click)="showQuestions(1)"
+        >
+          A2 Pre-Intermediate
+        </button>
+        <button
+          class="category__button"
+          mat-raised-button
+          (click)="showQuestions(2)"
+        >
+          B1 IIntermediate
+        </button>
+        <button
+          class="category__button"
+          mat-raised-button
+          (click)="showQuestions(3)"
+        >
+          B2 Upper-Intermediate
+        </button>
+        <button
+          class="category__button"
+          mat-raised-button
+          (click)="showQuestions(4)"
+        >
+          C1 Advanced
+        </button>
+        <button
+          class="category__button"
+          mat-raised-button
+          (click)="showQuestions(5)"
+        >
+          C2 Proficiency
+        </button>
+      </div>
     </div>
-  </div>
-  <ng-template #questions>
-    <div class="questions__container">
-      <div class="questions__audio"></div>
-      <div class="questions__answer-container">
-        <button mat-raised-button class="questions__answer">Ответ</button>
-        <button mat-raised-button class="questions__answer">Ответ</button>
-        <button mat-raised-button class="questions__answer">Ответ</button>
-        <button mat-raised-button class="questions__answer">Ответ</button>
-        <button mat-raised-button class="questions__answer">Ответ</button>
-        <div class="" *ngIf="questionsList.length">
-          <div class="" *ngFor="let question of questionsList">
-            {{ question.image }}
+  </ng-template>
+  <ng-template ngSwitchCase="statistic">
+    <div class="statistic__container">
+      <h2 class="statistic__header">Результаты игры</h2>
+      <div class="statistic__main">
+        <div class="statistic__correct correct__container">
+          <div class="audio__container">
+            <div *ngFor="let audio of statistic.correct.audioPath">
+              <div class="correct__audio" (click)="generateAudio(audio)"></div>
+            </div>
+          </div>
+          <div class="word__container">
+            <div
+              class="correct__word"
+              *ngFor="let word of statistic.correct.word"
+            >
+              {{ word }}
+            </div>
+          </div>
+          <div class="translation__container">
+            <div
+              class="correct__translation"
+              *ngFor="let translation of statistic.correct.translation"
+            >
+              {{ translation }}
+            </div>
+          </div>
+        </div>
+        <div class="statistic__incorrect incorrect__container">
+          <div class="audio__container">
+            <div *ngFor="let audio of statistic.incorrect.audioPath">
+              <div
+                class="incorrect__audio"
+                (click)="generateAudio(audio)"
+              ></div>
+            </div>
+          </div>
+          <div class="word__container">
+            <div
+              class="incorrect__word"
+              *ngFor="let word of statistic.incorrect.word"
+            >
+              {{ word }}
+            </div>
+          </div>
+          <div class="translation__container">
+            <div
+              class="incorrect__translation"
+              *ngFor="let translation of statistic.incorrect.translation"
+            >
+              {{ translation }}
+            </div>
           </div>
         </div>
       </div>
@@ -67,8 +108,83 @@
         (click)="showQuestions(7)"
         class="questions__back"
       >
-        Назад
+        Категории
       </button>
+    </div>
+  </ng-template>
+  <ng-template ngSwitchCase="answers">
+    <div class="questions__container">
+      <div
+        [ngClass]="
+          !isAnswered
+            ? 'questions__audio'
+            : isCorrect
+            ? 'questions__audio-correct'
+            : 'questions__audio-incorrect'
+        "
+        (click)="generateAudio(currentQuestion.audio)"
+      ></div>
+      <div class="questions__answer-container">
+        <button
+          [disabled]="isAnswered"
+          (click)="checkAnswer(currentQuestion.answersOptions![0])"
+          mat-raised-button
+          class="questions__answer"
+        >
+          {{ currentQuestion.answersOptions![0] }}
+        </button>
+        <button
+          [disabled]="isAnswered"
+          (click)="checkAnswer(currentQuestion.answersOptions![1])"
+          mat-raised-button
+          class="questions__answer"
+        >
+          {{ currentQuestion.answersOptions![1] }}
+        </button>
+        <button
+          [disabled]="isAnswered"
+          (click)="checkAnswer(currentQuestion.answersOptions![2])"
+          mat-raised-button
+          class="questions__answer"
+        >
+          {{ currentQuestion.answersOptions![2] }}
+        </button>
+        <button
+          [disabled]="isAnswered"
+          (click)="checkAnswer(currentQuestion.answersOptions![3])"
+          mat-raised-button
+          class="questions__answer"
+        >
+          {{ currentQuestion.answersOptions![3] }}
+        </button>
+        <button
+          [disabled]="isAnswered"
+          (click)="checkAnswer(currentQuestion.answersOptions![4])"
+          mat-raised-button
+          class="questions__answer"
+        >
+          {{ currentQuestion.answersOptions![4] }}
+        </button>
+      </div>
+      <div class="questions__controll">
+        <button
+          mat-raised-button
+          (click)="showQuestions(7)"
+          class="questions__back"
+          [style.background]="backColor"
+        >
+          Категории
+        </button>
+        <button
+          [disabled]="!isAnswered"
+          mat-raised-button
+          (click)="nextQuestion()"
+          class="questions__forward"
+          [style.background]="backColor"
+        >
+          След. вопрос
+        </button>
+      </div>
     </div>
   </ng-template>
 </div>

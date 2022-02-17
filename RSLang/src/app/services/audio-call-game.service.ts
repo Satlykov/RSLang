@@ -13,6 +13,11 @@ export class AudioCallGameService {
   private randomWords: string[] = [];
   private randomWordsSubject = new Subject<string[]>();
   private questionsListSubject = new Subject<Word[]>();
+  public fromBook = false;
+  public dataFromBook = {
+    group:0,
+    page:0
+  }
 
   get randomWords$(): Observable<string[]> {
     return this.randomWordsSubject.asObservable();
@@ -27,8 +32,13 @@ export class AudioCallGameService {
 
 
 
-  public getQuestions(group: number):Observable<Object> {
-    const path = this.getPath(group);
+  public getQuestions(group: number, page?: number|undefined):Observable<Object> {
+    let path = ''
+    if(page !== undefined){
+      path = `words?group=${group}&page=${page}`
+    }else{
+      path = this.getPath(group);
+    }
     return this.apiService.get(path)
   }
 
@@ -36,8 +46,8 @@ export class AudioCallGameService {
     this.getRandomWords()
   }
 
-  public getQuestionsList(group : number): void {
-    this.getQuestions(group)
+  public getQuestionsList(group : number, page?: number|undefined): void {
+    this.getQuestions(group,page)
       .pipe(
         take(1)
       )
@@ -46,7 +56,7 @@ export class AudioCallGameService {
         data.forEach(element => {
           const randomOptions: string[] = [];
           while(randomOptions.length < 4){
-            const randomNum = Math.floor(Math.random() * (this.randomWords.length + 1))
+            const randomNum = Math.floor(Math.random() * (this.randomWords.length))
             randomOptions.push(this.randomWords[randomNum])
           }
           element.answersOptions = randomOptions
@@ -68,7 +78,7 @@ export class AudioCallGameService {
         )
         .subscribe(response =>{
           const words = response as Word[];
-          words.forEach(element => this.randomWords.push(element.word))
+          words.forEach(element => this.randomWords.push(element.wordTranslate))
           if(this.randomWords.length === 120){
             this.randomWordsSubject.next(this.randomWords);
           }
@@ -76,26 +86,12 @@ export class AudioCallGameService {
     }
   }
 
+  public shuffle(array: string[]) {
+    for (let i = array.length - 1; i > 0; i--) {
+      let j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  }
 
-  // public getRandomWords(): String[]{
-  //   for(let id = 0; id<=5; id++){
-  //     this.getQuestions(id)
-  //       .pipe(
-  //         take(1)
-  //       )
-  //       .subscribe(response =>{
-  //         const words = response as Word[];
-  //         words.forEach(element => this.randomWords.push(element.word))
-  //         if(this.randomWords.length === 120){
-  //           this.randomWordsSubject.next();
-  //         }
-  //       })
-  //   }
-  //   return this.randomWords
-  // }
-
-  // public getRandomOptions():void {
-  //   console.log(this.getRandomWords())
-  // }
 
 }

@@ -44,3 +44,17 @@ export interface Auth {
   userId: string;
   name: string;
 }
+
+export interface AudioGameStatictic {
+  correct : {
+    word: string[];
+    translation: string[];
+    audioPath: string[];
+  };
+  incorrect : {
+    word: string[];
+    translation: string[];
+    audioPath: string[];
+  };
+  
+}
