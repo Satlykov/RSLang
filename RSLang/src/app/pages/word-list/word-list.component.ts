@@ -79,6 +79,7 @@ export class WordListComponent implements OnInit {
           );
       }
     }
+    this.cards.subscribe((words) => console.log(words))
   }
 
   changeLevel() {

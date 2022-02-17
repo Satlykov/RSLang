@@ -24,25 +24,25 @@ export class ElectronicBookService {
 
   getCardsUserHard(userID: string) {
     return this.api.get(
-      `users/${userID}/aggregatedWords?filter={"userWord.difficulty": "hard"}`
+      `users/${userID}/aggregatedWords?wordsPerPage=3200&filter={"userWord.difficulty": "hard"}`
     );
   }
 
   getCardsUserStudied(userID: string) {
     return this.api.get(
-      `users/${userID}/aggregatedWords?filter={"userWord.difficulty": "studied"}`
+      `users/${userID}/aggregatedWords?wordsPerPage=3200&filter={"userWord.difficulty": "studied"}`
     );
   }
 
   getCardsUserHardLevel(userID: string, selected: string) {
     return this.api.get(
-      `users/${userID}/aggregatedWords?filter={"$and": [{"group": ${selected}},{"userWord.difficulty": "hard"}]}`
+      `users/${userID}/aggregatedWords?wordsPerPage=600&filter={"$and": [{"group": ${selected}},{"userWord.difficulty": "hard"}]}`
     );
   }
 
   getCardsUserStudiedLevel(userID: string, selected: string) {
     return this.api.get(
-      `users/${userID}/aggregatedWords?filter={"$and": [{"group": ${selected}},{"userWord.difficulty": "studied"}]}`
+      `users/${userID}/aggregatedWords?wordsPerPage=600&filter={"$and": [{"group": ${selected}},{"userWord.difficulty": "studied"}]}`
     );
   }
 }
