@@ -23,8 +23,8 @@ export interface Word {
   answersOptions?: string[];
   userWord?: {
     difficulty?: string;
-    optional?: {}
-  }
+    optional?: {};
+  };
 }
 
 export interface UserWord {
@@ -49,7 +49,18 @@ export interface Auth {
   userId: string;
   name: string;
 }
-
+export interface AudioGameStatictic {
+  correct: {
+    word: string[];
+    translation: string[];
+    audioPath: string[];
+  };
+  incorrect: {
+    word: string[];
+    translation: string[];
+    audioPath: string[];
+  };
+}
 export interface Paginated {
   paginatedResults: Word[];
 }

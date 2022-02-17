@@ -5,6 +5,7 @@ import { ElectronicBookService } from 'src/app/services/electronic-book.service'
 import { Router } from '@angular/router';
 import { SprintGameService } from 'src/app/services/sprint-game.service';
 import { Paginated, Word } from 'src/app/models/interface';
+import { AudioCallGameService } from 'src/app/services/audio-call-game.service';
 
 @Component({
   selector: 'app-electronic-book-page',
@@ -50,7 +51,12 @@ export class ElectronicBookPageComponent implements OnInit {
     private electronicBookService: ElectronicBookService,
     private authorizationService: AuthorizationService,
     private router: Router,
+<<<<<<< HEAD
     private sprintGameService: SprintGameService
+=======
+    private sprintGameService: SprintGameService,
+    private audioGameService: AudioCallGameService
+>>>>>>> 2d4e9922ffc6654a155f02b64d735cafe8e76a1b
   ) {}
 
   ngOnInit(): void {
@@ -141,5 +147,13 @@ export class ElectronicBookPageComponent implements OnInit {
     this.sprintGameService.selected = this.selected;
     this.sprintGameService.numberPage = this.numberPage;
     this.router.navigateByUrl('/sprint-game');
+  }
+
+  startAudioCallGame(): void {
+    const group = this.selected.split('=')[1];
+    this.audioGameService.fromBook = true;
+    this.audioGameService.dataFromBook.group = Number(group);
+    this.audioGameService.dataFromBook.page = this.numberPage;
+    this.router.navigateByUrl('/audio-call-game');
   }
 }

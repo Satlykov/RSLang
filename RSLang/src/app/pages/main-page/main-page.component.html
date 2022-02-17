@@ -1,4 +1,5 @@
-<div class="main-container">
+
+<div class="main-container" id="main-page">
   <div class='light x1'></div>
   <div class='light x2'></div>
   <div class='light x3'></div>
@@ -8,11 +9,28 @@
   <div class='light x7'></div>
   <div class='light x8'></div>
   <div class='light x9'></div>
+<div class="main-container">
+  <div class="light x1"></div>
+  <div class="light x2"></div>
+  <div class="light x3"></div>
+  <div class="light x4"></div>
+  <div class="light x5"></div>
+  <div class="light x6"></div>
+  <div class="light x7"></div>
+  <div class="light x8"></div>
+  <div class="light x9"></div>
   <div class="main-container__home">
     <div class="welcome-section">
-        <h1 class="welcome-section__title">Школа английского языка RSLang</h1>
-      <p class="welcome-section__text">Быстрые результаты - с нами это реально!</p>
-      <a href="#about-container" routerLinkActive="active" class="welcome-section__link">Узнать подробности</a>
+      <h1 class="welcome-section__title">Школа английского языка RSLang</h1>
+      <p class="welcome-section__text">
+        Быстрые результаты - с нами это реально!
+      </p>
+      <a
+        href="#about-container"
+        routerLinkActive="active"
+        class="welcome-section__link"
+        >Узнать подробности</a
+      >
     </div>
     <div class="fork-section">
       <ul class="fork-section__links">
@@ -24,24 +42,107 @@
     </div>
   </div>
   <div class="main-container__about" id="about-container">
+    <div class="about-title">
+      <h1 routerLink="/authorization" class="about-title__main title">
+        Зарегестрируйтесь, чтоб использовать все возможности
+      </h1>
+    </div>
     <div class="container">
       <div class="A grid">
         <h2 class="grid-title">Учебник</h2>
-<p class="grid-text">В учебнике собраны самые используемые <br>в повседневной жизни слова. Включает определение слов и пример <br> использования на обоих языках.</p>
+        <p class="grid-text">
+          В учебнике собраны самые используемые <br />в повседневной жизни
+          слова. Включает определение слов и пример <br />
+          использования на обоих языках.
+        </p>
       </div>
       <div class="B grid">
         <h2 class="grid-title">Словарь</h2>
-        <p class="grid-text">Все изученные слова попадают в твой личный словарь. Ты можешь отметить сложные для тебя слова, чтобы обращать <br>на них внимание.</p>
+        <p class="grid-text">
+          Все изученные слова попадают в твой личный словарь. Ты можешь отметить
+          сложные для тебя слова, чтобы обращать <br />на них внимание.
+        </p>
       </div>
       <div class="C grid">
-        <h2 class="grid-title">Аудиовызов</h2>
-        <p class="grid-text">Игра Аудиовызов помогает разить навыки аудирования и перевода. Выбирай 1 из 4-х слов, которые услышишь.</p>
+        <h2 class="grid-title">Игры</h2>
+        <p class="grid-text">
+          Игра Аудиовызов помогает разить навыки аудирования и перевода. Выбирай
+          1 из 4-х слов, которые услышишь. В игре Спринт нужно выбрать
+          правильный ли перевод слова показан.
+        </p>
       </div>
       <div class="D grid">
-        <h2 class="grid-title">Спринт</h2>
-        <p class="grid-text">В игре Спринт нужно выбрать правильный ли перевод слова показан.</p>
+        <h2 class="grid-title">Статистика</h2>
+        <p class="grid-text">
+          Весь ход обучения можно просмотреть в статистике, где представлены
+          данные за текущий день и за весь период обучения.
+        </p>
       </div>
     </div>
+   <a href="#video-container"> <img src="assets/img/arrow-down.png" alt="arrow-down" class="arrow-down"></a>
   </div>
+  <div class="main-container__video" id="video-container">
+    <div class="video-title">
+      <h1 class="title">Как работает наше приложение</h1>
+    </div>
+  <div class="video-blackout">
+    <div class="video-frame"></div>
+  </div>
+    <a href="#people-container"> <img src="assets/img/arrow-down.png" alt="arrow-down" class="arrow-down"></a>
+  </div>
+  <div class="main-container__team" id="people-container">
+    <div class="team">
+      <h1 class="team-title title">Разработчики</h1>
+    </div>
+    <div class="team-people">
+    <div class="team-people__info">
+      <div class="content">
+      <a href="https://github.com/Satlykov" class="team-people__info-name">Руслан <img src="assets/img/github-2.png" alt="github"> </a>
+      <p class="team-people__info-job">team leader, frontend developer</p>
+      <p class="team-people__info-description">тут будет текст</p>
+      </div>
+      <div class="developer__photo">
+        <img src="assets/img/Photo-1.jpg" alt="developer__photo" class="photo-developer">
+      </div>
+    </div>
+    <div class="team-people__info">
+      <div class="content">
+      <a href="https://github.com/Anesthesia92" class="team-people__info-name">Настя <img src="assets/img/github-2.png" alt="github"></a>
+      <p class="team-people__info-job">frontend developer</p>
+      <p class="team-people__info-description">тут будет текст</p>
+      </div>
+      <div class="developer__photo">
+        <img src="assets/img/Photo-2.jpg" alt="developer__photo" class="photo-developer">
+      </div>
+    <div class="video-blackout">
+      <div class="video-frame"></div>
+    </div>
+  </div>
+  <div class="main-container__people" id="people-container">
+    <div class="people-title">
+      <h1 class="title">Разработчики</h1>
+      <h2 class="grid-title">Аудиовызов</h2>
+      <p class="grid-text">
+        Игра Аудиовызов помогает разить навыки аудирования и перевода. Выбирай 1
+        из 4-х слов, которые услышишь.
+      </p>
+    </div>
+    <div class="D grid">
+      <h2 class="grid-title">Спринт</h2>
+      <p class="grid-text">
+        В игре Спринт нужно выбрать правильный ли перевод слова показан.
+      </p>
+    </div>
+    <div class="team-people__info">
+      <div class="content">
+      <a href="https://github.com/SlikeX" class="team-people__info-name">Слава <img src="assets/img/github-2.png" alt="github"></a>
+      <p class="team-people__info-job">frontend developer</p>
+      <p class="team-people__info-description">тут будет текст</p>
+      </div>
+      <div class="developer__photo"><img src="assets/img/Photo-3.jpg" alt="developer__photo" class="photo-developer">
+      </div>
+    </div>
+    </div>
+  </div>
+  <a href="#main-page"> <img src="assets/img/arrow-top.png" alt="arrow-down" class="arrow-top"></a>
 </div>
-
