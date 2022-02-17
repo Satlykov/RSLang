@@ -12,7 +12,37 @@ export class ElectronicBookService {
     return this.api.get(`words?${selected}&page=${page}`);
   }
 
-  getCardsUser(userID: string, selected: string, page: number): Observable<Object> {
-    return this.api.get(`users/${userID}/aggregatedWords?wordsPerPage=20&filter={"$and": [{"group": ${selected}}, {"page": ${page}}]}`);
+  getCardsUser(
+    userID: string,
+    selected: string,
+    page: number
+  ): Observable<Object> {
+    return this.api.get(
+      `users/${userID}/aggregatedWords?wordsPerPage=20&filter={"$and": [{"group": ${selected}}, {"page": ${page}}]}`
+    );
+  }
+
+  getCardsUserHard(userID: string) {
+    return this.api.get(
+      `users/${userID}/aggregatedWords?filter={"userWord.difficulty": "hard"}`
+    );
+  }
+
+  getCardsUserStudied(userID: string) {
+    return this.api.get(
+      `users/${userID}/aggregatedWords?filter={"userWord.difficulty": "studied"}`
+    );
+  }
+
+  getCardsUserHardLevel(userID: string, selected: string) {
+    return this.api.get(
+      `users/${userID}/aggregatedWords?filter={"$and": [{"group": ${selected}},{"userWord.difficulty": "hard"}]}`
+    );
+  }
+
+  getCardsUserStudiedLevel(userID: string, selected: string) {
+    return this.api.get(
+      `users/${userID}/aggregatedWords?filter={"$and": [{"group": ${selected}},{"userWord.difficulty": "studied"}]}`
+    );
   }
 }

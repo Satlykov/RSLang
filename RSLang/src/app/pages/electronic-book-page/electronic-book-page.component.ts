@@ -4,7 +4,7 @@ import { AuthorizationService } from 'src/app/services/authorization.service';
 import { ElectronicBookService } from 'src/app/services/electronic-book.service';
 import { Router } from '@angular/router';
 import { SprintGameService } from 'src/app/services/sprint-game.service';
-import { Paginated, Word } from 'src/app/models/interface';
+import { Paginated } from 'src/app/models/interface';
 
 @Component({
   selector: 'app-electronic-book-page',

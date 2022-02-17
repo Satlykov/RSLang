@@ -21,5 +21,10 @@
       </mat-form-field>
     </div>
   </mat-toolbar>
-  <div class="words-container"></div>
+  <div class="words-container" [class.hard]="selectedWord === 'hard'">
+    <app-word-dictionary-card
+      *ngFor="let card of cards | async"
+      [card]="card"
+    ></app-word-dictionary-card>
+  </div>
 </div>

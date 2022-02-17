@@ -14,6 +14,7 @@ export class WordCardComponent implements OnInit {
   @Input() card!: Word;
   authenticated = false;
   hard = false;
+  studied = false;
 
   constructor(
     private userWordService: UserWordService,
@@ -21,8 +22,8 @@ export class WordCardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.authenticated = this.authorizationService.authenticated;
-    this.cheakHard();
+    this.authenticated = this.authorizationService.checkLogin();
+    this.cheakWord();
   }
 
   playWord(src: string) {
@@ -38,7 +39,6 @@ export class WordCardComponent implements OnInit {
       difficulty: 'hard',
       optional: {},
     };
-
     this.userWordService.postUserWord(this.card._id, obj).subscribe(
       () => {
         this.hard = true;
@@ -60,9 +60,10 @@ export class WordCardComponent implements OnInit {
     );
   }
 
-  cheakHard() {
+  cheakWord() {
     if (this.card.userWord) {
       this.hard = this.card.userWord.difficulty === 'hard';
+      this.studied = this.card.userWord.difficulty === 'studied';
     }
   }
 
