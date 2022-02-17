@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
-import { interval } from 'rxjs';
+import { Observable, of, Subject, switchMap, interval } from 'rxjs';
 import { take } from 'rxjs/operators';
-import { Word } from '../models/interface';
-import { SprintGamePageComponent } from '../pages/sprint-game-page/sprint-game-page.component';
+import { Paginated, Word } from '../models/interface';
 import { ApiService } from './api.service';
 
 @Injectable({
@@ -23,6 +21,7 @@ export class SprintGameService {
   pointsForAnswer = 10 * this.multiplier;
   fromBook = false;
   selected = '';
+  numberPage = 0;
 
   public sprintWords$ = new Subject<Word[]>();
   public streak$ = new Subject<number>();
@@ -55,6 +54,23 @@ export class SprintGameService {
       },
       (error) => console.log(error)
     );
+  }
+
+  getUserWords(userID: string, selected: string, page: number) {
+    this.api
+      .get(
+        `users/${userID}/aggregatedWords?wordsPerPage=20&filter={"$and": [{"group": ${selected}}, {"page": ${page}}, {"userWord.difficulty": null}]}`
+      )
+      .pipe(
+        switchMap((words) => of((words as Array<Paginated>)[0].paginatedResults))
+      )
+      .subscribe(
+        (res) => {
+          this.wordsSprint.push(...(res as Word[]));
+          this.getWordsSprint(this.wordsSprint);
+        },
+        (error) => console.log(error)
+      );
   }
 
   getMultiplier() {

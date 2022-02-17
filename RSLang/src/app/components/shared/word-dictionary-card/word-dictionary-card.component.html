@@ -1,16 +1,4 @@
-<mat-card [class.hard]="hard" [class.studied]="studied">
-  <button
-    mat-icon-button
-    class="btn-icon"
-    (click)="toggleHard()"
-    *ngIf="authenticated && !studied"
-  >
-    <mat-icon style="color: #929292ef" *ngIf="!hard">flash_off</mat-icon>
-    <mat-icon style="color: #e0bf02ee" *ngIf="hard">flash_on</mat-icon>
-  </button>
-  <mat-icon class="studied-icon" style="color: #1eff00" *ngIf="studied"
-    >verified</mat-icon
-  >
+<mat-card>
   <div
     class="img-container"
     style="background-image: linear-gradient(to top, #438aa8 0%, transparent 70%),
@@ -55,7 +43,6 @@
         <mat-icon>record_voice_over</mat-icon>
       </button>
     </div>
-
     <div class="line"></div>
     <p [innerHTML]="card.textMeaningTranslate"></p>
     <p style="font-style: italic" [innerHTML]="card.textExampleTranslate"></p>

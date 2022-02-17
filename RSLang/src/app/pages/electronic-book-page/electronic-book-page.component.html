@@ -1,10 +1,10 @@
 <div class="book-container" [style.background]="backColor">
   <mat-toolbar>
     <div class="game-btn-container">
-      <button mat-stroked-button class="btn-game" (click)="startSprint()">
+      <button mat-stroked-button class="btn-game" (click)="startSprint()" [disabled]="!canPlay">
         <mat-icon>videogame_asset</mat-icon>"Спринт"
       </button>
-      <button mat-stroked-button class="btn-game" (click)="startAudioCallGame()">
+      <button mat-stroked-button class="btn-game" (click)="startAudioCallGame()" [disabled]="!canPlay">
         <mat-icon>videogame_asset</mat-icon>"Аудиовызов"
       </button>
     </div>
@@ -35,7 +35,7 @@
       "Словарь"
     </button>
     <div class="selected-container">
-      <span class="selected-title">Уровень:</span>
+      <span class="selected-title">Уровени:</span>
       <mat-form-field>
         <mat-select [(value)]="selected" (valueChange)="changeLevel()">
           <mat-option *ngFor="let level of levels" [value]="level.value">{{

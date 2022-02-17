@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { catchError, Observable, of, Subscription, switchMap } from 'rxjs';
 import { AuthorizationService } from 'src/app/services/authorization.service';
 import { ElectronicBookService } from 'src/app/services/electronic-book.service';
 import { Router } from '@angular/router';
-import { SprintGamePageComponent } from '../sprint-game-page/sprint-game-page.component';
 import { SprintGameService } from 'src/app/services/sprint-game.service';
+import { Paginated, Word } from 'src/app/models/interface';
 import { AudioCallGameService } from 'src/app/services/audio-call-game.service';
 
 @Component({
@@ -14,11 +14,14 @@ import { AudioCallGameService } from 'src/app/services/audio-call-game.service';
 })
 export class ElectronicBookPageComponent implements OnInit {
   authenticated = false;
+  userID = '';
   selected: string = 'group=0';
+  canPlay = true;
+
   levels = [
     { value: 'group=0', viewValue: 'A1 Elementary' },
     { value: 'group=1', viewValue: 'A2 Pre-Intermediate' },
-    { value: 'group=2', viewValue: 'B1 IIntermediate' },
+    { value: 'group=2', viewValue: 'B1 Intermediate' },
     { value: 'group=3', viewValue: 'B2 Upper-Intermediate' },
     { value: 'group=4', viewValue: 'C1 Advanced' },
     { value: 'group=5', viewValue: 'C2 Proficiency' },
@@ -48,13 +51,18 @@ export class ElectronicBookPageComponent implements OnInit {
     private electronicBookService: ElectronicBookService,
     private authorizationService: AuthorizationService,
     private router: Router,
+<<<<<<< HEAD
+    private sprintGameService: SprintGameService
+=======
     private sprintGameService: SprintGameService,
     private audioGameService: AudioCallGameService
+>>>>>>> 2d4e9922ffc6654a155f02b64d735cafe8e76a1b
   ) {}
 
   ngOnInit(): void {
-    this.getCards();
     this.authenticated = this.authorizationService.checkLogin();
+    this.userID = this.authorizationService.getUserID();
+    this.getCards();
   }
 
   ngOnDestroy(): void {
@@ -62,10 +70,36 @@ export class ElectronicBookPageComponent implements OnInit {
   }
 
   getCards() {
-    this.cards = this.electronicBookService.getCards(
-      this.selected,
-      this.numberPage
-    );
+    if (this.authenticated) {
+      this.cards = this.electronicBookService
+        .getCardsUser(this.userID, this.selected.split('=')[1], this.numberPage)
+        .pipe(
+          switchMap((cards) =>
+            of((cards as Array<Paginated>)[0].paginatedResults)
+          ),
+          catchError((err) => {
+            console.log(err);
+            /*   if (err.status === 401) {
+              console.log(err);
+            } */
+            return [];
+          })
+        );
+      this.cards.subscribe((cards) => {
+        const index = cards.findIndex((card: Word) => card.userWord === undefined);
+        if (index === -1) {
+          this.canPlay = false;
+        } else {
+          this.canPlay = true;
+        }
+      }
+      );
+    } else {
+      this.cards = this.electronicBookService.getCards(
+        this.selected,
+        this.numberPage
+      );
+    }
   }
 
   setNumberPage(num: number) {
@@ -111,6 +145,7 @@ export class ElectronicBookPageComponent implements OnInit {
   startSprint() {
     this.sprintGameService.fromBook = true;
     this.sprintGameService.selected = this.selected;
+    this.sprintGameService.numberPage = this.numberPage;
     this.router.navigateByUrl('/sprint-game');
   }
 

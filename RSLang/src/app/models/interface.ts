@@ -6,6 +6,7 @@ export interface User {
 
 export interface Word {
   id: string;
+  _id: string;
   group: number;
   page: number;
   word: string;
@@ -20,6 +21,10 @@ export interface Word {
   textMeaningTranslate: string;
   textExampleTranslate: string;
   answersOptions?: string[];
+  userWord?: {
+    difficulty?: string;
+    optional?: {};
+  };
 }
 
 export interface UserWord {
@@ -44,17 +49,18 @@ export interface Auth {
   userId: string;
   name: string;
 }
-
 export interface AudioGameStatictic {
-  correct : {
+  correct: {
     word: string[];
     translation: string[];
     audioPath: string[];
   };
-  incorrect : {
+  incorrect: {
     word: string[];
     translation: string[];
     audioPath: string[];
   };
-  
+}
+export interface Paginated {
+  paginatedResults: Word[];
 }

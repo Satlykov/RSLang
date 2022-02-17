@@ -2,13 +2,17 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { backendURL } from 'src/app/constants/backendURL';
 import { Word } from 'src/app/models/interface';
+import { AuthorizationService } from 'src/app/services/authorization.service';
 import { SprintGameService } from 'src/app/services/sprint-game.service';
+import { UserWordService } from 'src/app/services/user-word.service';
 @Component({
   selector: 'app-sprint-game-page',
   templateUrl: './sprint-game-page.component.html',
   styleUrls: ['./sprint-game-page.component.scss'],
 })
 export class SprintGamePageComponent implements OnInit {
+  authenticated = false;
+  userID = '';
   sprintStatus = false;
   valueSpinner = 0;
   startSecond = 5;
@@ -45,7 +49,11 @@ export class SprintGamePageComponent implements OnInit {
     { value: 'group=5', viewValue: 'C2 Proficiency' },
   ];
 
-  constructor(private sprintGameService: SprintGameService) {}
+  constructor(
+    private sprintGameService: SprintGameService,
+    private authorizationService: AuthorizationService,
+    private userWordService: UserWordService
+  ) {}
 
   @HostListener('window:keyup', ['$event'])
   keyEvent(event: KeyboardEvent) {
@@ -61,10 +69,11 @@ export class SprintGamePageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.authenticated = this.authorizationService.checkLogin();
+    this.userID = this.authorizationService.getUserID();
     this.subsWords = this.sprintGameService.sprintWords$.subscribe(
       (words: Word[]) => {
         this.wordsSprint = words;
-        console.log(words[0])
       }
     );
     this.subsStreak = this.sprintGameService.streak$.subscribe(
@@ -84,7 +93,7 @@ export class SprintGamePageComponent implements OnInit {
     this.subsPercent = this.sprintGameService.percent$.subscribe((percent) => {
       this.percent = percent;
     });
-    this.FromBook()
+    this.fromBook();
   }
 
   ngOnDestroy(): void {
@@ -95,9 +104,10 @@ export class SprintGamePageComponent implements OnInit {
     this.closeSprint();
   }
 
-  startSprint(select?: string) {
-    if (select) {
+  startSprint(select?: string, page?: number) {
+    if (select && page) {
       this.selected = select;
+      this.page = page;
     }
     this.getWords();
     this.startSeconds();
@@ -131,7 +141,22 @@ export class SprintGamePageComponent implements OnInit {
   }
 
   getWords() {
-    this.sprintGameService.getWords(this.selected, this.page);
+    if (this.page === 30) {
+      this.page = 0;
+    }
+    if (this.authenticated) {
+      this.sprintGameService.getUserWords(
+        this.userID,
+        this.selected.split('=')[1],
+        this.page
+      );
+      if (this.indexWord === this.wordsSprint.length - 10) {
+        this.page += 1;
+        this.getWords();
+      }
+    } else {
+      this.sprintGameService.getWords(this.selected, this.page);
+    }
   }
 
   wordToComponetn() {
@@ -196,6 +221,11 @@ export class SprintGamePageComponent implements OnInit {
     audio.load();
     audio.volume = 0.1;
     audio.play();
+    const obj = {
+      difficulty: 'studied',
+      optional: {},
+    };
+    this.userWordService.postUserWord((this.wordsSprint[this.indexWord] as Word)._id, obj).subscribe(() => {});
   }
 
   wrong() {
@@ -204,12 +234,19 @@ export class SprintGamePageComponent implements OnInit {
     audio.load();
     audio.volume = 0.1;
     audio.play();
+    const obj = {
+      difficulty: 'hard',
+      optional: {},
+    };
+    this.userWordService.postUserWord((this.wordsSprint[this.indexWord] as Word)._id, obj).subscribe(() => {});
   }
 
-  FromBook() {
-    console.log(this.sprintGameService.fromBook, this.sprintGameService.selected)
-    if (this.sprintGameService.fromBook && this.sprintGameService.selected.length !== 0) {
-      this.startSprint(this.sprintGameService.selected);
+  fromBook() {
+    if (this.sprintGameService.fromBook) {
+      this.startSprint(
+        this.sprintGameService.selected,
+        this.sprintGameService.numberPage
+      );
     }
   }
 
