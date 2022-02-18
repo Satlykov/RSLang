@@ -1,29 +1,48 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
-import { Word } from '../models/interface';
+import { Observable } from 'rxjs';
 import { ApiService } from './api.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ElectronicBookService {
-  cards: Word[] = [];
+  constructor(private api: ApiService) {}
 
-  public cardsBook$ = new Subject<Word[]>();
-
-  public getCardsStream(cards: Word[]) {
-    this.cardsBook$.next(cards);
+  getCards(selected: string, page: number): Observable<Object> {
+    return this.api.get(`words?${selected}&page=${page}`);
   }
 
-  constructor(private api: ApiService) { }
+  getCardsUser(
+    userID: string,
+    selected: string,
+    page: number
+  ): Observable<Object> {
+    return this.api.get(
+      `users/${userID}/aggregatedWords?wordsPerPage=20&filter={"$and": [{"group": ${selected}}, {"page": ${page}}]}`
+    );
+  }
 
-  getCards(selected: string, page: number) {
-    this.api.get(`words?${selected}&page=${page}`).subscribe(
-      (res) => {
-        this.cards.push(...(res as Word[]));
-        this.getCardsStream(this.cards);
-      },
-      (error) => console.log(error)
+  getCardsUserHard(userID: string) {
+    return this.api.get(
+      `users/${userID}/aggregatedWords?wordsPerPage=3200&filter={"userWord.difficulty": "hard"}`
+    );
+  }
+
+  getCardsUserStudied(userID: string) {
+    return this.api.get(
+      `users/${userID}/aggregatedWords?wordsPerPage=3200&filter={"userWord.difficulty": "studied"}`
+    );
+  }
+
+  getCardsUserHardLevel(userID: string, selected: string) {
+    return this.api.get(
+      `users/${userID}/aggregatedWords?wordsPerPage=600&filter={"$and": [{"group": ${selected}},{"userWord.difficulty": "hard"}]}`
+    );
+  }
+
+  getCardsUserStudiedLevel(userID: string, selected: string) {
+    return this.api.get(
+      `users/${userID}/aggregatedWords?wordsPerPage=600&filter={"$and": [{"group": ${selected}},{"userWord.difficulty": "studied"}]}`
     );
   }
 }
