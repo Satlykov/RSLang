@@ -64,7 +64,7 @@
   justify-content: space-around;
 }
 .main-container__team .team-people__info {
-  height: 26%;
+  height: 28%;
   background: linear-gradient(45deg, rgba(66, 138, 168, 0.8), rgba(233, 243, 255, 0.8)), url(../../../assets/img/blue4.jpg);
   border: #fa8d62 solid 3px;
   display: flex;
@@ -165,8 +165,7 @@
 }
 
 .grid:hover {
-  width: 26.5rem;
-  height: 20.5rem;
+  filter: brightness(1.2);
   transition-duration: 700ms;
 }
 
@@ -242,10 +241,10 @@
   color: #49494b;
   cursor: pointer;
   font-size: 30px;
-  height: 4rem;
   text-shadow: 1px 1px 1px #e9f3ff, 0 0 1em #428AA8;
   margin: 0;
   letter-spacing: 2px;
+  text-align: center;
 }
 
 .photo-developer {
@@ -797,12 +796,6 @@ button:focus {
     height: 16rem;
   }
 
-  .grid:hover {
-    width: 23rem;
-    height: 17rem;
-    transition-duration: 700ms;
-  }
-
   .about-title__main {
     display: none;
   }
@@ -843,10 +836,6 @@ button:focus {
   transition-duration: 500ms;
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
 @media only screen and (max-width: 520px) {
   .team-people__info {
     flex-wrap: wrap;
@@ -865,8 +854,43 @@ html {
   }
 
   .title {
-    font-size: 23px;
+    font-size: 24px;
     letter-spacing: 1px;
+  }
+
+  .developer__photo {
+    height: 45% !important;
+    padding-left: 10px;
+  }
+
+  .welcome-section__title {
+    max-width: 28rem;
+    font-size: 1.5rem;
+  }
+
+  .welcome-section__link {
+    height: 55px;
+    width: 210px;
+    font-size: 1.2rem;
+  }
+
+  .fork-section {
+    width: 26rem;
+    height: 35rem;
+  }
+
+  .grid {
+    width: 18rem;
+    height: 15rem;
+    border-radius: 10%;
+  }
+  .grid-title {
+    padding-top: 0;
+    font-size: 24px;
+  }
+  .grid-text {
+    font-size: 19px;
+    line-height: 22px;
   }
 }
 

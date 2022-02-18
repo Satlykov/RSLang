@@ -6,7 +6,12 @@ mat-toolbar {
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
+  a {
+    font-family: Rubic, sans-serif;
+    color: #49494b;
+  }
 }
+
 
 @media only screen and (max-width: 650px) {
   mat-toolbar {
