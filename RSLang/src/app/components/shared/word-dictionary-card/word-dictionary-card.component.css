@@ -6,12 +6,6 @@ mat-card {
   margin: 10px 0;
   cursor: default;
 }
-mat-card.hard {
-  box-shadow: 0px 0px 50px 10px #e00202f6;
-}
-mat-card.studied {
-  box-shadow: 0px 0px 50px 10px #1eff00;
-}
 mat-card .img-container {
   width: 100%;
   height: 200px;
@@ -68,22 +62,8 @@ mat-card .en-text-container {
   justify-content: space-between;
 }
 
-.btn-icon {
-  top: 10px;
-  left: 5px;
-  position: absolute;
-  transform: scale(1.8);
-}
-
 .btn-all {
   margin-bottom: 10px;
 }
 
-.studied-icon {
-  position: absolute;
-  top: 21px;
-  right: 20px;
-  transform: scale(1.8);
-}
-
-/*# sourceMappingURL=word-card.component.css.map */
+/*# sourceMappingURL=word-dictionary-card.component.css.map */
