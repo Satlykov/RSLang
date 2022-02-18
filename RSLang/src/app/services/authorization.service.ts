@@ -22,6 +22,7 @@ export class AuthorizationService {
 
   userName = '';
   userID = '';
+  token = '';
 
   public authenticatedStatus$ = new Subject<boolean>();
   public spinnerStatus$ = new Subject<boolean>();
@@ -43,8 +44,10 @@ export class AuthorizationService {
     private apiService: ApiService,
     private localStorageService: LocalStorageService,
     private router: Router,
-    private userWordService: UserWordService,
-  ) {}
+    private userWordService: UserWordService
+  ) {
+    this.getToken();
+  }
 
   // General Email Regex (RFC 5322 Official Standard)
   checkEmail(email: string) {
@@ -190,7 +193,7 @@ export class AuthorizationService {
 
   getToken() {
     if (this.localStorageService.getItem(this.keyStorage)) {
-      return this.localStorageService.getItem(this.keyStorage).token;
+      this.token = this.localStorageService.getItem(this.keyStorage).token;
     }
   }
 
@@ -198,9 +201,16 @@ export class AuthorizationService {
     return this.userID;
   }
 
- /*  refreshToken() {
+  refreshToken() {
     if (this.localStorageService.getItem(this.keyStorage)) {
-      const refreshToken = this.localStorageService.getItem(this.keyStorage).refreshToken;
+      this.token = this.localStorageService.getItem(
+        this.keyStorage
+      ).refreshToken;
+      this.apiService.get(`users/${this.userID}/tokens`).subscribe((res) => {
+        this.localStorageService.setItem(this.keyStorage, res);
+        this.token = this.localStorageService.getItem(this.keyStorage).token;
+        console.log("Token Refresh!");
+      });
     }
-  } */
+  }
 }

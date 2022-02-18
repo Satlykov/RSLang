@@ -160,7 +160,6 @@ export class SprintGamePageComponent implements OnInit {
           this.page
         );
       }
-
     } else {
       this.sprintGameService.getWords(this.selected, this.page);
     }
@@ -206,7 +205,10 @@ export class SprintGamePageComponent implements OnInit {
   nextWord() {
     this.indexWord += 1;
     if (this.authenticated && !this.sprintGameService.fromBook) {
-      if ((this.wordsSprint[this.indexWord] as Word).userWord?.difficulty === 'hard') {
+      if (
+        (this.wordsSprint[this.indexWord] as Word).userWord?.difficulty ===
+        'hard'
+      ) {
         this.nextWord();
         return;
       }
@@ -235,7 +237,9 @@ export class SprintGamePageComponent implements OnInit {
       difficulty: 'studied',
       optional: {},
     };
-    this.userWordService.postUserWord((this.wordsSprint[this.indexWord] as Word)._id, obj).subscribe(() => {});
+    this.userWordService
+      .postUserWord((this.wordsSprint[this.indexWord] as Word)._id, obj)
+      .subscribe(() => {});
   }
 
   wrong() {
@@ -244,11 +248,14 @@ export class SprintGamePageComponent implements OnInit {
     audio.load();
     audio.volume = 0.1;
     audio.play();
-    const obj = {
-      difficulty: 'hard',
-      optional: {},
-    };
-    this.userWordService.postUserWord((this.wordsSprint[this.indexWord] as Word)._id, obj).subscribe(() => {});
+    if (
+      (this.wordsSprint[this.indexWord] as Word).userWord?.difficulty ===
+      'studied'
+    ) {
+      this.userWordService
+        .deleteUserWord((this.wordsSprint[this.indexWord] as Word)._id)
+        .subscribe(() => {});
+    }
   }
 
   fromBook() {
@@ -261,9 +268,12 @@ export class SprintGamePageComponent implements OnInit {
   }
 
   cheackLengthWords() {
-    if (this.indexWord >= this.wordsSprint.length - 10 && this.getCounter < 31) {
+    if (
+      this.indexWord >= this.wordsSprint.length - 10 &&
+      this.getCounter < 31
+    ) {
       this.page += 1;
-      this.getCounter +=1;
+      this.getCounter += 1;
       this.getWords();
     } else {
       this.getCounter = 0;
