@@ -4,6 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+    <list default="true" id="6bbf114f-ff85-4f2d-a4da-5c00618127d7" name="Changes" comment="feat: change name">
+      <change afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RSLang/src/app/app.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/RSLang/src/app/app.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RSLang/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/RSLang/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RSLang/src/app/components/core/footer/footer.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/RSLang/src/app/components/core/footer/footer.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RSLang/src/app/components/core/footer/footer.component.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/RSLang/src/app/components/core/footer/footer.component.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RSLang/src/app/components/core/footer/footer.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/RSLang/src/app/components/core/footer/footer.component.html" afterDir="false" />
     <list default="true" id="6bbf114f-ff85-4f2d-a4da-5c00618127d7" name="Changes" comment="feat: add list to arrows-img">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RSLang/src/app/app.component.css" beforeDir="false" />
@@ -14,9 +22,21 @@
       <change beforePath="$PROJECT_DIR$/RSLang/src/app/components/core/header/header.component.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/RSLang/src/app/components/core/header/header.component.css.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RSLang/src/app/components/core/main-content/main-content.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/RSLang/src/app/components/core/main-content/main-content.component.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RSLang/src/app/components/core/main-content/main-content.component.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/RSLang/src/app/components/core/main-content/main-content.component.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RSLang/src/app/pages/authorization-page/authorization-page.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/RSLang/src/app/pages/authorization-page/authorization-page.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RSLang/src/app/pages/authorization-page/authorization-page.component.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/RSLang/src/app/pages/authorization-page/authorization-page.component.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RSLang/src/app/pages/electronic-book-page/electronic-book-page.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/RSLang/src/app/pages/electronic-book-page/electronic-book-page.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RSLang/src/app/pages/electronic-book-page/electronic-book-page.component.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/RSLang/src/app/pages/electronic-book-page/electronic-book-page.component.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RSLang/src/app/pages/exit/exit.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/RSLang/src/app/pages/exit/exit.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RSLang/src/app/pages/exit/exit.component.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/RSLang/src/app/pages/exit/exit.component.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RSLang/src/app/pages/main-page/main-page.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/RSLang/src/app/pages/main-page/main-page.component.css" afterDir="false" />
+=======
       <change beforePath="$PROJECT_DIR$/RSLang/src/app/pages/main-page/main-page.component.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/RSLang/src/app/pages/main-page/main-page.component.css.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RSLang/src/app/pages/main-page/main-page.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/RSLang/src/app/pages/main-page/main-page.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RSLang/src/app/pages/main-page/main-page.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/RSLang/src/app/pages/main-page/main-page.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RSLang/src/app/pages/main-page/main-page.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/RSLang/src/app/pages/main-page/main-page.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RSLang/src/app/pages/sprint-game-page/sprint-game-page.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/RSLang/src/app/pages/sprint-game-page/sprint-game-page.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RSLang/src/app/pages/sprint-game-page/sprint-game-page.component.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/RSLang/src/app/pages/sprint-game-page/sprint-game-page.component.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,7 +100,10 @@
       <workItem from="1644237894597" duration="1299000" />
       <workItem from="1644931737481" duration="1286000" />
       <workItem from="1644934228194" duration="12850000" />
-      <workItem from="1645004938516" duration="998000" />
+      <workItem from="1645004938516" duration="4726000" />
+      <workItem from="1645023678956" duration="132000" />
+      <workItem from="1645099115888" duration="5029000" />
+      <workItem from="1645181929722" duration="1258000" />
     </task>
     <task id="LOCAL-00001" summary="feat: create a new branch, add mixins">
       <created>1643824469994</created>
@@ -216,7 +239,21 @@
       <option name="project" value="LOCAL" />
       <updated>1644960459124</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="feat: add photos">
+      <created>1645006027434</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1645006027434</updated>
+    </task>
+    <task id="LOCAL-00021" summary="feat: change name">
+      <created>1645023802516</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1645023802516</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -252,7 +289,9 @@
     <MESSAGE value="Merge remote-tracking branch 'origin/video-review' into video-review&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;RSLang/src/app/pages/main-page/main-page.component.css&#10;#&#9;RSLang/src/app/pages/main-page/main-page.component.css.map&#10;#&#9;RSLang/src/app/pages/main-page/main-page.component.html&#10;#&#9;RSLang/src/app/pages/main-page/main-page.component.scss" />
     <MESSAGE value="feat: add buttons top/down" />
     <MESSAGE value="feat: add border for photos" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: add border for photos" />
+    <MESSAGE value="feat: add photos" />
+    <MESSAGE value="feat: change name" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: change name" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
