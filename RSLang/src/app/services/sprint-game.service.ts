@@ -59,18 +59,37 @@ export class SprintGameService {
   getUserWords(userID: string, selected: string, page: number) {
     this.api
       .get(
-        `users/${userID}/aggregatedWords?wordsPerPage=20&filter={"$and": [{"group": ${selected}}, {"page": ${page}}, {"userWord.difficulty": null}]}`
+        `users/${userID}/aggregatedWords?wordsPerPage=20&filter={"$and": [{"group": ${selected}}, {"page": ${page}}]}`
       )
       .pipe(
         switchMap((words) => of((words as Array<Paginated>)[0].paginatedResults))
       )
       .subscribe(
         (res) => {
+          console.log(res as Word[])
           this.wordsSprint.push(...(res as Word[]));
           this.getWordsSprint(this.wordsSprint);
         },
         (error) => console.log(error)
       );
+  }
+
+  getUserWordsFromeBook(userID: string, selected: string, page: number) {
+    this.api
+    .get(
+      `users/${userID}/aggregatedWords?wordsPerPage=20&filter={"$and": [{"group": ${selected}}, {"page": ${page}}, {"userWord":null}]}`
+    )
+    .pipe(
+      switchMap((words) => of((words as Array<Paginated>)[0].paginatedResults))
+    )
+    .subscribe(
+      (res) => {
+        console.log(res as Word[])
+        this.wordsSprint.push(...(res as Word[]));
+        this.getWordsSprint(this.wordsSprint);
+      },
+      (error) => console.log(error)
+    );
   }
 
   getMultiplier() {

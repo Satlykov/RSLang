@@ -147,11 +147,20 @@ export class SprintGamePageComponent implements OnInit {
       this.page = 0;
     }
     if (this.authenticated) {
-      this.sprintGameService.getUserWords(
-        this.userID,
-        this.selected.split('=')[1],
-        this.page
-      );
+      if (this.sprintGameService.fromBook) {
+        this.sprintGameService.getUserWordsFromeBook(
+          this.userID,
+          this.selected.split('=')[1],
+          this.page
+        );
+      } else {
+        this.sprintGameService.getUserWords(
+          this.userID,
+          this.selected.split('=')[1],
+          this.page
+        );
+      }
+
     } else {
       this.sprintGameService.getWords(this.selected, this.page);
     }
@@ -196,6 +205,12 @@ export class SprintGamePageComponent implements OnInit {
 
   nextWord() {
     this.indexWord += 1;
+    if (this.authenticated && !this.sprintGameService.fromBook) {
+      if ((this.wordsSprint[this.indexWord] as Word).userWord?.difficulty === 'hard') {
+        this.nextWord();
+        return;
+      }
+    }
     this.wordToComponetn();
     this.cheackLengthWords();
   }
