@@ -1,12 +1,15 @@
 <div class="book-container" [style.background]="backColor">
-  <mat-toolbar>
-    <div class="game-btn-container">
-      <button mat-stroked-button class="btn-game" (click)="startSprint()" [disabled]="!canPlay">
+  <mat-toolbar [ngClass]="!canPlay ? 'cant-play' : ''">
+    <div class="game-btn-container" *ngIf="canPlay">
+      <button mat-stroked-button class="btn-game" (click)="startSprint()">
         <mat-icon>videogame_asset</mat-icon>"Спринт"
       </button>
-      <button mat-stroked-button class="btn-game" (click)="startAudioCallGame()" [disabled]="!canPlay">
+      <button mat-stroked-button class="btn-game" (click)="startAudioCallGame()">
         <mat-icon>videogame_asset</mat-icon>"Аудиовызов"
       </button>
+    </div>
+    <div class="done-icon"  *ngIf="!canPlay">
+      <mat-icon>verified</mat-icon>
     </div>
     <div class="pagination-container">
       <button mat-icon-button (click)="setNumberPage(0)" [disabled]="!minusPage">

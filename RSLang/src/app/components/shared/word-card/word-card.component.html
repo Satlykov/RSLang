@@ -8,9 +8,20 @@
     <mat-icon style="color: #929292ef" *ngIf="!hard">flash_off</mat-icon>
     <mat-icon style="color: #e0bf02ee" *ngIf="hard">flash_on</mat-icon>
   </button>
-  <mat-icon class="studied-icon" style="color: #1eff00" *ngIf="studied"
-    >verified</mat-icon
+  <button
+    mat-icon-button
+    class="btn-studied"
+    (click)="toggleStudied()"
+    *ngIf="authenticated && !hard"
   >
+    <mat-icon style="color: #929292ef" *ngIf="!studied"
+      >verified</mat-icon
+    >
+    <mat-icon style="color: #1eff00" *ngIf="studied"
+      >verified</mat-icon
+    >
+  </button>
+
   <div
     class="img-container"
     style="background-image: linear-gradient(to top, #438aa8 0%, transparent 70%),

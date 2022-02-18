@@ -49,6 +49,21 @@ export class WordCardComponent implements OnInit {
     );
   }
 
+  addStudied() {
+    const obj = {
+      difficulty: 'studied',
+      optional: {},
+    };
+    this.userWordService.postUserWord(this.card._id, obj).subscribe(
+      () => {
+        this.studied = true;
+      },
+      (error) => {
+        this.studied = false;
+      }
+    );
+  }
+
   deletHard() {
     this.userWordService.deleteUserWord(this.card._id).subscribe(
       () => {
@@ -56,6 +71,17 @@ export class WordCardComponent implements OnInit {
       },
       (error) => {
         this.hard = true;
+      }
+    );
+  }
+
+  deletStudied() {
+    this.userWordService.deleteUserWord(this.card._id).subscribe(
+      () => {
+        this.studied = false;
+      },
+      (error) => {
+        this.studied = true;
       }
     );
   }
@@ -72,6 +98,14 @@ export class WordCardComponent implements OnInit {
       this.deletHard();
     } else {
       this.addToHard();
+    }
+  }
+
+  toggleStudied() {
+    if (this.studied) {
+      this.deletStudied();
+    } else {
+      this.addStudied();
     }
   }
 

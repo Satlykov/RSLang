@@ -34,6 +34,7 @@ export class SprintGamePageComponent implements OnInit {
   percent = 0;
   soundEfect = true;
   spinerTime = 5500;
+  getCounter = 0;
 
   private subsWords: Subscription = new Subscription();
   private subsStreak: Subscription = new Subscription();
@@ -74,6 +75,7 @@ export class SprintGamePageComponent implements OnInit {
     this.subsWords = this.sprintGameService.sprintWords$.subscribe(
       (words: Word[]) => {
         this.wordsSprint = words;
+        this.cheackLengthWords();
       }
     );
     this.subsStreak = this.sprintGameService.streak$.subscribe(
@@ -150,10 +152,6 @@ export class SprintGamePageComponent implements OnInit {
         this.selected.split('=')[1],
         this.page
       );
-      if (this.indexWord === this.wordsSprint.length - 10) {
-        this.page += 1;
-        this.getWords();
-      }
     } else {
       this.sprintGameService.getWords(this.selected, this.page);
     }
@@ -199,10 +197,7 @@ export class SprintGamePageComponent implements OnInit {
   nextWord() {
     this.indexWord += 1;
     this.wordToComponetn();
-    if (this.indexWord === this.wordsSprint.length - 10) {
-      this.page += 1;
-      this.getWords();
-    }
+    this.cheackLengthWords();
   }
 
   sound() {
@@ -248,7 +243,16 @@ export class SprintGamePageComponent implements OnInit {
         this.sprintGameService.numberPage
       );
     }
-    this.sprintGameService.fromBook = false;
+  }
+
+  cheackLengthWords() {
+    if (this.indexWord >= this.wordsSprint.length - 10 && this.getCounter < 31) {
+      this.page += 1;
+      this.getCounter +=1;
+      this.getWords();
+    } else {
+      this.getCounter = 0;
+    }
   }
 
   closeSprint() {
@@ -269,5 +273,6 @@ export class SprintGamePageComponent implements OnInit {
     this.streakAnswers = 0;
     this.score = 0;
     this.star = 1;
+    this.sprintGameService.fromBook = false;
   }
 }
