@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ViewportScroller } from "@angular/common";
 
 @Component({
   selector: 'app-main-page',
@@ -6,7 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./main-page.component.scss'],
 })
 export class MainPageComponent implements OnInit {
-  constructor() {}
+  constructor(
+    private viewportScroller: ViewportScroller
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
+
+  scrollTo() {
+    this.viewportScroller.scrollToAnchor('main-page');
+  }
 }

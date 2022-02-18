@@ -1,17 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Neucha&family=Rubik:wght@300;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Neucha&family=Rubik:ital,wght@0,300;0,700;1,300&display=swap");
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background-color: darkgrey;
-}
-
-::-webkit-scrollbar-thumb {
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-}
-
 .main-container {
   width: 100%;
   display: flex;
@@ -76,7 +64,7 @@
   justify-content: space-around;
 }
 .main-container__team .team-people__info {
-  height: 30%;
+  height: 26%;
   background: linear-gradient(45deg, rgba(66, 138, 168, 0.8), rgba(233, 243, 255, 0.8)), url(../../../assets/img/blue4.jpg);
   border: #fa8d62 solid 3px;
   display: flex;
@@ -109,14 +97,14 @@
   margin: 0;
   color: #e9f3ff;
   font-size: 20px;
-  line-height: 40px;
+  line-height: 30px;
 }
 .main-container__team .team-people__info-job {
   letter-spacing: 2px;
 }
 .main-container__team .team-people__info .developer__photo {
   width: 50%;
-  height: 99%;
+  height: 98%;
 }
 
 .container {
@@ -797,10 +785,6 @@ button:focus {
   transform: translate(95vw, 90vh);
 }
 
-.html {
-  scroll-behavior: smooth;
-}
-
 @media only screen and (max-width: 920px) {
   .container {
     grid-template-areas: "A" "B" "C" "D";
@@ -826,18 +810,10 @@ button:focus {
   .team-people {
     width: 95% !important;
   }
-  .team-people__info {
-    height: 32% !important;
-  }
 
   .photo-developer {
     width: inherit;
     height: auto;
-  }
-}
-@media only screen and (max-width: 520px) {
-  .team-people__info {
-    flex-wrap: wrap;
   }
 }
 .arrow-down {
@@ -857,6 +833,7 @@ button:focus {
   position: absolute;
   right: 20px;
   bottom: 20px;
+  cursor: pointer;
 }
 
 .arrow-top:hover {
@@ -864,6 +841,33 @@ button:focus {
   width: 33px;
   height: 33px;
   transition-duration: 500ms;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media only screen and (max-width: 520px) {
+  .team-people__info {
+    flex-wrap: wrap;
+  }
+  .team-people__info p {
+    font-size: 18px !important;
+    letter-spacing: 0 !important;
+  }
+
+  .team-people__info-name {
+    font-size: 22px !important;
+  }
+
+  .content {
+    width: 100% !important;
+  }
+
+  .title {
+    font-size: 23px;
+    letter-spacing: 1px;
+  }
 }
 
 /*# sourceMappingURL=main-page.component.css.map */
