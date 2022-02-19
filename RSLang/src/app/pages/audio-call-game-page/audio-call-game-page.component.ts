@@ -5,6 +5,8 @@ import { AudioCallGameService } from 'src/app/services/audio-call-game.service';
 import * as _ from 'lodash';
 import { backendURL } from 'src/app/constants/backendURL';
 import { sections, KEY_CODE } from 'src/app/enums.ts/enums';
+import { AuthorizationService } from 'src/app/services/authorization.service';
+import { UserWordService } from 'src/app/services/user-word.service';
 
 
 @Component({
@@ -41,6 +43,8 @@ export class AudioCallGamePageComponent implements OnInit, OnDestroy {
     }
   }
 
+  public isAuthenticated = false;
+  private userID = '';
   public section = sections.questions;
   public isOpened = false;
   public isAnswered = false;
@@ -99,9 +103,13 @@ export class AudioCallGamePageComponent implements OnInit, OnDestroy {
 
   constructor(
   private audioCallGameService: AudioCallGameService,
+  private authorizationService: AuthorizationService,
+  private userWordService: UserWordService
   ) {}
 
   ngOnInit(): void {
+    this.isAuthenticated = this.authorizationService.checkLogin();
+    this.userID = this.authorizationService.getUserID();
     this.audioCallGameService.randomWords$
       .pipe(
         takeUntil(this.unsubscribe$),
@@ -112,6 +120,7 @@ export class AudioCallGamePageComponent implements OnInit, OnDestroy {
       })
     this.audioCallGameService.loadRandomWords();
     this.startFromBook();
+    // console.log(this.isAuthenticated,this.userID)
   }
 
 
@@ -121,7 +130,7 @@ export class AudioCallGamePageComponent implements OnInit, OnDestroy {
   }
 
 
-  public showQuestions(group: number, page?: number|undefined):void {
+  public showQuestions(group: number, page?: number|undefined,authorization?: boolean|undefined, userID?: string|undefined):void {
     if(group === 7){
       this.statistic = {
         correct:{
@@ -142,7 +151,7 @@ export class AudioCallGamePageComponent implements OnInit, OnDestroy {
     }
     this.questionsList = [];
     this.section = sections.answers;
-    this.audioCallGameService.getQuestionsList(group,page);
+    this.audioCallGameService.getQuestionsList(group,page,authorization,userID);
       this.audioCallGameService.questionsList$
       .pipe(
         take(1)
@@ -200,7 +209,7 @@ export class AudioCallGamePageComponent implements OnInit, OnDestroy {
 
   public startFromBook(): void {
     if(this.audioCallGameService.fromBook){
-      this.showQuestions(this.audioCallGameService.dataFromBook.group,this.audioCallGameService.dataFromBook.page)
+      this.showQuestions(this.audioCallGameService.dataFromBook.group,this.audioCallGameService.dataFromBook.page,this.isAuthenticated,this.userID)
       this.section = sections.answers
     }
   }
