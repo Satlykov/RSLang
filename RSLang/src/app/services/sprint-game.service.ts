@@ -3,6 +3,7 @@ import { Observable, of, Subject, switchMap, interval } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { Paginated, Word } from '../models/interface';
 import { ApiService } from './api.service';
+import { AuthorizationService } from './authorization.service';
 
 @Injectable({
   providedIn: 'root',
@@ -44,7 +45,10 @@ export class SprintGameService {
     this.percent$.next(percent);
   }
 
-  constructor(private api: ApiService) {}
+  constructor(
+    private api: ApiService,
+    private authorizationService: AuthorizationService
+  ) {}
 
   getWords(selected: string, page: number) {
     this.api.get(`words?${selected}&page=${page}`).subscribe(
@@ -59,13 +63,42 @@ export class SprintGameService {
   getUserWords(userID: string, selected: string, page: number) {
     this.api
       .get(
-        `users/${userID}/aggregatedWords?wordsPerPage=20&filter={"$and": [{"group": ${selected}}, {"page": ${page}}, {"userWord.difficulty": null}]}`
+        `users/${userID}/aggregatedWords?wordsPerPage=20&filter={"$and": [{"group": ${selected}}, {"page": ${page}}]}`
       )
       .pipe(
-        switchMap((words) => of((words as Array<Paginated>)[0].paginatedResults))
+        switchMap((words) =>
+          of((words as Array<Paginated>)[0].paginatedResults)
+        )
       )
       .subscribe(
         (res) => {
+          this.wordsSprint.push(...(res as Word[]));
+          this.getWordsSprint(this.wordsSprint);
+        },
+        (error) => {
+          if (error.status === 401) {
+            this.authorizationService.refreshToken();
+            setTimeout(() => {
+              this.getUserWords(userID, selected, page);
+            }, 500);
+          }
+        }
+      );
+  }
+
+  getUserWordsFromeBook(userID: string, selected: string, page: number) {
+    this.api
+      .get(
+        `users/${userID}/aggregatedWords?wordsPerPage=20&filter={"$and": [{"group": ${selected}}, {"page": ${page}}, {"userWord":null}]}`
+      )
+      .pipe(
+        switchMap((words) =>
+          of((words as Array<Paginated>)[0].paginatedResults)
+        )
+      )
+      .subscribe(
+        (res) => {
+          console.log(res as Word[]);
           this.wordsSprint.push(...(res as Word[]));
           this.getWordsSprint(this.wordsSprint);
         },

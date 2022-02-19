@@ -23,8 +23,9 @@
   </mat-toolbar>
   <div class="words-container" [class.hard]="selectedWord === 'hard'">
     <app-word-dictionary-card
-      *ngFor="let card of cards | async"
+      *ngFor="let card of cards | async; let index = index"
       [card]="card"
+      [index]="index"
     ></app-word-dictionary-card>
   </div>
 </div>

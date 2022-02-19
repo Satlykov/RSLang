@@ -14,7 +14,7 @@ export class WordListComponent implements OnInit {
   selectedWord: string = 'hard';
 
   levels = [
-    { value: 'all', viewValue: 'All' },
+    { value: 'all', viewValue: 'Все' },
     { value: '0', viewValue: 'A1 Elementary' },
     { value: '1', viewValue: 'A2 Pre-Intermediate' },
     { value: '2', viewValue: 'B1 Intermediate' },
@@ -79,7 +79,6 @@ export class WordListComponent implements OnInit {
           );
       }
     }
-    this.cards.subscribe((words) => console.log(words))
   }
 
   changeLevel() {
