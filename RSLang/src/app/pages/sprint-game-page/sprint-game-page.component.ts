@@ -96,7 +96,6 @@ export class SprintGamePageComponent implements OnInit {
       this.percent = percent;
     });
     this.fromBook();
-    this.sprintGameService.getStat(this.userID);
   }
 
   ngOnDestroy(): void {
@@ -230,7 +229,7 @@ export class SprintGamePageComponent implements OnInit {
       optional: {},
     };
     if (
-      (this.wordsSprint[this.indexWord] as Word).userWord?.difficulty !== null
+      (this.wordsSprint[this.indexWord] as Word).userWord?.difficulty !== undefined
     ) {
       this.userWordService
         .putUserWord((this.wordsSprint[this.indexWord] as Word)._id, obj)
@@ -253,7 +252,7 @@ export class SprintGamePageComponent implements OnInit {
       optional: {},
     };
     if (
-      (this.wordsSprint[this.indexWord] as Word).userWord?.difficulty !== null
+      (this.wordsSprint[this.indexWord] as Word).userWord?.difficulty !== undefined
     ) {
       this.userWordService
         .putUserWord((this.wordsSprint[this.indexWord] as Word)._id, obj)
