@@ -207,9 +207,16 @@ export class AuthorizationService {
         this.keyStorage
       ).refreshToken;
       this.apiService.get(`users/${this.userID}/tokens`).subscribe((res) => {
-        this.localStorageService.setItem(this.keyStorage, res);
-        this.token = this.localStorageService.getItem(this.keyStorage).token;
-        console.log("Token Refresh!");
+        this.token = (res as Auth).token;
+        const obj = {
+          message: 'Authenticated',
+          name: this.userName,
+          refreshToken: (res as Auth).refreshToken,
+          token: (res as Auth).token,
+          userId: this.userID,
+        };
+        this.localStorageService.setItem(this.keyStorage, obj);
+        console.log('Token Refresh!');
       });
     }
   }
