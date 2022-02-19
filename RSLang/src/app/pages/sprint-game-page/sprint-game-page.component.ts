@@ -204,15 +204,6 @@ export class SprintGamePageComponent implements OnInit {
 
   nextWord() {
     this.indexWord += 1;
-    if (this.authenticated && !this.sprintGameService.fromBook) {
-      if (
-        (this.wordsSprint[this.indexWord] as Word).userWord?.difficulty ===
-        'hard'
-      ) {
-        this.nextWord();
-        return;
-      }
-    }
     this.wordToComponetn();
     this.cheackLengthWords();
   }
@@ -233,13 +224,21 @@ export class SprintGamePageComponent implements OnInit {
     audio.load();
     audio.volume = 0.1;
     audio.play();
-    const obj = {
-      difficulty: 'studied',
-      optional: {},
-    };
-    this.userWordService
-      .postUserWord((this.wordsSprint[this.indexWord] as Word)._id, obj)
-      .subscribe(() => {});
+    if (
+      (this.wordsSprint[this.indexWord] as Word).userWord?.difficulty === 'hard'
+    ) {
+      this.userWordService
+        .deleteUserWord((this.wordsSprint[this.indexWord] as Word)._id)
+        .subscribe(() => {});
+    } else {
+      const obj = {
+        difficulty: 'studied',
+        optional: {},
+      };
+      this.userWordService
+        .postUserWord((this.wordsSprint[this.indexWord] as Word)._id, obj)
+        .subscribe(() => {});
+    }
   }
 
   wrong() {
@@ -254,6 +253,14 @@ export class SprintGamePageComponent implements OnInit {
     ) {
       this.userWordService
         .deleteUserWord((this.wordsSprint[this.indexWord] as Word)._id)
+        .subscribe(() => {});
+    } else {
+      const obj = {
+        difficulty: 'hard',
+        optional: {},
+      };
+      this.userWordService
+        .postUserWord((this.wordsSprint[this.indexWord] as Word)._id, obj)
         .subscribe(() => {});
     }
   }
