@@ -76,12 +76,7 @@ export class SprintGameService {
           this.getWordsSprint(this.wordsSprint);
         },
         (error) => {
-          if (error.status === 401) {
-            this.authorizationService.refreshToken();
-            setTimeout(() => {
-              this.getUserWords(userID, selected, page);
-            }, 500);
-          }
+          console.log(error.status);
         }
       );
   }

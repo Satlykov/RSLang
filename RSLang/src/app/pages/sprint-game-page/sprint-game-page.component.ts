@@ -230,7 +230,7 @@ export class SprintGamePageComponent implements OnInit {
       optional: {},
     };
     if (
-      (this.wordsSprint[this.indexWord] as Word).userWord?.difficulty === 'hard'
+      (this.wordsSprint[this.indexWord] as Word).userWord?.difficulty !== null
     ) {
       this.userWordService
         .putUserWord((this.wordsSprint[this.indexWord] as Word)._id, obj)
@@ -253,8 +253,7 @@ export class SprintGamePageComponent implements OnInit {
       optional: {},
     };
     if (
-      (this.wordsSprint[this.indexWord] as Word).userWord?.difficulty ===
-      'studied'
+      (this.wordsSprint[this.indexWord] as Word).userWord?.difficulty !== null
     ) {
       this.userWordService
         .putUserWord((this.wordsSprint[this.indexWord] as Word)._id, obj)

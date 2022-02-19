@@ -20,9 +20,12 @@ export class StatisticsService {
           audio: {
 
           },
+          word: {
+
+          },
           book: {
             
-          },
+          }
         }
       ],
     },
