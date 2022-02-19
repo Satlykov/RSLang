@@ -11,16 +11,17 @@ import { WordListComponent } from 'src/app/pages/word-list/word-list.component';
 })
 export class WordDictionaryCardComponent implements OnInit {
   @Input() card!: Word;
-  @Input() index!: number;
-  @Input() cards!: Word[];
 
   closed = false;
+  hard = false;
   constructor(
     private userWordService: UserWordService,
     private wordListComponent: WordListComponent
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.hard = this.card.userWord?.difficulty === 'hard';
+  }
 
   playWord(src: string) {
     let audio = new Audio();
@@ -50,10 +51,9 @@ export class WordDictionaryCardComponent implements OnInit {
     };
   }
 
-  deletHard() {
+  deleteHard() {
     this.userWordService.deleteUserWord(this.card._id).subscribe(() => {
       this.wordListComponent.getCards();
-      /* this.cards.splice(this.index, 1) */
     });
   }
 }

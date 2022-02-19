@@ -1,5 +1,5 @@
 <mat-card>
-  <button mat-mini-fab class="btn-icon" (click)="deletHard()" color="warn">
+  <button *ngIf="hard" mat-mini-fab class="btn-icon" (click)="deleteHard()" color="warn">
     <mat-icon>close</mat-icon>
   </button>
   <div
