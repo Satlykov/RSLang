@@ -34,9 +34,37 @@ export interface UserWord {
 
 export interface Statistic {
   learnedWords: number;
-  optional: {};
+  optional: OptionalStatistic;
 }
 
+export interface OptionalStatistic {
+  days: [
+    date: string,
+    studyDay: string,
+    words: WordStatistic,
+    sprint: GamesStatistic,
+    audio: GamesStatistic,
+    book: BookStatistic
+  ]
+}
+
+export interface WordStatistic {
+  newWords: number,
+  studiedWords: number,
+  correctAnswersPercentage: number,
+}
+
+export interface GamesStatistic {
+  newWords: number,
+  correctAnswersPercentage: number,
+  longestStreak: number,
+}
+
+export interface BookStatistic {
+  newWords: number,
+  notedHard: number,
+  notedStudied: number,
+}
 export interface Setting {
   wordsPerDay: number;
   optional: {};
