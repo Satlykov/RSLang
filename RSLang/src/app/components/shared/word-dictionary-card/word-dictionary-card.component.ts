@@ -11,6 +11,9 @@ import { WordListComponent } from 'src/app/pages/word-list/word-list.component';
 })
 export class WordDictionaryCardComponent implements OnInit {
   @Input() card!: Word;
+  @Input() index!: number;
+  @Input() cards!: Word[];
+
   closed = false;
   constructor(
     private userWordService: UserWordService,
@@ -50,6 +53,7 @@ export class WordDictionaryCardComponent implements OnInit {
   deletHard() {
     this.userWordService.deleteUserWord(this.card._id).subscribe(() => {
       this.wordListComponent.getCards();
+      /* this.cards.splice(this.index, 1) */
     });
   }
 }
