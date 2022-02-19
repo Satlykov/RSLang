@@ -96,6 +96,7 @@ export class SprintGamePageComponent implements OnInit {
       this.percent = percent;
     });
     this.fromBook();
+    this.sprintGameService.getStat(this.userID);
   }
 
   ngOnDestroy(): void {
@@ -224,17 +225,17 @@ export class SprintGamePageComponent implements OnInit {
     audio.load();
     audio.volume = 0.1;
     audio.play();
+    const obj = {
+      difficulty: 'studied',
+      optional: {},
+    };
     if (
       (this.wordsSprint[this.indexWord] as Word).userWord?.difficulty === 'hard'
     ) {
       this.userWordService
-        .deleteUserWord((this.wordsSprint[this.indexWord] as Word)._id)
+        .putUserWord((this.wordsSprint[this.indexWord] as Word)._id, obj)
         .subscribe(() => {});
     } else {
-      const obj = {
-        difficulty: 'studied',
-        optional: {},
-      };
       this.userWordService
         .postUserWord((this.wordsSprint[this.indexWord] as Word)._id, obj)
         .subscribe(() => {});
@@ -247,18 +248,18 @@ export class SprintGamePageComponent implements OnInit {
     audio.load();
     audio.volume = 0.1;
     audio.play();
+    const obj = {
+      difficulty: 'hard',
+      optional: {},
+    };
     if (
       (this.wordsSprint[this.indexWord] as Word).userWord?.difficulty ===
       'studied'
     ) {
       this.userWordService
-        .deleteUserWord((this.wordsSprint[this.indexWord] as Word)._id)
+        .putUserWord((this.wordsSprint[this.indexWord] as Word)._id, obj)
         .subscribe(() => {});
     } else {
-      const obj = {
-        difficulty: 'hard',
-        optional: {},
-      };
       this.userWordService
         .postUserWord((this.wordsSprint[this.indexWord] as Word)._id, obj)
         .subscribe(() => {});

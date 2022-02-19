@@ -148,4 +148,23 @@ export class SprintGameService {
     this.score = 0;
     this.multiplier = 1;
   }
+
+  getStat(userID: string) {
+    this.api.get(`users/${userID}/statistics`).subscribe((res) => {
+      console.log(res);
+    });
+  }
+
+  putStat(userID: string) {
+    this.api
+      .put(`users/${userID}/statistics`, {
+        learnedWords: 33,
+        optional: {
+          day: '19.02.2022',
+        },
+      })
+      .subscribe((res) => {
+        console.log(res);
+      });
+  }
 }
