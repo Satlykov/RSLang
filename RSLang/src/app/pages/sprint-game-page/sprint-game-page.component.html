@@ -108,6 +108,9 @@
     </div>
   </mat-card>
   <mat-card *ngIf="endSprint">
+    <p *ngIf="beforeTimer" style="color: red; font-size: 1.5rem;">
+      Игра завершилась до окончания таймера! Кончились слова!
+    </p>
     <h2>Ваш результат:</h2>
     <span class="end-score">{{ score }}</span>
     <h2>Процент правильных:</h2>

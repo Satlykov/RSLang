@@ -1,9 +1,10 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { backendURL } from 'src/app/constants/backendURL';
 import { Word } from 'src/app/models/interface';
 import { AuthorizationService } from 'src/app/services/authorization.service';
 import { SprintGameService } from 'src/app/services/sprint-game.service';
+import { StatisticsService } from 'src/app/services/statistics.service';
 import { UserWordService } from 'src/app/services/user-word.service';
 @Component({
   selector: 'app-sprint-game-page',
@@ -28,6 +29,7 @@ export class SprintGamePageComponent implements OnInit {
   indexTranslate = 0;
   page = 0;
   streakAnswers = 0;
+  streakAnswersBest = 0;
   star = 1;
   score = 0;
   pointsForAnswer = 10;
@@ -35,11 +37,14 @@ export class SprintGamePageComponent implements OnInit {
   soundEfect = true;
   spinerTime = 5500;
   getCounter = 0;
+  beforeTimer = false;
+  newWordsNum = 0;
 
   private subsWords: Subscription = new Subscription();
   private subsStreak: Subscription = new Subscription();
   private subsScore: Subscription = new Subscription();
   private subsPercent: Subscription = new Subscription();
+  private subsNewWordsNum: Subscription = new Subscription();
 
   levels = [
     { value: 'group=0', viewValue: 'A1 Elementary' },
@@ -50,10 +55,13 @@ export class SprintGamePageComponent implements OnInit {
     { value: 'group=5', viewValue: 'C2 Proficiency' },
   ];
 
+  stopWatch: any;
+
   constructor(
     private sprintGameService: SprintGameService,
     private authorizationService: AuthorizationService,
-    private userWordService: UserWordService
+    private userWordService: UserWordService,
+    private statistics: StatisticsService
   ) {}
 
   @HostListener('window:keyup', ['$event'])
@@ -81,6 +89,9 @@ export class SprintGamePageComponent implements OnInit {
     this.subsStreak = this.sprintGameService.streak$.subscribe(
       (streak: number) => {
         this.streakAnswers = streak;
+        if (this.streakAnswers > this.streakAnswersBest) {
+          this.streakAnswersBest = this.streakAnswers;
+        }
         this.star = Math.floor(streak / 3) + 1;
         if (this.star > 5) {
           this.star = 5;
@@ -95,8 +106,13 @@ export class SprintGamePageComponent implements OnInit {
     this.subsPercent = this.sprintGameService.percent$.subscribe((percent) => {
       this.percent = percent;
     });
+    this.subsNewWordsNum = this.sprintGameService.newWordsNum$.subscribe(
+      (num) => {
+        this.newWordsNum = num;
+      }
+    );
+    this.stopWatch = this.sprintGameService.stopWatch(60);
     this.fromBook();
-    this.sprintGameService.getStat(this.userID);
   }
 
   ngOnDestroy(): void {
@@ -104,6 +120,7 @@ export class SprintGamePageComponent implements OnInit {
     this.subsStreak.unsubscribe();
     this.subsScore.unsubscribe();
     this.subsPercent.unsubscribe();
+    this.subsNewWordsNum.unsubscribe();
     this.closeSprint();
   }
 
@@ -118,7 +135,7 @@ export class SprintGamePageComponent implements OnInit {
       this.wordToComponetn();
       this.startSecondStatus = false;
       this.sprintStatus = true;
-      this.sprintGameService.stopWatch(60).subscribe((sec: number) => {
+      this.stopWatch.subscribe((sec: number) => {
         this.gameSecond = 60 - sec;
         if (this.gameSecond === 0) {
           this.stopSprint();
@@ -130,6 +147,13 @@ export class SprintGamePageComponent implements OnInit {
   stopSprint() {
     this.sprintStatus = false;
     this.endSprint = true;
+    if (this.authenticated) {
+      this.statistics.addSprintStatistics(
+        this.newWordsNum,
+        this.percent,
+        this.streakAnswersBest
+      );
+    }
   }
 
   startSeconds() {
@@ -144,8 +168,14 @@ export class SprintGamePageComponent implements OnInit {
   }
 
   getWords() {
-    if (this.page === 30) {
-      this.page = 0;
+    if (this.sprintGameService.fromBook) {
+      if (this.page === -1) {
+        return;
+      }
+    } else {
+      if (this.page === 30) {
+        this.page = 0;
+      }
     }
     if (this.authenticated) {
       if (this.sprintGameService.fromBook) {
@@ -192,21 +222,25 @@ export class SprintGamePageComponent implements OnInit {
   }
 
   cheackAnswer(answer: boolean) {
-    this.sprintGameService.cheackAnswer(answer, this.translateWord);
-    if (this.soundEfect) {
-      if (answer === this.translateWord) {
-        this.correct();
-      } else {
-        this.wrong();
+    if (this.sprintStatus) {
+      this.sprintGameService.cheackAnswer(answer, this.translateWord);
+      if (this.soundEfect) {
+        if (answer === this.translateWord) {
+          this.correct();
+        } else {
+          this.wrong();
+        }
       }
+      this.nextWord();
     }
-    this.nextWord();
   }
 
   nextWord() {
     this.indexWord += 1;
-    this.wordToComponetn();
     this.cheackLengthWords();
+    if (this.indexWord !== this.wordsSprint.length) {
+      this.wordToComponetn();
+    }
   }
 
   sound() {
@@ -230,7 +264,8 @@ export class SprintGamePageComponent implements OnInit {
       optional: {},
     };
     if (
-      (this.wordsSprint[this.indexWord] as Word).userWord?.difficulty === 'hard'
+      (this.wordsSprint[this.indexWord] as Word).userWord?.difficulty !==
+      undefined
     ) {
       this.userWordService
         .putUserWord((this.wordsSprint[this.indexWord] as Word)._id, obj)
@@ -253,8 +288,8 @@ export class SprintGamePageComponent implements OnInit {
       optional: {},
     };
     if (
-      (this.wordsSprint[this.indexWord] as Word).userWord?.difficulty ===
-      'studied'
+      (this.wordsSprint[this.indexWord] as Word).userWord?.difficulty !==
+      undefined
     ) {
       this.userWordService
         .putUserWord((this.wordsSprint[this.indexWord] as Word)._id, obj)
@@ -276,15 +311,32 @@ export class SprintGamePageComponent implements OnInit {
   }
 
   cheackLengthWords() {
-    if (
-      this.indexWord >= this.wordsSprint.length - 10 &&
-      this.getCounter < 31
-    ) {
-      this.page += 1;
-      this.getCounter += 1;
-      this.getWords();
+    if (this.sprintGameService.fromBook) {
+      if (this.indexWord === this.wordsSprint.length) {
+        this.beforeTimer = true;
+        this.stopSprint();
+      } else if (
+        this.indexWord >= this.wordsSprint.length - 3 &&
+        this.getCounter < 5 &&
+        this.page === -1
+      ) {
+        this.page -= 1;
+        this.getCounter += 1;
+        this.getWords();
+      } else {
+        this.getCounter = 0;
+      }
     } else {
-      this.getCounter = 0;
+      if (
+        this.indexWord >= this.wordsSprint.length - 10 &&
+        this.getCounter < 31
+      ) {
+        this.page += 1;
+        this.getCounter += 1;
+        this.getWords();
+      } else {
+        this.getCounter = 0;
+      }
     }
   }
 
@@ -307,5 +359,6 @@ export class SprintGamePageComponent implements OnInit {
     this.score = 0;
     this.star = 1;
     this.sprintGameService.fromBook = false;
+    this.beforeTimer = false;
   }
 }
