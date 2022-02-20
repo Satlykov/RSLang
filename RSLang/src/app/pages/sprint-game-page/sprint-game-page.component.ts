@@ -4,6 +4,7 @@ import { backendURL } from 'src/app/constants/backendURL';
 import { Word } from 'src/app/models/interface';
 import { AuthorizationService } from 'src/app/services/authorization.service';
 import { SprintGameService } from 'src/app/services/sprint-game.service';
+import { StatisticsService } from 'src/app/services/statistics.service';
 import { UserWordService } from 'src/app/services/user-word.service';
 @Component({
   selector: 'app-sprint-game-page',
@@ -28,6 +29,7 @@ export class SprintGamePageComponent implements OnInit {
   indexTranslate = 0;
   page = 0;
   streakAnswers = 0;
+  streakAnswersBest = 0;
   star = 1;
   score = 0;
   pointsForAnswer = 10;
@@ -36,11 +38,13 @@ export class SprintGamePageComponent implements OnInit {
   spinerTime = 5500;
   getCounter = 0;
   beforeTimer = false;
+  newWordsNum = 0;
 
   private subsWords: Subscription = new Subscription();
   private subsStreak: Subscription = new Subscription();
   private subsScore: Subscription = new Subscription();
   private subsPercent: Subscription = new Subscription();
+  private subsNewWordsNum: Subscription = new Subscription();
 
   levels = [
     { value: 'group=0', viewValue: 'A1 Elementary' },
@@ -56,7 +60,8 @@ export class SprintGamePageComponent implements OnInit {
   constructor(
     private sprintGameService: SprintGameService,
     private authorizationService: AuthorizationService,
-    private userWordService: UserWordService
+    private userWordService: UserWordService,
+    private statistics: StatisticsService
   ) {}
 
   @HostListener('window:keyup', ['$event'])
@@ -84,6 +89,9 @@ export class SprintGamePageComponent implements OnInit {
     this.subsStreak = this.sprintGameService.streak$.subscribe(
       (streak: number) => {
         this.streakAnswers = streak;
+        if (this.streakAnswers > this.streakAnswersBest) {
+          this.streakAnswersBest = this.streakAnswers;
+        }
         this.star = Math.floor(streak / 3) + 1;
         if (this.star > 5) {
           this.star = 5;
@@ -98,6 +106,11 @@ export class SprintGamePageComponent implements OnInit {
     this.subsPercent = this.sprintGameService.percent$.subscribe((percent) => {
       this.percent = percent;
     });
+    this.subsNewWordsNum = this.sprintGameService.newWordsNum$.subscribe(
+      (num) => {
+        this.newWordsNum = num;
+      }
+    );
     this.stopWatch = this.sprintGameService.stopWatch(60);
     this.fromBook();
   }
@@ -107,6 +120,7 @@ export class SprintGamePageComponent implements OnInit {
     this.subsStreak.unsubscribe();
     this.subsScore.unsubscribe();
     this.subsPercent.unsubscribe();
+    this.subsNewWordsNum.unsubscribe();
     this.closeSprint();
   }
 
@@ -133,6 +147,13 @@ export class SprintGamePageComponent implements OnInit {
   stopSprint() {
     this.sprintStatus = false;
     this.endSprint = true;
+    if (this.authenticated) {
+      this.statistics.addSprintStatistics(
+        this.newWordsNum,
+        this.percent,
+        this.streakAnswersBest
+      );
+    }
   }
 
   startSeconds() {

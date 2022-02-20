@@ -28,6 +28,7 @@ export class SprintGameService {
   public streak$ = new Subject<number>();
   public score$ = new Subject<number>();
   public percent$ = new Subject<number>();
+  public newWordsNum$ = new Subject<number>();
 
   public getWordsSprint(wordsSprint: Word[]) {
     this.sprintWords$.next(wordsSprint);
@@ -45,9 +46,12 @@ export class SprintGameService {
     this.percent$.next(percent);
   }
 
+  public getNewNumWords(newWordsNum: number) {
+    this.newWordsNum$.next(newWordsNum);
+  }
+
   constructor(
     private api: ApiService,
-    private authorizationService: AuthorizationService
   ) {}
 
   getWords(selected: string, page: number) {
@@ -125,6 +129,7 @@ export class SprintGameService {
     this.getMultiplier();
     this.getScore(this.score);
     this.getPercent(this.percent);
+    this.getNewNumWords(this.answers)
     return answer === translateWord;
   }
 

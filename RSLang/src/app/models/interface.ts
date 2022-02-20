@@ -35,35 +35,47 @@ export interface UserWord {
 export interface Statistic {
   learnedWords: number;
   optional: OptionalStatistic;
+  id?: string | null;
 }
 
+export interface StatisticDelete {
+  learnedWords: number;
+  optional: {};
+}
+
+
 export interface OptionalStatistic {
-  days: [
-    date: string,
-    studyDay: string,
-    words: WordStatistic,
-    sprint: GamesStatistic,
-    audio: GamesStatistic,
-    book: BookStatistic
-  ]
+  stat: {
+    days: [
+      {
+        date: string;
+        studyDay: number;
+        words: WordStatistic;
+        sprint: GamesStatistic;
+        audio: GamesStatistic;
+        book: BookStatistic;
+      }
+    ]
+  };
 }
 
 export interface WordStatistic {
-  newWords: number,
-  studiedWords: number,
-  correctAnswersPercentage: number,
+  newWords: number;
+  studiedWords: number;
+  correctAnswersPercentage: number;
 }
 
 export interface GamesStatistic {
-  newWords: number,
-  correctAnswersPercentage: number,
-  longestStreak: number,
+  newWords: number;
+  gamesDay: number;
+  correctAnswersPercentageDay: number[];
+  longestStreak: number;
 }
 
 export interface BookStatistic {
-  newWords: number,
-  notedHard: number,
-  notedStudied: number,
+  newWords: number;
+  notedHard: number;
+  notedStudied: number;
 }
 export interface Setting {
   wordsPerDay: number;

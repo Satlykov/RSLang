@@ -4,6 +4,7 @@ import { backendURL } from 'src/app/constants/backendURL';
 import { Word } from 'src/app/models/interface';
 import { ElectronicBookPageComponent } from 'src/app/pages/electronic-book-page/electronic-book-page.component';
 import { AuthorizationService } from 'src/app/services/authorization.service';
+import { StatisticsService } from 'src/app/services/statistics.service';
 import { UserWordService } from 'src/app/services/user-word.service';
 
 @Component({
@@ -20,7 +21,8 @@ export class WordCardComponent implements OnInit {
   constructor(
     private userWordService: UserWordService,
     private authorizationService: AuthorizationService,
-    private electronicBookPageComponent: ElectronicBookPageComponent
+    private electronicBookPageComponent: ElectronicBookPageComponent,
+    private statistics: StatisticsService
   ) {}
 
   ngOnInit(): void {
@@ -45,6 +47,7 @@ export class WordCardComponent implements OnInit {
       () => {
         this.hard = true;
         this.electronicBookPageComponent.getCards();
+
       },
       (error) => {
         this.hard = false;
