@@ -7,4 +7,5 @@ import { Statistic } from '../models/interface';
 export class StatisticsService {
   allLearnedWords: number = 0;
   constructor() {}
+
 }

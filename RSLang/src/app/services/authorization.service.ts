@@ -223,7 +223,7 @@ export class AuthorizationService {
         };
         this.localStorageService.setItem(this.keyStorage, obj);
         this.sessionStorageService.setItem(this.keyStorage, obj);
-        console.log('Token Refresh!');
+        /* console.log('Token Refresh!'); */
       });
     }
   }
