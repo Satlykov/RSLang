@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Auth } from '../models/interface';
 import { ApiService } from './api.service';
 import { LocalStorageService } from './local-storage.service';
+import { SessionStorageService } from './session-storage.service';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { UserWordService } from './user-word.service';
@@ -43,6 +44,7 @@ export class AuthorizationService {
   constructor(
     private apiService: ApiService,
     private localStorageService: LocalStorageService,
+    private sessionStorageService: SessionStorageService,
     private router: Router,
     private userWordService: UserWordService
   ) {
@@ -125,18 +127,19 @@ export class AuthorizationService {
         password: password,
       })
       .subscribe(
-        (req) => {
+        (res) => {
           this.spinner = false;
           this.changeSpinnerStatus(this.spinner);
-          if (req) {
+          if (res) {
             this.authenticated = true;
             this.changeAuthenticatedStatus(this.authenticated);
             this.router.navigateByUrl('/');
-            this.userName = (req as Auth).name;
-            this.userID = (req as Auth).userId;
+            this.userName = (res as Auth).name;
+            this.userID = (res as Auth).userId;
             this.userWordService.userID = this.userID;
             this.getUserName(this.userName);
-            this.localStorageService.setItem(this.keyStorage, req);
+            this.localStorageService.setItem(this.keyStorage, res);
+            this.sessionStorageService.setItem(this.keyStorage, res);
           }
         },
         (error) => {
@@ -186,6 +189,9 @@ export class AuthorizationService {
         this.localStorageService.getItem(this.keyStorage) as Auth
       ).userId;
       this.userWordService.userID = this.userID;
+      if (!this.sessionStorageService.getItem(this.keyStorage)) {
+        this.refreshToken();
+      }
       return true;
     }
     return false;
@@ -216,7 +222,8 @@ export class AuthorizationService {
           userId: this.userID,
         };
         this.localStorageService.setItem(this.keyStorage, obj);
-        console.log('Token Refresh!');
+        this.sessionStorageService.setItem(this.keyStorage, obj);
+        /* console.log('Token Refresh!'); */
       });
     }
   }
