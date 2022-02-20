@@ -3,7 +3,7 @@ import { Observable, Subject, take, switchMap, of } from 'rxjs';
 import { ApiService } from './api.service';
 import { Word } from '../models/interface';
 import { Paginated } from '../models/interface';
-import { words } from 'lodash';
+
 
 @Injectable({
   providedIn: 'root'
@@ -15,10 +15,14 @@ export class AudioCallGameService {
   private randomWords: string[] = [];
   private randomWordsSubject = new Subject<string[]>();
   private questionsListSubject = new Subject<Word[]>();
+  public fromWordList = false;
   public fromBook = false;
   public dataFromBook = {
     group:0,
     page:0
+  }
+  public dataFromWordList = {
+    group:0
   }
 
   get randomWords$(): Observable<string[]> {
@@ -50,12 +54,45 @@ export class AudioCallGameService {
     return this.apiService.get(path)
   }
 
+  private getHardQuestions(group: number|undefined,userID?: string|undefined):Observable<Object> {
+    if(group){
+      const path = `users/${userID}/aggregatedWords?filter={"$and": [{"group": ${group}}, {"userWord.difficulty":"hard"}]}`;
+      return this.apiService.get(path)
+    }else{
+      const path = `users/${userID}/aggregatedWords?filter={"$and": [{"userWord.difficulty":"hard"}]}`;
+      return this.apiService.get(path)
+    }
+  }
+
   public loadRandomWords():void {
     this.getRandomWords()
   }
 
-  public getQuestionsList(group : number, page?: number|undefined,authorization?: boolean|undefined, userID?: string|undefined): void {
-    if(authorization){
+  public getQuestionsList(group : number,fromWordList:boolean, page?: number|undefined,authorization?: boolean|undefined, userID?: string|undefined ): void {
+    if(authorization && fromWordList) {
+      this.getHardQuestions(group,userID)
+        .pipe(
+          take(1),
+          switchMap((words) =>
+          of((words as Array<Paginated>)[0].paginatedResults)
+          )
+        )
+        .subscribe(words => {
+          const data = words as Word[];
+          console.log(data)
+          data.forEach(element => {
+            const randomOptions: string[] = [];
+            while(randomOptions.length < 4){
+              const randomNum = Math.floor(Math.random() * (this.randomWords.length))
+              randomOptions.push(this.randomWords[randomNum])
+            }
+            element.answersOptions = randomOptions
+          })
+          this.questionsListSubject.next(data)
+          }
+        );
+    }
+    else if(authorization){
       this.getUsersQuestions(group,page,userID)
         .pipe(
           take(1),
@@ -65,6 +102,7 @@ export class AudioCallGameService {
         )
         .subscribe(words => {
           const data = words as Word[];
+          console.log(data)
           data.forEach(element => {
             const randomOptions: string[] = [];
             while(randomOptions.length < 4){

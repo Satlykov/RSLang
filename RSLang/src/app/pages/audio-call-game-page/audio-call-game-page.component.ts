@@ -35,7 +35,7 @@ export class AudioCallGamePageComponent implements OnInit, OnDestroy {
         this.checkAnswer(this.currentQuestion.answersOptions![4]);
       }
       if(event.keyCode === KEY_CODE.back){
-        this.showQuestions(7);
+        this.showQuestions(7,false);
       }
       if(event.keyCode === KEY_CODE.confirm){
         this.nextQuestion();
@@ -120,7 +120,7 @@ export class AudioCallGamePageComponent implements OnInit, OnDestroy {
       })
     this.audioCallGameService.loadRandomWords();
     this.startFromBook();
-    // console.log(this.isAuthenticated,this.userID)
+    this.startFromWorldList();
   }
 
 
@@ -130,7 +130,7 @@ export class AudioCallGamePageComponent implements OnInit, OnDestroy {
   }
 
 
-  public showQuestions(group: number, page?: number|undefined,authorization?: boolean|undefined, userID?: string|undefined):void {
+  public showQuestions(group: number, fromWordList: boolean, page?: number|undefined,authorization?: boolean|undefined, userID?: string|undefined):void {
     if(group === 7){
       this.statistic = {
         correct:{
@@ -151,7 +151,7 @@ export class AudioCallGamePageComponent implements OnInit, OnDestroy {
     }
     this.questionsList = [];
     this.section = sections.answers;
-    this.audioCallGameService.getQuestionsList(group,page,authorization,userID);
+    this.audioCallGameService.getQuestionsList(group,fromWordList,page,authorization,userID);
       this.audioCallGameService.questionsList$
       .pipe(
         take(1)
@@ -171,6 +171,40 @@ export class AudioCallGamePageComponent implements OnInit, OnDestroy {
     this.generateAudio(this.currentQuestion.audio)
   }
 
+  private correct(word: Word): void {
+    const obj = {
+      difficulty: 'studied',
+      optional: {},
+    };
+    if(word.userWord?.difficulty !== undefined){
+      this.userWordService
+        .putUserWord(word._id,obj)
+        .subscribe(() => {});
+    }
+    else{
+      this.userWordService
+      .postUserWord(word._id,obj)
+      .subscribe(() => {});
+    }
+  }
+
+  private wrong(word: Word): void{
+    const obj = {
+      difficulty: 'hard',
+      optional: {},
+    };
+    if(word.userWord?.difficulty !== undefined){
+      this.userWordService
+        .putUserWord(word._id,obj)
+        .subscribe(() => {});
+    }
+    else{
+      this.userWordService
+      .postUserWord(word._id,obj)
+      .subscribe(() => {});
+    }
+  }
+
   public generateAudio(path: string):void {
     const audio = new Audio();
     audio.src = `${this.backendURL}/${path}`;
@@ -184,11 +218,13 @@ export class AudioCallGamePageComponent implements OnInit, OnDestroy {
     const currentQuestion = this.currentQuestion;
     this.isAnswered = !this.isAnswered
     if( this.currentQuestion.wordTranslate === answer){
+      this.correct(this.currentQuestion)
       this.isCorrect = true;
       correct.word.push(currentQuestion.word);
       correct.translation.push(currentQuestion.wordTranslate);
       correct.audioPath.push(currentQuestion.audio);
     }else{
+      this.wrong(this.currentQuestion)
       this.isCorrect = false;
       incorrect.word.push(currentQuestion.word);
       incorrect.translation.push(currentQuestion.wordTranslate);
@@ -209,7 +245,14 @@ export class AudioCallGamePageComponent implements OnInit, OnDestroy {
 
   public startFromBook(): void {
     if(this.audioCallGameService.fromBook){
-      this.showQuestions(this.audioCallGameService.dataFromBook.group,this.audioCallGameService.dataFromBook.page,this.isAuthenticated,this.userID)
+      this.showQuestions(this.audioCallGameService.dataFromBook.group,this.audioCallGameService.fromWordList,this.audioCallGameService.dataFromBook.page,this.isAuthenticated,this.userID)
+      this.section = sections.answers
+    }
+  }
+
+  public startFromWorldList(): void {
+    if(this.audioCallGameService.fromWordList){
+      this.showQuestions(this.audioCallGameService.dataFromBook.group,this.audioCallGameService.fromWordList,this.audioCallGameService.dataFromBook.page,this.isAuthenticated,this.userID,)
       this.section = sections.answers
     }
   }

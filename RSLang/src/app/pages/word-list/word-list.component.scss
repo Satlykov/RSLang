@@ -41,3 +41,20 @@ mat-toolbar {
   align-items: center;
   min-width: 300px;
 }
+
+.game-btn-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  min-width: 300px;
+}
+
+.btn-game {
+  @include button;
+}
+
+.btn-game:hover {
+  @include button-hover;
+}

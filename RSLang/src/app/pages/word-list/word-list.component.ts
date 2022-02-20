@@ -3,6 +3,8 @@ import { Observable, of, switchMap } from 'rxjs';
 import { Paginated } from 'src/app/models/interface';
 import { AuthorizationService } from 'src/app/services/authorization.service';
 import { ElectronicBookService } from 'src/app/services/electronic-book.service';
+import { AudioCallGameService } from 'src/app/services/audio-call-game.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-word-list',
@@ -33,7 +35,9 @@ export class WordListComponent implements OnInit {
 
   constructor(
     private authorizationService: AuthorizationService,
-    private electronicBookService: ElectronicBookService
+    private electronicBookService: ElectronicBookService,
+    private audioCallGameService: AudioCallGameService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -88,4 +92,12 @@ export class WordListComponent implements OnInit {
   changeType() {
     this.getCards();
   }
+
+  public startAudioCallGame(): void {
+    const group = this.selected;
+    this.audioCallGameService.fromWordList = true;
+    this.audioCallGameService.dataFromWordList.group = Number(group);
+    this.router.navigateByUrl('/audio-call-game');
+  }
+
 }

@@ -7,42 +7,42 @@
         <button
           class="category__button"
           mat-raised-button
-          (click)="showQuestions(0)"
+          (click)="showQuestions(0,false)"
         >
           A1 Elementary
         </button>
         <button
           class="category__button"
           mat-raised-button
-          (click)="showQuestions(1)"
+          (click)="showQuestions(1,false)"
         >
           A2 Pre-Intermediate
         </button>
         <button
           class="category__button"
           mat-raised-button
-          (click)="showQuestions(2)"
+          (click)="showQuestions(2,false)"
         >
           B1 IIntermediate
         </button>
         <button
           class="category__button"
           mat-raised-button
-          (click)="showQuestions(3)"
+          (click)="showQuestions(3,false)"
         >
           B2 Upper-Intermediate
         </button>
         <button
           class="category__button"
           mat-raised-button
-          (click)="showQuestions(4)"
+          (click)="showQuestions(4,false)"
         >
           C1 Advanced
         </button>
         <button
           class="category__button"
           mat-raised-button
-          (click)="showQuestions(5)"
+          (click)="showQuestions(5,false)"
         >
           C2 Proficiency
         </button>
@@ -105,7 +105,7 @@
       </div>
       <button
         mat-raised-button
-        (click)="showQuestions(7)"
+        (click)="showQuestions(7,false)"
         class="questions__back"
       >
         Категории
@@ -169,7 +169,7 @@
       <div class="questions__controll">
         <button
           mat-raised-button
-          (click)="showQuestions(7)"
+          (click)="showQuestions(7,false)"
           class="questions__back"
           [style.background]="backColor"
         >
