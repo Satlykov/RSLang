@@ -13,6 +13,10 @@ mat-toolbar p {
   color: #49494b;
   padding: 0;
 }
+mat-toolbar a {
+  font-family: Rubic, sans-serif;
+  color: #49494b;
+}
 
 @media only screen and (max-width: 650px) {
   mat-toolbar {

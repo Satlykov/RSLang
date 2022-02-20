@@ -35,5 +35,19 @@ $RSLang-theme: mat.define-light-theme((
 
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body {
+  height: 100%;
+  scroll-behavior: smooth;
+}
+body {
+  margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background-color: rgba(66, 138, 168);
+}
+::-webkit-scrollbar-thumb {
+  box-shadow: inset 8px 8px 8px rgb(250, 141, 98);
+}

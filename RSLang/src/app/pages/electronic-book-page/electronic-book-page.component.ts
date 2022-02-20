@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { SprintGameService } from 'src/app/services/sprint-game.service';
 import { Paginated, Word } from 'src/app/models/interface';
 import { AudioCallGameService } from 'src/app/services/audio-call-game.service';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
   selector: 'app-electronic-book-page',
@@ -39,7 +40,7 @@ export class ElectronicBookPageComponent implements OnInit {
 
   public cards!: Observable<any>;
 
-  numberPage = 0;
+  numberPage:number = 0;
   plusPage = true;
   minusPage = false;
 
@@ -52,13 +53,19 @@ export class ElectronicBookPageComponent implements OnInit {
     private authorizationService: AuthorizationService,
     private router: Router,
     private sprintGameService: SprintGameService,
-    private audioGameService: AudioCallGameService
+    private audioGameService: AudioCallGameService,
+    private localStorageService: LocalStorageService
   ) {}
 
   ngOnInit(): void {
+    if (this.localStorageService.getItem('EBookPage')) {
+      this.numberPage = +this.localStorageService.getItem('EBookPage').page;
+      this.selected = this.localStorageService.getItem('EBookPage').selected;
+    }
     this.authenticated = this.authorizationService.checkLogin();
     this.userID = this.authorizationService.getUserID();
     this.getCards();
+    this.checkPage();
   }
 
   ngOnDestroy(): void {
@@ -82,14 +89,15 @@ export class ElectronicBookPageComponent implements OnInit {
           })
         );
       this.cards.subscribe((cards) => {
-        const index = cards.findIndex((card: Word) => card.userWord === undefined);
+        const index = cards.findIndex(
+          (card: Word) => card.userWord === undefined
+        );
         if (index === -1) {
           this.canPlay = false;
         } else {
           this.canPlay = true;
         }
-      }
-      );
+      });
     } else {
       this.cards = this.electronicBookService.getCards(
         this.selected,
@@ -131,11 +139,13 @@ export class ElectronicBookPageComponent implements OnInit {
     } else {
       this.minusPage = true;
     }
+    this.localStorageService.setItem('EBookPage', { page: this.numberPage, selected: this.selected });
   }
 
   changeLevel() {
     this.backColor = this.backColors[+this.selected.split('=')[1]];
     this.getCards();
+    this.localStorageService.setItem('EBookPage', { page: this.numberPage, selected: this.selected });
   }
 
   startSprint() {

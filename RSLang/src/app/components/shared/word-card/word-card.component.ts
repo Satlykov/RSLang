@@ -49,6 +49,21 @@ export class WordCardComponent implements OnInit {
     );
   }
 
+  addStudied() {
+    const obj = {
+      difficulty: 'studied',
+      optional: {},
+    };
+    this.userWordService.postUserWord(this.card._id, obj).subscribe(
+      () => {
+        this.studied = true;
+      },
+      (error) => {
+        this.studied = false;
+      }
+    );
+  }
+
   deletHard() {
     this.userWordService.deleteUserWord(this.card._id).subscribe(
       () => {
@@ -56,6 +71,17 @@ export class WordCardComponent implements OnInit {
       },
       (error) => {
         this.hard = true;
+      }
+    );
+  }
+
+  deletStudied() {
+    this.userWordService.deleteUserWord(this.card._id).subscribe(
+      () => {
+        this.studied = false;
+      },
+      (error) => {
+        this.studied = true;
       }
     );
   }
@@ -75,22 +101,27 @@ export class WordCardComponent implements OnInit {
     }
   }
 
+  toggleStudied() {
+    if (this.studied) {
+      this.deletStudied();
+    } else {
+      this.addStudied();
+    }
+  }
+
   playAll() {
     let audioN = new Audio();
     const tracks = [this.card.audio, this.card.audioMeaning, this.card.audioExample];
     let current = 0;
-    if ('pause' in audioN) audioN.pause();
     audioN.src = backendURL + '/' + tracks[current];
-    audioN.load();
     audioN.volume = 0.5;
     audioN.play();
     audioN.onended = function () {
       current++;
       audioN.src = backendURL + '/' + tracks[current];
-      audioN.load();
       audioN.volume = 0.5;
       audioN.play();
-      if (current >= tracks.length) return;
+      if (current === 2) return;
     };
   }
 }

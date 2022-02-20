@@ -27,6 +27,10 @@ mat-toolbar {
   justify-content: space-between;
   @include blueTheme;
   color: #fff;
+
+  &.cant-play  {
+    background-color: #008100;
+  }
 }
 
 .selected-container {
@@ -78,5 +82,17 @@ mat-icon {
     &:active {
       transform: scale(.5);
     }
+  }
+}
+
+.done-icon {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  min-width: 300px;
+  color: #ffd900ee;
+  mat-icon {
+    transform: scale(2);
   }
 }

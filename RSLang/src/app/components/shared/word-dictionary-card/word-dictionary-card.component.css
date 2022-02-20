@@ -66,4 +66,10 @@ mat-card .en-text-container {
   margin-bottom: 10px;
 }
 
+.btn-icon {
+  top: 10px;
+  right: 15px;
+  position: absolute;
+}
+
 /*# sourceMappingURL=word-dictionary-card.component.css.map */

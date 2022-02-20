@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { backendURL } from 'src/app/constants/backendURL';
 import { Word } from 'src/app/models/interface';
+import { UserWordService } from 'src/app/services/user-word.service';
+import { WordListComponent } from 'src/app/pages/word-list/word-list.component';
 
 @Component({
   selector: 'app-word-dictionary-card',
@@ -9,7 +11,14 @@ import { Word } from 'src/app/models/interface';
 })
 export class WordDictionaryCardComponent implements OnInit {
   @Input() card!: Word;
-  constructor() {}
+  @Input() index!: number;
+  @Input() cards!: Word[];
+
+  closed = false;
+  constructor(
+    private userWordService: UserWordService,
+    private wordListComponent: WordListComponent
+  ) {}
 
   ngOnInit(): void {}
 
@@ -29,18 +38,22 @@ export class WordDictionaryCardComponent implements OnInit {
       this.card.audioExample,
     ];
     let current = 0;
-    if ('pause' in audioN) audioN.pause();
     audioN.src = backendURL + '/' + tracks[current];
-    audioN.load();
     audioN.volume = 0.5;
     audioN.play();
     audioN.onended = function () {
       current++;
       audioN.src = backendURL + '/' + tracks[current];
-      audioN.load();
       audioN.volume = 0.5;
       audioN.play();
-      if (current >= tracks.length) return;
+      if (current === 2) return;
     };
+  }
+
+  deleteHard() {
+    this.userWordService.deleteUserWord(this.card._id).subscribe(() => {
+      this.wordListComponent.getCards();
+      /* this.cards.splice(this.index, 1) */
+    });
   }
 }

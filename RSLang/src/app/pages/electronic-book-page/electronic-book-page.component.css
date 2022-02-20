@@ -33,6 +33,9 @@ mat-toolbar p {
   font-weight: 300;
   color: #e9f3ff;
 }
+mat-toolbar.cant-play {
+  background-color: #008100;
+}
 
 .selected-container {
   display: flex;
@@ -110,6 +113,18 @@ mat-icon {
 }
 .pagination-container button:active {
   transform: scale(0.5);
+}
+
+.done-icon {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  min-width: 300px;
+  color: #ffd900ee;
+}
+.done-icon mat-icon {
+  transform: scale(2);
 }
 
 /*# sourceMappingURL=electronic-book-page.component.css.map */
