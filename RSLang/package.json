@@ -10,10 +10,6 @@
     "test": "ng test",
     "lint": "ng lint"
   },
-  "engines": {
-    "node": "16.x",
-    "npm": "6.x"
-  },
   "private": true,
   "dependencies": {
     "@angular/animations": "~13.1.0",
@@ -36,6 +32,10 @@
     "tslib": "^2.3.0",
     "typescript": "~4.5.2",
     "zone.js": "~0.11.4"
+  },
+  "engines": {
+    "node": "16.13.0",
+    "npm": "8.1.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^13.2.2",
