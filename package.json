@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "@angular/cdk": "^13.2.2",
-    "ngx-scrollbar": "^9.0.1"
-  }
-}
