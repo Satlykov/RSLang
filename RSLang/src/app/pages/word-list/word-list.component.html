@@ -10,10 +10,7 @@
           </mat-select>
         </mat-form-field>
       </div>
-      <div class="game-btn-container" *ngIf="isEmpty">
-        <button mat-stroked-button class="btn-game" >
-          <mat-icon>videogame_asset</mat-icon>"Спринт"
-        </button>
+      <div class="game-btn-container" *ngIf="isEmpty && selectedWord === 'hard'">
         <button mat-stroked-button class="btn-game" (click)="startAudioCallGame()">
           <mat-icon>videogame_asset</mat-icon>"Аудиовызов"
         </button>
