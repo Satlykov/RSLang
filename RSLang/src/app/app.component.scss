@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Neucha&family=Rubik:wght@300;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Neucha&family=Rubik:ital,wght@0,300;0,700;1,300&display=swap');
+
+@mixin indents {
+  margin: 0;
+  padding: 0;
+}
+@mixin h1 {
+  h1 {
+    font-family: Merienda One, sans-serif;
+    letter-spacing: 3px;
+    color: #e9f3ff;
+    font-weight: bold;
+  }
+}
+@mixin h2 {
+  h2 {
+    font-family: Merienda One, sans-serif;
+    letter-spacing: 2px;
+    color: #e9f3ff;
+  }
+}
+@mixin h3 {
+  h3 {
+    font-family: Merienda One, sans-serif;
+    color: #e9f3ff;
+  }
+}
+@mixin lightTheme {
+  p {
+    font-family: Rubic, sans-serif;
+    font-weight: 300;
+    color: #49494b;
+    padding: 0;
+  }
+  background-color: #e9f3ff;
+}
+@mixin blueTheme {
+  p {
+    font-family: Rubic, sans-serif;
+    font-weight: 300;
+    color: #e9f3ff;
+  }
+  background-color: #438aa8;
+}
+@mixin button {
+  border-radius: 40px;
+  border: 1px solid #fa8d62;
+  color: #e9f3ff;
+  background-color: #fa8d62;
+  text-align: center;
+  vertical-align: middle;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Rubic, sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+  transition-duration: 600ms;
+}
+@mixin button-hover {
+  @include button;
+  transition-duration: 600ms;
+  background: linear-gradient(to right, #fa8d62, #438aa8);
+  color: #e9f3ff;
+  filter: drop-shadow(0 0 0.2rem #438aa8);
+}
+@mixin ul {
+  list-style-type: none;
+  font-family: Rubic, sans-serif;
+  padding: 0;
+  margin: 0;
+}
+@mixin link {
+  text-decoration: none;
+  font-family: Rubic, sans-serif;
+}
+
+

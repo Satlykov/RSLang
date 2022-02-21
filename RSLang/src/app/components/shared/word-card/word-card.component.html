@@ -1,0 +1,74 @@
+<mat-card [class.hard]="hard" [class.studied]="studied">
+  <button
+    mat-icon-button
+    class="btn-icon"
+    (click)="toggleHard()"
+    *ngIf="authenticated && !studied"
+  >
+    <mat-icon style="color: #929292ef" *ngIf="!hard">flash_off</mat-icon>
+    <mat-icon style="color: #e0bf02ee" *ngIf="hard">flash_on</mat-icon>
+  </button>
+  <button
+    mat-icon-button
+    class="btn-studied"
+    (click)="toggleStudied()"
+    *ngIf="authenticated && !hard"
+  >
+    <mat-icon style="color: #929292ef" *ngIf="!studied"
+      >verified</mat-icon
+    >
+    <mat-icon style="color: #1eff00" *ngIf="studied"
+      >verified</mat-icon
+    >
+  </button>
+
+  <div
+    class="img-container"
+    style="background-image: linear-gradient(to top, #438aa8 0%, transparent 70%),
+        url(https://rslangsteam.herokuapp.com/{{ card.image }});"
+  ></div>
+  <div class="text-container">
+    <button mat-mini-fab class="btn-all" color="warn" (click)="playAll()">
+      <mat-icon>volume_up</mat-icon>
+    </button>
+    <h2 class="word">{{ card.word }}</h2>
+    <button
+      mat-icon-button
+      class="btn-pronounce"
+      (click)="playWord(card.audio)"
+    >
+      <mat-icon>record_voice_over</mat-icon>
+    </button>
+    <span class="translation"
+      >{{ card.wordTranslate }} {{ card.transcription }}</span
+    >
+    <div class="en-text-container">
+      <p class="en-text" [innerHTML]="card.textMeaning"></p>
+      <button
+        mat-icon-button
+        class="btn-pronounce"
+        (click)="playWord(card.audioMeaning)"
+      >
+        <mat-icon>record_voice_over</mat-icon>
+      </button>
+    </div>
+    <div class="en-text-container">
+      <p
+        class="en-text"
+        style="font-style: italic"
+        [innerHTML]="card.textExample"
+      ></p>
+      <button
+        mat-icon-button
+        class="btn-pronounce"
+        (click)="playWord(card.audioExample)"
+      >
+        <mat-icon>record_voice_over</mat-icon>
+      </button>
+    </div>
+
+    <div class="line"></div>
+    <p [innerHTML]="card.textMeaningTranslate"></p>
+    <p style="font-style: italic" [innerHTML]="card.textExampleTranslate"></p>
+  </div>
+</mat-card>

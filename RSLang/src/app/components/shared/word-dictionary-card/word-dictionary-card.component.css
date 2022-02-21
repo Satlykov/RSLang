@@ -1,0 +1,75 @@
+mat-card {
+  width: 320px;
+  min-height: 470px;
+  padding: 0;
+  background: #438aa8;
+  margin: 10px 0;
+  cursor: default;
+}
+mat-card .img-container {
+  width: 100%;
+  height: 200px;
+  background-position: center;
+  background-size: cover;
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+mat-card .text-container {
+  margin: -130px 0 0 0;
+  width: 100%;
+  padding: 16px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+mat-card .text-container .word {
+  margin: 0;
+  text-align: right;
+  text-shadow: 1px 2px 3px #49494b;
+  background-color: #ffffff8e;
+  border-radius: 4px;
+  padding: 3px 8px;
+}
+mat-card .text-container .btn-pronounce {
+  margin: 0;
+}
+mat-card .text-container .translation {
+  margin: 5px 0;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #fff;
+  text-shadow: none;
+  text-shadow: 1px 2px 3px #49494b;
+}
+mat-card .text-container .en-text-container {
+  width: 100%;
+}
+mat-card .text-container p {
+  margin: 5px 0;
+  width: 100%;
+  text-align: left;
+}
+mat-card .text-container .line {
+  height: 2px;
+  width: 100%;
+  background-color: #49494b;
+  margin: 5px 0;
+}
+mat-card .en-text-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.btn-all {
+  margin-bottom: 10px;
+}
+
+.btn-icon {
+  top: 10px;
+  right: 15px;
+  position: absolute;
+}
+
+/*# sourceMappingURL=word-dictionary-card.component.css.map */

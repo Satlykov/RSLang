@@ -1,0 +1,57 @@
+<div class="book-container" [style.background]="backColor">
+  <mat-toolbar [ngClass]="!canPlay ? 'cant-play' : ''">
+    <div class="game-btn-container" *ngIf="canPlay">
+      <button mat-stroked-button class="btn-game" (click)="startSprint()">
+        <mat-icon>video-game_asset</mat-icon>"Спринт"
+      </button>
+      <button mat-stroked-button class="btn-game" (click)="startAudioCallGame()">
+        <mat-icon>video-game_asset</mat-icon>"Аудиовызов"
+      </button>
+    </div>
+    <div class="done-icon"  *ngIf="!canPlay">
+      <mat-icon>verified</mat-icon>
+    </div>
+    <div class="pagination-container">
+      <button mat-icon-button (click)="setNumberPage(0)" [disabled]="!minusPage">
+        <mat-icon>keyboard_double_arrow_left</mat-icon>
+      </button>
+      <button mat-icon-button (click)="minusNumberPage()" [disabled]="!minusPage">
+        <mat-icon>keyboard_arrow_left</mat-icon>
+      </button>
+      <span style="cursor: default">
+        <span>{{ ("0" + (numberPage + 1)).slice(-2) }}</span
+        >/<span>30</span></span
+      >
+      <button mat-icon-button (click)="plusNumberPage()" [disabled]="!plusPage">
+        <mat-icon>keyboard_arrow_right</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        (click)="setNumberPage(29)"
+        [disabled]="!plusPage"
+      >
+        <mat-icon>keyboard_double_arrow_right</mat-icon>
+      </button>
+    </div>
+    <button mat-stroked-button class="btn-game" *ngIf="authenticated" routerLink="/word-list">
+      <mat-icon>translate</mat-icon>
+      "Словарь"
+    </button>
+    <div class="selected-container">
+      <span class="selected-title">Уровни:</span>
+      <mat-form-field>
+        <mat-select [(value)]="selected" (valueChange)="changeLevel()">
+          <mat-option *ngFor="let level of levels" [value]="level.value">{{
+            level.viewValue
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </mat-toolbar>
+  <div class="words-container">
+    <app-word-card
+      *ngFor="let card of cards | async"
+      [card]="card"
+    ></app-word-card>
+  </div>
+</div>

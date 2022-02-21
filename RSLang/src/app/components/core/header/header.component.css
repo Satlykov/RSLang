@@ -1,0 +1,61 @@
+@import url("https://fonts.googleapis.com/css2?family=Neucha&family=Rubik:wght@300;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Neucha&family=Rubik:ital,wght@0,300;0,700;1,300&display=swap");
+.spacer {
+  flex: 1 1 auto;
+}
+
+button {
+  border-radius: 40px;
+  border: 1px solid #fa8d62;
+  color: #e9f3ff;
+  background-color: #fa8d62;
+  text-align: center;
+  vertical-align: middle;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Rubic, sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+  transition-duration: 600ms;
+}
+
+button:hover {
+  border-radius: 40px;
+  border: 1px solid #fa8d62;
+  color: #e9f3ff;
+  background-color: #fa8d62;
+  text-align: center;
+  vertical-align: middle;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Rubic, sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+  transition-duration: 600ms;
+  transition-duration: 600ms;
+  background: linear-gradient(to right, #fa8d62, #438aa8);
+  color: #e9f3ff;
+  filter: drop-shadow(0 0 0.2rem #438aa8);
+}
+
+mat-toolbar {
+  background-color: #438aa8;
+}
+mat-toolbar p {
+  font-family: Rubic, sans-serif;
+  font-weight: 300;
+  color: #e9f3ff;
+}
+
+.user-title {
+  color: #fff;
+  margin: 0 10px;
+}
+
+.logo {
+  margin-left: 10px;
+}
+
+/*# sourceMappingURL=header.component.css.map */

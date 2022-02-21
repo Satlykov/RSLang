@@ -1,0 +1,22 @@
+@import '../../../app.component.scss';
+
+.active {
+  color: #428AA8;
+  font-weight: 500;
+}
+
+mat-drawer {
+  @include lightTheme;
+  min-width: 250px
+}
+
+mat-icon {
+  margin-right: 10px;
+}
+
+mat-drawer-content {
+  width: 100%;
+  min-height: calc(100vh - 128px);
+}
+
+

@@ -1,0 +1,28 @@
+@import url("https://fonts.googleapis.com/css2?family=Neucha&family=Rubik:wght@300;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Neucha&family=Rubik:ital,wght@0,300;0,700;1,300&display=swap");
+.active {
+  color: #428AA8;
+  font-weight: 500;
+}
+
+mat-drawer {
+  background-color: #e9f3ff;
+  min-width: 250px;
+}
+mat-drawer p {
+  font-family: Rubic, sans-serif;
+  font-weight: 300;
+  color: #49494b;
+  padding: 0;
+}
+
+mat-icon {
+  margin-right: 10px;
+}
+
+mat-drawer-content {
+  width: 100%;
+  min-height: calc(100vh - 128px);
+}
+
+/*# sourceMappingURL=main-content.component.css.map */
