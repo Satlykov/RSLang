@@ -266,7 +266,8 @@ export class AudioCallGamePageComponent implements OnInit, OnDestroy {
       this.statistics.addAudioStatistic(
         this.questionsList.length,
         this.percent,
-        this.maxStreak
+        this.maxStreak,
+        this.statistic.correct.word.length
       )
     }
   }
