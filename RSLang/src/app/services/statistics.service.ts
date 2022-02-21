@@ -1,14 +1,18 @@
 import { error } from '@angular/compiler/src/util';
 import { Injectable } from '@angular/core';
+import { Observable, of, Subject, switchMap } from 'rxjs';
 import {
   BookStatistic,
+  Day,
   GamesStatistic,
+  Paginated,
   Statistic,
   StatisticDelete,
   WordStatistic,
 } from '../models/interface';
 import { ApiService } from './api.service';
 import { AuthorizationService } from './authorization.service';
+import { ElectronicBookService } from './electronic-book.service';
 
 @Injectable({
   providedIn: 'root',
@@ -25,6 +29,7 @@ export class StatisticsService {
   gamesStatistic: GamesStatistic = {
     newWords: 0,
     correctAnswersPercentageDay: [],
+    percentageDay: 0,
     gamesDay: 0,
     longestStreak: 0,
   };
@@ -53,9 +58,16 @@ export class StatisticsService {
   };
 
   lengthArr = this.statisticAll.optional.stat.days.length;
+
+  public stat$ = new Subject<Statistic>();
+
+  public getStatToComponent(stat: Statistic) {
+    this.stat$.next(stat);
+  }
   constructor(
     private api: ApiService,
-    private authorizationService: AuthorizationService
+    private authorizationService: AuthorizationService,
+    private electronicBookService: ElectronicBookService
   ) {
     this.getStat();
   }
@@ -88,7 +100,8 @@ export class StatisticsService {
               this.statisticAll.optional.stat?.days.push(newDate);
             }
           }
-          console.log(res);
+          console.log((res as Statistic).optional.stat.days);
+          this.getStatToComponent(res as Statistic);
         },
         (error) => {
           if (error.status) {
@@ -150,10 +163,14 @@ export class StatisticsService {
         ].sprint.longestStreak = longestStreak;
       }
     }
-    (
-      this.statisticAll.optional.stat.days[this.lengthArr - 1].sprint
-        .correctAnswersPercentageDay as Number[]
-    ).push(percent);
+    let percentArr: Array<number> = this.statisticAll.optional.stat.days[
+      this.lengthArr - 1
+    ].sprint.correctAnswersPercentageDay as Array<number>;
+    percentArr.push(percent);
+    this.statisticAll.optional.stat.days[
+      this.lengthArr - 1
+    ].sprint.percentageDay =
+      percentArr.reduce((a, b) => a + b) / percentArr.length;
     this.statisticAll.optional.stat.days[this.lengthArr - 1].sprint.gamesDay =
       this.statisticAll.optional.stat.days[
         this.lengthArr - 1
@@ -161,6 +178,20 @@ export class StatisticsService {
     console.log(
       this.statisticAll.optional.stat.days[this.lengthArr - 1].sprint
     );
+    this.getLearnedWords();
     this.putStat();
+  }
+
+  getLearnedWords() {
+    this.electronicBookService
+      .getCardsUserStudied(this.authorizationService.getUserID())
+      .pipe(
+        switchMap((cards) =>
+          of((cards as Array<Paginated>)[0].paginatedResults)
+        )
+      )
+      .subscribe((cards) => {
+        this.statisticAll.learnedWords = cards.length;
+      });
   }
 }

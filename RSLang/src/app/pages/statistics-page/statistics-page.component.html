@@ -1,1 +1,82 @@
-<p>statistics-page works!</p>
+<mat-toolbar>
+  <div class="title-container">
+    <h2 *ngIf="selected === 'words'">Статистика по словам</h2>
+    <h2 *ngIf="selected === 'sprint'">Статистика игры "Спринт"</h2>
+    <h2 *ngIf="selected === 'audio'">Статистика игры "Аудиовызов"</h2>
+    <h2 *ngIf="selected === 'book'">Статистика по Учебнику</h2>
+    <h2 *ngIf="selected === 'chart-new-words'">График новых слов</h2>
+    <h2 *ngIf="selected === 'chart-studied-words'">'График изученных слов</h2>
+  </div>
+  <div class="selected-container">
+    <span>Тип статистики:</span>
+    <mat-form-field>
+      <mat-select [(value)]="selected">
+        <mat-option *ngFor="let type of types" [value]="type.value">{{
+          type.viewValue
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</mat-toolbar>
+<div class="statistics-container">
+  <mat-card>
+    <table *ngIf="selected === 'words'">
+      <thead>
+        <th>День учёбы:</th>
+        <th>Дата:</th>
+        <th>Новых слов:</th>
+        <th>Изученных слов:</th>
+        <th>Средний процент задень:</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let day of days">
+          <td>{{ day.studyDay }}</td>
+          <td>{{ day.date }}</td>
+          <td>{{ day.words.newWords}}</td>
+          <td>{{ day.words.studiedWords}}</td>
+          <td>{{ day.words.correctAnswersPercentage}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <table *ngIf="selected === 'sprint'">
+      <thead>
+        <th>День учёбы:</th>
+        <th>Дата:</th>
+        <th>Игр за день:</th>
+        <th>Новых слов:</th>
+        <th>Средний процент задень:</th>
+        <th>Лучшая серия:</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let day of days">
+          <td>{{ day.studyDay }}</td>
+          <td>{{ day.date }}</td>
+          <td>{{ day.sprint.gamesDay }}</td>
+          <td>{{ day.sprint.newWords }}</td>
+          <td>{{ day.sprint.percentageDay }}</td>
+          <td>{{ day.sprint.longestStreak }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <table *ngIf="selected === 'audio'">
+      <thead>
+        <th>День учёбы:</th>
+        <th>Дата:</th>
+        <th>Игр за день:</th>
+        <th>Новых слов:</th>
+        <th>Средний процент задень:</th>
+        <th>Лучшая серия:</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let day of days">
+          <td>{{ day.studyDay }}</td>
+          <td>{{ day.date }}</td>
+          <td>{{ day.audio.gamesDay }}</td>
+          <td>{{ day.audio.newWords }}</td>
+          <td>{{ day.audio.percentageDay }}</td>
+          <td>{{ day.audio.longestStreak }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </mat-card>
+</div>
