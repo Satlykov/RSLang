@@ -39,6 +39,7 @@ export class SprintGamePageComponent implements OnInit {
   getCounter = 0;
   beforeTimer = false;
   newWordsNum = 0;
+  learnedWords = 0;
 
   private subsWords: Subscription = new Subscription();
   private subsStreak: Subscription = new Subscription();
@@ -125,6 +126,7 @@ export class SprintGamePageComponent implements OnInit {
   }
 
   startSprint(select?: string, page?: number) {
+    this.learnedWords = 0;
     if (select && page) {
       this.selected = select;
       this.page = page;
@@ -151,7 +153,8 @@ export class SprintGamePageComponent implements OnInit {
       this.statistics.addSprintStatistics(
         this.newWordsNum,
         this.percent,
-        this.streakAnswersBest
+        this.streakAnswersBest,
+        this.learnedWords
       );
     }
   }
@@ -259,6 +262,7 @@ export class SprintGamePageComponent implements OnInit {
     audio.load();
     audio.volume = 0.1;
     audio.play();
+    this.learnedWords += 1;
     const obj = {
       difficulty: 'studied',
       optional: {},
@@ -360,5 +364,6 @@ export class SprintGamePageComponent implements OnInit {
     this.star = 1;
     this.sprintGameService.fromBook = false;
     this.beforeTimer = false;
+    this.learnedWords = 0;
   }
 }

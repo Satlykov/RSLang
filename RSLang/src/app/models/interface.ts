@@ -60,6 +60,7 @@ export interface Day {
 export interface WordStatistic {
   newWords: number;
   studiedWords: number;
+  studiedWordsDay: number;
   correctAnswersPercentage: number;
 }
 

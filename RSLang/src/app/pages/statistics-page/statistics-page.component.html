@@ -7,6 +7,7 @@
     <h2 *ngIf="selected === 'chart-new-words'">График новых слов</h2>
     <h2 *ngIf="selected === 'chart-studied-words'">'График изученных слов</h2>
   </div>
+  <h2>Всего изученно слов: {{allLearnedWords}}</h2>
   <div class="selected-container">
     <span>Тип статистики:</span>
     <mat-form-field>
@@ -26,6 +27,7 @@
         <th>Дата:</th>
         <th>Новых слов:</th>
         <th>Изученных слов:</th>
+        <th>Изученных слов всего:</th>
         <th>Средний процент задень:</th>
       </thead>
       <tbody>
@@ -33,8 +35,9 @@
           <td>{{ day.studyDay }}</td>
           <td>{{ day.date }}</td>
           <td>{{ day.words.newWords}}</td>
+          <td>{{ day.words.studiedWordsDay}}</td>
           <td>{{ day.words.studiedWords}}</td>
-          <td>{{ day.words.correctAnswersPercentage}}</td>
+          <td>{{ day.words.correctAnswersPercentage}} %</td>
         </tr>
       </tbody>
     </table>
@@ -53,7 +56,7 @@
           <td>{{ day.date }}</td>
           <td>{{ day.sprint.gamesDay }}</td>
           <td>{{ day.sprint.newWords }}</td>
-          <td>{{ day.sprint.percentageDay }}</td>
+          <td>{{ day.sprint.percentageDay }} %</td>
           <td>{{ day.sprint.longestStreak }}</td>
         </tr>
       </tbody>
@@ -73,8 +76,26 @@
           <td>{{ day.date }}</td>
           <td>{{ day.audio.gamesDay }}</td>
           <td>{{ day.audio.newWords }}</td>
-          <td>{{ day.audio.percentageDay }}</td>
+          <td>{{ day.audio.percentageDay }} %</td>
           <td>{{ day.audio.longestStreak }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <table *ngIf="selected === 'book'">
+      <thead>
+        <th>День учёбы:</th>
+        <th>Дата:</th>
+        <th>Новые слова:</th>
+        <th>Отмеченые как изученные:</th>
+        <th>Отмеченые как сложные:</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let day of days">
+          <td>{{ day.studyDay }}</td>
+          <td>{{ day.date }}</td>
+          <td>{{ day.book.newWords }}</td>
+          <td>{{ day.book.notedStudied }}</td>
+          <td>{{ day.book.notedHard }}</td>
         </tr>
       </tbody>
     </table>

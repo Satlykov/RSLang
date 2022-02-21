@@ -25,10 +25,12 @@ export class StatisticsPageComponent implements OnInit {
   constructor(private statistics: StatisticsService) {}
 
   days: Day[] = [];
+  allLearnedWords: number = 0;
 
   ngOnInit(): void {
     this.subsStat = this.statistics.stat$.subscribe((stat: Statistic) => {
       this.days = stat.optional.stat.days;
+      this.allLearnedWords = stat.learnedWords;
     });
     this.statistics.getStat();
   }
