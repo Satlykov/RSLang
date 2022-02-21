@@ -163,4 +163,45 @@ export class StatisticsService {
     );
     this.putStat();
   }
+
+  public addAudioStatistic(
+    newWords: number,
+    percent: number,
+    longestStreak: number
+    ):void {
+      if (
+        this.statisticAll.optional.stat.days[this.lengthArr - 1].audio
+          .gamesDay === 0
+      ) {
+        this.statisticAll.optional.stat.days[this.lengthArr - 1].audio.newWords =
+          newWords;
+        this.statisticAll.optional.stat.days[
+          this.lengthArr - 1
+        ].audio.longestStreak = longestStreak;
+      } else {
+        this.statisticAll.optional.stat.days[
+          this.lengthArr - 1
+        ].audio.newWords += newWords;
+        if (
+          this.statisticAll.optional.stat.days[this.lengthArr - 1].audio
+            .longestStreak < longestStreak
+        ) {
+          this.statisticAll.optional.stat.days[
+            this.lengthArr - 1
+          ].audio.longestStreak = longestStreak;
+        }
+      }
+      (
+        this.statisticAll.optional.stat.days[this.lengthArr - 1].audio
+          .correctAnswersPercentageDay as Number[]
+      ).push(percent);
+      this.statisticAll.optional.stat.days[this.lengthArr - 1].audio.gamesDay =
+        this.statisticAll.optional.stat.days[
+          this.lengthArr - 1
+        ].audio.correctAnswersPercentageDay.length;
+      console.log(
+        this.statisticAll.optional.stat.days[this.lengthArr - 1].audio
+      );
+      this.putStat();
+  }
 }

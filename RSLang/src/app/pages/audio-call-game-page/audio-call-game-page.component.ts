@@ -7,6 +7,7 @@ import { backendURL } from 'src/app/constants/backendURL';
 import { sections, KEY_CODE } from 'src/app/enums.ts/enums';
 import { AuthorizationService } from 'src/app/services/authorization.service';
 import { UserWordService } from 'src/app/services/user-word.service';
+import { StatisticsService } from 'src/app/services/statistics.service';
 
 
 @Component({
@@ -37,7 +38,7 @@ export class AudioCallGamePageComponent implements OnInit, OnDestroy {
       if(event.keyCode === KEY_CODE.back){
         this.showQuestions(7,false);
       }
-      if(event.keyCode === KEY_CODE.confirm){
+      if(event.keyCode === KEY_CODE.confirm && this.isAnswered){
         this.nextQuestion();
       }
     }
@@ -55,7 +56,7 @@ export class AudioCallGamePageComponent implements OnInit, OnDestroy {
   private randomWords: string[] = [];
   public percent = 0;
   public currentStreak = 0;
-  public maxSreak = 0
+  public maxStreak = 0
   private unsubscribe$ = new Subject<void>();
   public currentQuestion: Word = {
     id: '1',
@@ -107,7 +108,8 @@ export class AudioCallGamePageComponent implements OnInit, OnDestroy {
   constructor(
   private audioCallGameService: AudioCallGameService,
   private authorizationService: AuthorizationService,
-  private userWordService: UserWordService
+  private userWordService: UserWordService,
+  private statistics: StatisticsService
   ) {}
 
   ngOnInit(): void {
@@ -130,6 +132,7 @@ export class AudioCallGamePageComponent implements OnInit, OnDestroy {
   ngOnDestroy():void {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
+    this.endGame();
   }
 
 
@@ -232,8 +235,8 @@ export class AudioCallGamePageComponent implements OnInit, OnDestroy {
       this.correct(this.currentQuestion)
       this.isCorrect = true;
       this.currentStreak++;
-      if(this.maxSreak < this.currentStreak){
-        this.maxSreak = this.currentStreak
+      if(this.maxStreak < this.currentStreak){
+        this.maxStreak = this.currentStreak
       }
       correct.word.push(currentQuestion.word);
       correct.translation.push(currentQuestion.wordTranslate);
@@ -259,7 +262,11 @@ export class AudioCallGamePageComponent implements OnInit, OnDestroy {
       this.currentIndex = 0;
       this.section = sections.statistic;
       this.percent = correct.word.length/(correct.word.length + incorrect.word.length) * 100;
-      console.log(this.maxSreak)
+      this.statistics.addAudioStatistic(
+        this.questionsList.length,
+        this.percent,
+        this.maxStreak
+      )
     }
   }
 
@@ -276,4 +283,14 @@ export class AudioCallGamePageComponent implements OnInit, OnDestroy {
       this.section = sections.answers
     }
   }
+
+  private endGame(): void {
+    this.currentIndex = 0;
+    this.currentStreak = 0;
+    this.percent = 0;
+    this.maxStreak = 0;
+    this.questionsList = [];
+    this.section = sections.questions;
+  }
+
 }
