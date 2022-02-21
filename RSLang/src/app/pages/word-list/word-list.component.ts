@@ -32,6 +32,7 @@ export class WordListComponent implements OnInit {
 
   public cards!: Observable<any>;
   userID = '';
+  public isEmpty = false;
 
   constructor(
     private authorizationService: AuthorizationService,
@@ -54,7 +55,7 @@ export class WordListComponent implements OnInit {
             switchMap((cards) =>
               of((cards as Array<Paginated>)[0].paginatedResults)
             )
-          );
+          )
       } else if (this.selectedWord === 'studied') {
         this.cards = this.electronicBookService
           .getCardsUserStudied(this.userID)
@@ -83,6 +84,12 @@ export class WordListComponent implements OnInit {
           );
       }
     }
+    this.isEmpty = true
+    this.cards.subscribe(cards => {
+      if(cards.length < 1){
+        this.isEmpty = false;
+      }
+    })
   }
 
   changeLevel() {

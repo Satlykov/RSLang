@@ -10,8 +10,8 @@
           </mat-select>
         </mat-form-field>
       </div>
-      <div class="game-btn-container">
-        <button mat-stroked-button class="btn-game">
+      <div class="game-btn-container" *ngIf="isEmpty">
+        <button mat-stroked-button class="btn-game" >
           <mat-icon>videogame_asset</mat-icon>"Спринт"
         </button>
         <button mat-stroked-button class="btn-game" (click)="startAudioCallGame()">

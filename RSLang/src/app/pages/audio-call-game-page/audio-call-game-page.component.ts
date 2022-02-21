@@ -53,6 +53,9 @@ export class AudioCallGamePageComponent implements OnInit, OnDestroy {
   public id = 0;
   public questionsList: Word[] = [];
   private randomWords: string[] = [];
+  public percent = 0;
+  public currentStreak = 0;
+  public maxSreak = 0
   private unsubscribe$ = new Subject<void>();
   public currentQuestion: Word = {
     id: '1',
@@ -172,35 +175,43 @@ export class AudioCallGamePageComponent implements OnInit, OnDestroy {
   }
 
   private correct(word: Word): void {
+    let id = word._id;
+    if(!id){
+      id = word.id
+    }
     const obj = {
       difficulty: 'studied',
       optional: {},
     };
     if(word.userWord?.difficulty !== undefined){
       this.userWordService
-        .putUserWord(word._id,obj)
+        .putUserWord(id,obj)
         .subscribe(() => {});
     }
     else{
       this.userWordService
-      .postUserWord(word._id,obj)
+      .postUserWord(id,obj)
       .subscribe(() => {});
     }
   }
 
   private wrong(word: Word): void{
+    let id = word._id;
+    if(!id){
+      id = word.id
+    }
     const obj = {
       difficulty: 'hard',
       optional: {},
     };
     if(word.userWord?.difficulty !== undefined){
       this.userWordService
-        .putUserWord(word._id,obj)
+        .putUserWord(id,obj)
         .subscribe(() => {});
     }
     else{
       this.userWordService
-      .postUserWord(word._id,obj)
+      .postUserWord(id,obj)
       .subscribe(() => {});
     }
   }
@@ -220,12 +231,17 @@ export class AudioCallGamePageComponent implements OnInit, OnDestroy {
     if( this.currentQuestion.wordTranslate === answer){
       this.correct(this.currentQuestion)
       this.isCorrect = true;
+      this.currentStreak++;
+      if(this.maxSreak < this.currentStreak){
+        this.maxSreak = this.currentStreak
+      }
       correct.word.push(currentQuestion.word);
       correct.translation.push(currentQuestion.wordTranslate);
       correct.audioPath.push(currentQuestion.audio);
     }else{
       this.wrong(this.currentQuestion)
       this.isCorrect = false;
+      this.currentStreak = 0;
       incorrect.word.push(currentQuestion.word);
       incorrect.translation.push(currentQuestion.wordTranslate);
       incorrect.audioPath.push(currentQuestion.audio);
@@ -233,6 +249,8 @@ export class AudioCallGamePageComponent implements OnInit, OnDestroy {
   }
 
   public nextQuestion():void {
+    const correct = this.statistic.correct;
+    const incorrect = this.statistic.incorrect;
     this.isAnswered = !this.isAnswered
     if(this.currentIndex < this.questionsList.length-1){
       this.currentIndex++;
@@ -240,6 +258,8 @@ export class AudioCallGamePageComponent implements OnInit, OnDestroy {
     }else{
       this.currentIndex = 0;
       this.section = sections.statistic;
+      this.percent = correct.word.length/(correct.word.length + incorrect.word.length) * 100;
+      console.log(this.maxSreak)
     }
   }
 
@@ -252,7 +272,7 @@ export class AudioCallGamePageComponent implements OnInit, OnDestroy {
 
   public startFromWorldList(): void {
     if(this.audioCallGameService.fromWordList){
-      this.showQuestions(this.audioCallGameService.dataFromBook.group,this.audioCallGameService.fromWordList,this.audioCallGameService.dataFromBook.page,this.isAuthenticated,this.userID,)
+      this.showQuestions(this.audioCallGameService.dataFromWordList.group,this.audioCallGameService.fromWordList,this.audioCallGameService.dataFromBook.page,this.isAuthenticated,this.userID,)
       this.section = sections.answers
     }
   }

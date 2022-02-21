@@ -55,11 +55,14 @@ export class AudioCallGameService {
   }
 
   private getHardQuestions(group: number|undefined,userID?: string|undefined):Observable<Object> {
-    if(group){
+    // console.log(group)
+    if(!isNaN(group!)){
       const path = `users/${userID}/aggregatedWords?filter={"$and": [{"group": ${group}}, {"userWord.difficulty":"hard"}]}`;
+      console.log(path)
       return this.apiService.get(path)
     }else{
       const path = `users/${userID}/aggregatedWords?filter={"$and": [{"userWord.difficulty":"hard"}]}`;
+      console.log(path)
       return this.apiService.get(path)
     }
   }
