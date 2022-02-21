@@ -1,4 +1,10 @@
-<div class="container" [ngSwitch]="section" [style.background]="backColor">
+<div class="container" [ngSwitch]="section" [style.background]="backColor" (click)="hideInfo()">
+  <button class="info-btn" (click)="releaseInfo()" *ngIf="!showInfo"></button>
+  <div class="game-info" *ngIf="showInfo">
+    <p>1-5 - выбор варинта ответа</p>
+    <p>Пробел - следующий вопрос</p>
+    <p>Backspace - вернуться к категориям</p>
+  </div>
   <ng-template ngSwitchCase="question">
     <div class="category__container">
       <h2 class="category__title">Аудиовызов</h2>

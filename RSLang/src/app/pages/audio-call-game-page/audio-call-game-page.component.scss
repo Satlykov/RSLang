@@ -102,6 +102,26 @@
 .questions__forward {
   margin-left: 10px;
 }
+.game-info{
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 15px;
+  background-color: aquamarine;
+  border-radius: 50px;
+}
+.info-btn{
+position: absolute;
+width: 50px;
+height: 50px;
+top: 10px;
+left: 10px;
+color: white;
+border-radius: 30px;
+background: url(../../../assets/svg/circle-question-regular.svg) ;
+background-color: rgb(81, 81, 241);
+cursor: pointer;
+}
 //================================Statistic======================================//
 .statistic__container {
   display: flex;

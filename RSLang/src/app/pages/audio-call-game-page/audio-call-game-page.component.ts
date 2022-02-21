@@ -44,6 +44,7 @@ export class AudioCallGamePageComponent implements OnInit, OnDestroy {
     }
   }
 
+  public showInfo = false;
   public isAuthenticated = false;
   private userID = '';
   public section = sections.questions;
@@ -291,6 +292,17 @@ export class AudioCallGamePageComponent implements OnInit, OnDestroy {
     this.maxStreak = 0;
     this.questionsList = [];
     this.section = sections.questions;
+  }
+
+  public hideInfo(): void {
+    this.showInfo = false
+    console.log(this.showInfo)
+  }
+
+  public releaseInfo(): void {
+    event?.stopImmediatePropagation()
+    this.showInfo  = true
+    console.log(this.showInfo)
   }
 
 }
