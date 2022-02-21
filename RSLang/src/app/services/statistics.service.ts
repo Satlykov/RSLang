@@ -214,30 +214,28 @@ export class StatisticsService {
     this.putStat();
   }
 
-<<<<<<< HEAD
-=======
   public addAudioStatistic(
     newWords: number,
     percent: number,
     longestStreak: number,
     learnedWords: number
-    ):void {
+  ): void {
     if (
-        this.statisticAll.optional.stat.days[this.lengthArr - 1].audio
-          .gamesDay === 0
+      this.statisticAll.optional.stat.days[this.lengthArr - 1].audio
+        .gamesDay === 0
     ) {
+      this.statisticAll.optional.stat.days[
+        this.lengthArr - 1
+      ].audio.longestStreak = longestStreak;
+    } else {
+      if (
+        this.statisticAll.optional.stat.days[this.lengthArr - 1].audio
+          .longestStreak < longestStreak
+      ) {
         this.statisticAll.optional.stat.days[
           this.lengthArr - 1
         ].audio.longestStreak = longestStreak;
-    } else {
-      if(
-          this.statisticAll.optional.stat.days[this.lengthArr - 1].audio
-          .longestStreak < longestStreak
-        ){
-          this.statisticAll.optional.stat.days[
-            this.lengthArr - 1
-          ].audio.longestStreak = longestStreak;
-        }
+      }
     }
     this.statisticAll.optional.stat.days[this.lengthArr - 1].audio.newWords +=
       newWords;
@@ -282,9 +280,8 @@ export class StatisticsService {
       this.statisticAll.optional.stat.days[this.lengthArr - 1].sprint
     );
     this.putStat();
-      }
+  }
 
->>>>>>> 34a3e32a89d834ef3fa23f54ecd1c46b58f072c5
   addToHard() {
     this.statisticAll.optional.stat.days[this.lengthArr - 1].book.newWords += 1;
     this.statisticAll.optional.stat.days[
