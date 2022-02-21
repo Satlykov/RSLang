@@ -55,14 +55,11 @@ export class AudioCallGameService {
   }
 
   private getHardQuestions(group: number|undefined,userID?: string|undefined):Observable<Object> {
-    // console.log(group)
     if(!isNaN(group!)){
       const path = `users/${userID}/aggregatedWords?filter={"$and": [{"group": ${group}}, {"userWord.difficulty":"hard"}]}`;
-      console.log(path)
       return this.apiService.get(path)
     }else{
       const path = `users/${userID}/aggregatedWords?filter={"$and": [{"userWord.difficulty":"hard"}]}`;
-      console.log(path)
       return this.apiService.get(path)
     }
   }
@@ -82,7 +79,6 @@ export class AudioCallGameService {
         )
         .subscribe(words => {
           const data = words as Word[];
-          console.log(data)
           data.forEach(element => {
             const randomOptions: string[] = [];
             while(randomOptions.length < 4){
@@ -105,7 +101,6 @@ export class AudioCallGameService {
         )
         .subscribe(words => {
           const data = words as Word[];
-          console.log(data)
           data.forEach(element => {
             const randomOptions: string[] = [];
             while(randomOptions.length < 4){
@@ -158,19 +153,6 @@ export class AudioCallGameService {
         })
     }
   }
-
-  // public getUserWords (userID: string | undefined, group: number, page: number |undefined) {
-  //   this.apiService
-  //     .get(
-  //       `users/${userID}/aggregatedWords?wordsPerPage=20&filter={"$and": [{"group": ${group}}, {"page": ${page}}, {"userWord":null}]}`
-  //     )
-  //     .subscribe(
-  //       (response) =>{
-  //         const words = response as Word[];
-  //         console.log(words)
-  //       }
-  //     )
-  // }
 
   public shuffle(array: string[]) {
     for (let i = array.length - 1; i > 0; i--) {

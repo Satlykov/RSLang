@@ -50,17 +50,14 @@ export class SprintGameService {
     this.newWordsNum$.next(newWordsNum);
   }
 
-  constructor(
-    private api: ApiService,
-  ) {}
+  constructor(private api: ApiService) {}
 
   getWords(selected: string, page: number) {
     this.api.get(`words?${selected}&page=${page}`).subscribe(
       (res) => {
         this.wordsSprint.push(...(res as Word[]));
         this.getWordsSprint(this.wordsSprint);
-      },
-      (error) => console.log(error)
+      }
     );
   }
 
@@ -78,9 +75,6 @@ export class SprintGameService {
         (res) => {
           this.wordsSprint.push(...(res as Word[]));
           this.getWordsSprint(this.wordsSprint);
-        },
-        (error) => {
-          console.log(error.status);
         }
       );
   }
@@ -97,11 +91,9 @@ export class SprintGameService {
       )
       .subscribe(
         (res) => {
-          console.log(res as Word[]);
           this.wordsSprint.push(...(res as Word[]));
           this.getWordsSprint(this.wordsSprint);
-        },
-        (error) => console.log(error)
+        }
       );
   }
 
@@ -129,7 +121,7 @@ export class SprintGameService {
     this.getMultiplier();
     this.getScore(this.score);
     this.getPercent(this.percent);
-    this.getNewNumWords(this.answers)
+    this.getNewNumWords(this.answers);
     return answer === translateWord;
   }
 
@@ -147,24 +139,5 @@ export class SprintGameService {
     this.percent = 0;
     this.score = 0;
     this.multiplier = 1;
-  }
-
-  getStat(userID: string) {
-    this.api.get(`users/${userID}/statistics`).subscribe((res) => {
-      console.log(res);
-    });
-  }
-
-  putStat(userID: string) {
-    this.api
-      .put(`users/${userID}/statistics`, {
-        learnedWords: 33,
-        optional: {
-          day: '19.02.2022',
-        },
-      })
-      .subscribe((res) => {
-        console.log(res);
-      });
   }
 }

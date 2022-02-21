@@ -98,7 +98,6 @@ export class StatisticsService {
               this.lengthArr = this.statisticAll.optional.stat.days.length;
             }
           }
-          console.log(res as Statistic);
           this.getStatToComponent(res as Statistic);
         },
         (error) => {
@@ -115,10 +114,7 @@ export class StatisticsService {
         `users/${this.authorizationService.userID}/statistics`,
         this.statisticAll
       )
-      .subscribe(
-        () => {},
-        (error) => console.log(error)
-      );
+      .subscribe(() => {});
   }
 
   deleteStatBackend() {
@@ -128,9 +124,7 @@ export class StatisticsService {
     };
     this.api
       .put(`users/${this.authorizationService.userID}/statistics`, obj)
-      .subscribe((res) => {
-        console.log(res);
-      });
+      .subscribe(() => {});
   }
 
   addSprintStatistics(
@@ -207,10 +201,6 @@ export class StatisticsService {
     this.statisticAll.optional.stat.days[
       this.lengthArr - 1
     ].words.studiedWordsDay += learnedWords;
-    console.log(
-      this.lengthArr - 1,
-      this.statisticAll.optional.stat.days[this.lengthArr - 1].sprint
-    );
     this.putStat();
   }
 
@@ -287,10 +277,6 @@ export class StatisticsService {
     this.statisticAll.optional.stat.days[
       this.lengthArr - 1
     ].words.studiedWordsDay += learnedWords;
-    console.log(
-      this.lengthArr - 1,
-      this.statisticAll.optional.stat.days[this.lengthArr - 1].sprint
-    );
     this.putStat();
   }
 

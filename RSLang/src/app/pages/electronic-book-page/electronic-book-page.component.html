@@ -1,6 +1,6 @@
 <div class="book-container" [style.background]="backColor">
   <mat-toolbar [ngClass]="!canPlay ? 'cant-play' : ''">
-    <div class="game-btn-container" *ngIf="canPlay">
+    <div class="game-btn-container" *ngIf="canPlay && authenticated">
       <button mat-stroked-button class="btn-game" (click)="startSprint()">
         <mat-icon>videogame_asset</mat-icon>"Спринт"
       </button>
