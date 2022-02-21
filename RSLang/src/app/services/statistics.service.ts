@@ -254,15 +254,27 @@ export class StatisticsService {
       percentArr.reduce((a, b) => a + b) / percentArr.length
     );
 
-    this.statisticAll.optional.stat.days[
-      this.lengthArr - 1
-    ].words.correctAnswersPercentage = Math.round(
-      (this.statisticAll.optional.stat.days[this.lengthArr - 1].sprint
-        .percentageDay +
-        this.statisticAll.optional.stat.days[this.lengthArr - 1].audio
-          .percentageDay) /
-        2
-    );
+    if (
+      this.statisticAll.optional.stat.days[this.lengthArr - 1].sprint
+        .percentageDay === 0
+    ) {
+      this.statisticAll.optional.stat.days[
+        this.lengthArr - 1
+      ].words.correctAnswersPercentage =
+        this.statisticAll.optional.stat.days[
+          this.lengthArr - 1
+        ].audio.percentageDay;
+    } else {
+      this.statisticAll.optional.stat.days[
+        this.lengthArr - 1
+      ].words.correctAnswersPercentage = Math.round(
+        (this.statisticAll.optional.stat.days[this.lengthArr - 1].sprint
+          .percentageDay +
+          this.statisticAll.optional.stat.days[this.lengthArr - 1].audio
+            .percentageDay) /
+          2
+      );
+    }
 
     this.statisticAll.optional.stat.days[this.lengthArr - 1].audio.gamesDay =
       this.statisticAll.optional.stat.days[
