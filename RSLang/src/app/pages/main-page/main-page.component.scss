@@ -61,9 +61,15 @@ $title: 1px 1px 1px $white, 0 0 1em $blue;
     flex-direction: column;
     justify-content: space-evenly;
     .video-blackout {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       width: 100%;
       height: 65vh;
+      min-height: 600px;
       background-color: rgb(233, 243, 255, 0.5);
+
     }
   }
   &__team {
