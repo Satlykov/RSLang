@@ -3,6 +3,8 @@ import { Observable, of, switchMap } from 'rxjs';
 import { Paginated } from 'src/app/models/interface';
 import { AuthorizationService } from 'src/app/services/authorization.service';
 import { ElectronicBookService } from 'src/app/services/electronic-book.service';
+import { AudioCallGameService } from 'src/app/services/audio-call-game.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-word-list',
@@ -30,10 +32,13 @@ export class WordListComponent implements OnInit {
 
   public cards!: Observable<any>;
   userID = '';
+  public isEmpty = false;
 
   constructor(
     private authorizationService: AuthorizationService,
-    private electronicBookService: ElectronicBookService
+    private electronicBookService: ElectronicBookService,
+    private audioCallGameService: AudioCallGameService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -50,7 +55,7 @@ export class WordListComponent implements OnInit {
             switchMap((cards) =>
               of((cards as Array<Paginated>)[0].paginatedResults)
             )
-          );
+          )
       } else if (this.selectedWord === 'studied') {
         this.cards = this.electronicBookService
           .getCardsUserStudied(this.userID)
@@ -79,9 +84,10 @@ export class WordListComponent implements OnInit {
           );
       }
     }
-    this.cards.subscribe((cards) => {
-      if (cards.length > 0) {
-
+    this.isEmpty = true
+    this.cards.subscribe(cards => {
+      if(cards.length < 1){
+        this.isEmpty = false;
       }
     })
   }
@@ -93,4 +99,12 @@ export class WordListComponent implements OnInit {
   changeType() {
     this.getCards();
   }
+
+  public startAudioCallGame(): void {
+    const group = this.selected;
+    this.audioCallGameService.fromWordList = true;
+    this.audioCallGameService.dataFromWordList.group = Number(group);
+    this.router.navigateByUrl('/audio-call-game');
+  }
+
 }

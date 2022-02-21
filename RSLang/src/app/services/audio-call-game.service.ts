@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject, take } from 'rxjs';
+import { Observable, Subject, take, switchMap, of } from 'rxjs';
 import { ApiService } from './api.service';
 import { Word } from '../models/interface';
+import { Paginated } from '../models/interface';
+
 
 @Injectable({
   providedIn: 'root'
@@ -13,10 +15,14 @@ export class AudioCallGameService {
   private randomWords: string[] = [];
   private randomWordsSubject = new Subject<string[]>();
   private questionsListSubject = new Subject<Word[]>();
+  public fromWordList = false;
   public fromBook = false;
   public dataFromBook = {
     group:0,
     page:0
+  }
+  public dataFromWordList = {
+    group:0
   }
 
   get randomWords$(): Observable<string[]> {
@@ -33,21 +39,87 @@ export class AudioCallGameService {
 
 
   public getQuestions(group: number, page?: number|undefined):Observable<Object> {
-    let path = ''
+    let path = '';
     if(page !== undefined){
       path = `words?group=${group}&page=${page}`
+      return this.apiService.get(path)
     }else{
       path = this.getPath(group);
+      return this.apiService.get(path)
     }
+  }
+
+  private getUsersQuestions(group: number, page?: number|undefined,userID?: string|undefined):Observable<Object> {
+    const path = `users/${userID}/aggregatedWords?wordsPerPage=20&filter={"$and": [{"group": ${group}}, {"page": ${page}}, {"userWord":null}]}`
     return this.apiService.get(path)
+  }
+
+  private getHardQuestions(group: number|undefined,userID?: string|undefined):Observable<Object> {
+    // console.log(group)
+    if(!isNaN(group!)){
+      const path = `users/${userID}/aggregatedWords?filter={"$and": [{"group": ${group}}, {"userWord.difficulty":"hard"}]}`;
+      console.log(path)
+      return this.apiService.get(path)
+    }else{
+      const path = `users/${userID}/aggregatedWords?filter={"$and": [{"userWord.difficulty":"hard"}]}`;
+      console.log(path)
+      return this.apiService.get(path)
+    }
   }
 
   public loadRandomWords():void {
     this.getRandomWords()
   }
 
-  public getQuestionsList(group : number, page?: number|undefined): void {
-    this.getQuestions(group,page)
+  public getQuestionsList(group : number,fromWordList:boolean, page?: number|undefined,authorization?: boolean|undefined, userID?: string|undefined ): void {
+    if(authorization && fromWordList) {
+      this.getHardQuestions(group,userID)
+        .pipe(
+          take(1),
+          switchMap((words) =>
+          of((words as Array<Paginated>)[0].paginatedResults)
+          )
+        )
+        .subscribe(words => {
+          const data = words as Word[];
+          console.log(data)
+          data.forEach(element => {
+            const randomOptions: string[] = [];
+            while(randomOptions.length < 4){
+              const randomNum = Math.floor(Math.random() * (this.randomWords.length))
+              randomOptions.push(this.randomWords[randomNum])
+            }
+            element.answersOptions = randomOptions
+          })
+          this.questionsListSubject.next(data)
+          }
+        );
+    }
+    else if(authorization){
+      this.getUsersQuestions(group,page,userID)
+        .pipe(
+          take(1),
+          switchMap((words) =>
+          of((words as Array<Paginated>)[0].paginatedResults)
+          )
+        )
+        .subscribe(words => {
+          const data = words as Word[];
+          console.log(data)
+          data.forEach(element => {
+            const randomOptions: string[] = [];
+            while(randomOptions.length < 4){
+              const randomNum = Math.floor(Math.random() * (this.randomWords.length))
+              randomOptions.push(this.randomWords[randomNum])
+            }
+            element.answersOptions = randomOptions
+          })
+          this.questionsListSubject.next(data)
+          }
+        );
+    }
+    else{
+      this.getQuestions(group,page)
       .pipe(
         take(1)
       )
@@ -63,6 +135,7 @@ export class AudioCallGameService {
         })
         this.questionsListSubject.next(data)
       })
+    }
   }
 
   private getPath(group: number):string{
@@ -71,8 +144,8 @@ export class AudioCallGameService {
   }
 
   private getRandomWords():void {
-    for(let id = 0; id<=5; id++){
-      this.getQuestions(id)
+    for(let group = 0; group<=5; group++){
+      this.getQuestions(group)
         .pipe(
           take(1)
         )
@@ -85,6 +158,19 @@ export class AudioCallGameService {
         })
     }
   }
+
+  // public getUserWords (userID: string | undefined, group: number, page: number |undefined) {
+  //   this.apiService
+  //     .get(
+  //       `users/${userID}/aggregatedWords?wordsPerPage=20&filter={"$and": [{"group": ${group}}, {"page": ${page}}, {"userWord":null}]}`
+  //     )
+  //     .subscribe(
+  //       (response) =>{
+  //         const words = response as Word[];
+  //         console.log(words)
+  //       }
+  //     )
+  // }
 
   public shuffle(array: string[]) {
     for (let i = array.length - 1; i > 0; i--) {

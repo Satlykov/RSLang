@@ -206,6 +206,73 @@ export class StatisticsService {
     this.putStat();
   }
 
+  public addAudioStatistic(
+    newWords: number,
+    percent: number,
+    longestStreak: number,
+    learnedWords: number
+    ):void {
+    if (
+        this.statisticAll.optional.stat.days[this.lengthArr - 1].audio
+          .gamesDay === 0
+    ) {
+        this.statisticAll.optional.stat.days[
+          this.lengthArr - 1
+        ].audio.longestStreak = longestStreak;
+    } else {
+      if(
+          this.statisticAll.optional.stat.days[this.lengthArr - 1].audio
+          .longestStreak < longestStreak
+        ){
+          this.statisticAll.optional.stat.days[
+            this.lengthArr - 1
+          ].audio.longestStreak = longestStreak;
+        }
+    }
+    this.statisticAll.optional.stat.days[this.lengthArr - 1].audio.newWords +=
+      newWords;
+
+    this.statisticAll.optional.stat.days[this.lengthArr - 1].words.newWords +=
+      newWords;
+
+    let percentArr: Array<number> = this.statisticAll.optional.stat.days[
+      this.lengthArr - 1
+    ].audio.correctAnswersPercentageDay as Array<number>;
+    percentArr.push(percent);
+
+    this.statisticAll.optional.stat.days[
+      this.lengthArr - 1
+    ].audio.percentageDay = Math.round(
+      percentArr.reduce((a, b) => a + b) / percentArr.length
+    );
+
+    this.statisticAll.optional.stat.days[
+      this.lengthArr - 1
+    ].words.correctAnswersPercentage = Math.round(
+      (this.statisticAll.optional.stat.days[this.lengthArr - 1].sprint
+        .percentageDay +
+        this.statisticAll.optional.stat.days[this.lengthArr - 1].audio
+          .percentageDay) /
+        2
+    );
+
+    this.statisticAll.optional.stat.days[this.lengthArr - 1].audio.gamesDay =
+      this.statisticAll.optional.stat.days[
+        this.lengthArr - 1
+      ].audio.correctAnswersPercentageDay.length;
+    this.statisticAll.learnedWords += learnedWords;
+    this.statisticAll.optional.stat.days[
+      this.lengthArr - 1
+    ].words.studiedWords = this.statisticAll.learnedWords;
+    this.statisticAll.optional.stat.days[
+      this.lengthArr - 1
+    ].words.studiedWordsDay += learnedWords;
+    console.log(
+      this.lengthArr - 1,
+      this.statisticAll.optional.stat.days[this.lengthArr - 1].sprint
+    );
+    this.putStat();
+      }
 
   addToHard() {
     this.statisticAll.optional.stat.days[

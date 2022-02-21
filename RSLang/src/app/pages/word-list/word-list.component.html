@@ -1,25 +1,33 @@
 <div class="dictionary-container">
   <mat-toolbar>
-    <div class="selected-container">
-      <span class="selected-title">Тип слов:</span>
-      <mat-form-field>
-        <mat-select [(value)]="selectedWord" (valueChange)="changeType()">
-          <mat-option *ngFor="let type of types" [value]="type.value">{{
-            type.viewValue
-          }}</mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-    <div class="selected-container">
-      <span class="selected-title">Уровени:</span>
-      <mat-form-field>
-        <mat-select [(value)]="selected" (valueChange)="changeLevel()">
-          <mat-option *ngFor="let level of levels" [value]="level.value">{{
-            level.viewValue
-          }}</mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
+      <div class="selected-container">
+        <span class="selected-title">Тип слов:</span>
+        <mat-form-field>
+          <mat-select [(value)]="selectedWord" (valueChange)="changeType()">
+            <mat-option *ngFor="let type of types" [value]="type.value">{{
+              type.viewValue
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="game-btn-container" *ngIf="isEmpty">
+        <button mat-stroked-button class="btn-game" >
+          <mat-icon>videogame_asset</mat-icon>"Спринт"
+        </button>
+        <button mat-stroked-button class="btn-game" (click)="startAudioCallGame()">
+          <mat-icon>videogame_asset</mat-icon>"Аудиовызов"
+        </button>
+      </div>
+      <div class="selected-container">
+        <span class="selected-title">Уровни:</span>
+        <mat-form-field>
+          <mat-select [(value)]="selected" (valueChange)="changeLevel()">
+            <mat-option *ngFor="let level of levels" [value]="level.value">{{
+              level.viewValue
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
   </mat-toolbar>
   <div class="words-container" [class.hard]="selectedWord === 'hard'">
     <app-word-dictionary-card
