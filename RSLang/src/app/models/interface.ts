@@ -35,7 +35,6 @@ export interface UserWord {
 export interface Statistic {
   learnedWords: number;
   optional: OptionalStatistic;
-  id?: string | null;
 }
 
 export interface StatisticDelete {
@@ -43,25 +42,25 @@ export interface StatisticDelete {
   optional: {};
 }
 
-
 export interface OptionalStatistic {
   stat: {
-    days: [
-      {
-        date: string;
-        studyDay: number;
-        words: WordStatistic;
-        sprint: GamesStatistic;
-        audio: GamesStatistic;
-        book: BookStatistic;
-      }
-    ]
+    days: [Day];
   };
+}
+
+export interface Day {
+  date: string;
+  studyDay: number;
+  words: WordStatistic;
+  sprint: GamesStatistic;
+  audio: GamesStatistic;
+  book: BookStatistic;
 }
 
 export interface WordStatistic {
   newWords: number;
   studiedWords: number;
+  studiedWordsDay: number;
   correctAnswersPercentage: number;
 }
 
@@ -69,6 +68,7 @@ export interface GamesStatistic {
   newWords: number;
   gamesDay: number;
   correctAnswersPercentageDay: number[];
+  percentageDay: number;
   longestStreak: number;
 }
 
@@ -103,4 +103,9 @@ export interface AudioGameStatictic {
 }
 export interface Paginated {
   paginatedResults: Word[];
+}
+
+export interface Chart {
+  name: string,
+  value: number
 }

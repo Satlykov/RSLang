@@ -5,6 +5,9 @@ import { AudioCallGameService } from 'src/app/services/audio-call-game.service';
 import * as _ from 'lodash';
 import { backendURL } from 'src/app/constants/backendURL';
 import { sections, KEY_CODE } from 'src/app/enums.ts/enums';
+import { AuthorizationService } from 'src/app/services/authorization.service';
+import { UserWordService } from 'src/app/services/user-word.service';
+import { StatisticsService } from 'src/app/services/statistics.service';
 
 
 @Component({
@@ -33,14 +36,17 @@ export class AudioCallGamePageComponent implements OnInit, OnDestroy {
         this.checkAnswer(this.currentQuestion.answersOptions![4]);
       }
       if(event.keyCode === KEY_CODE.back){
-        this.showQuestions(7);
+        this.showQuestions(7,false);
       }
-      if(event.keyCode === KEY_CODE.confirm){
+      if(event.keyCode === KEY_CODE.confirm && this.isAnswered){
         this.nextQuestion();
       }
     }
   }
 
+  public showInfo = false;
+  public isAuthenticated = false;
+  private userID = '';
   public section = sections.questions;
   public isOpened = false;
   public isAnswered = false;
@@ -49,6 +55,9 @@ export class AudioCallGamePageComponent implements OnInit, OnDestroy {
   public id = 0;
   public questionsList: Word[] = [];
   private randomWords: string[] = [];
+  public percent = 0;
+  public currentStreak = 0;
+  public maxStreak = 0
   private unsubscribe$ = new Subject<void>();
   public currentQuestion: Word = {
     id: '1',
@@ -99,9 +108,14 @@ export class AudioCallGamePageComponent implements OnInit, OnDestroy {
 
   constructor(
   private audioCallGameService: AudioCallGameService,
+  private authorizationService: AuthorizationService,
+  private userWordService: UserWordService,
+  private statistics: StatisticsService
   ) {}
 
   ngOnInit(): void {
+    this.isAuthenticated = this.authorizationService.checkLogin();
+    this.userID = this.authorizationService.getUserID();
     this.audioCallGameService.randomWords$
       .pipe(
         takeUntil(this.unsubscribe$),
@@ -112,16 +126,18 @@ export class AudioCallGamePageComponent implements OnInit, OnDestroy {
       })
     this.audioCallGameService.loadRandomWords();
     this.startFromBook();
+    this.startFromWorldList();
   }
 
 
   ngOnDestroy():void {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
+    this.endGame();
   }
 
 
-  public showQuestions(group: number, page?: number|undefined):void {
+  public showQuestions(group: number, fromWordList: boolean, page?: number|undefined,authorization?: boolean|undefined, userID?: string|undefined):void {
     if(group === 7){
       this.statistic = {
         correct:{
@@ -142,7 +158,7 @@ export class AudioCallGamePageComponent implements OnInit, OnDestroy {
     }
     this.questionsList = [];
     this.section = sections.answers;
-    this.audioCallGameService.getQuestionsList(group,page);
+    this.audioCallGameService.getQuestionsList(group,fromWordList,page,authorization,userID);
       this.audioCallGameService.questionsList$
       .pipe(
         take(1)
@@ -162,6 +178,48 @@ export class AudioCallGamePageComponent implements OnInit, OnDestroy {
     this.generateAudio(this.currentQuestion.audio)
   }
 
+  private correct(word: Word): void {
+    let id = word._id;
+    if(!id){
+      id = word.id
+    }
+    const obj = {
+      difficulty: 'studied',
+      optional: {},
+    };
+    if(word.userWord?.difficulty !== undefined){
+      this.userWordService
+        .putUserWord(id,obj)
+        .subscribe(() => {});
+    }
+    else{
+      this.userWordService
+      .postUserWord(id,obj)
+      .subscribe(() => {});
+    }
+  }
+
+  private wrong(word: Word): void{
+    let id = word._id;
+    if(!id){
+      id = word.id
+    }
+    const obj = {
+      difficulty: 'hard',
+      optional: {},
+    };
+    if(word.userWord?.difficulty !== undefined){
+      this.userWordService
+        .putUserWord(id,obj)
+        .subscribe(() => {});
+    }
+    else{
+      this.userWordService
+      .postUserWord(id,obj)
+      .subscribe(() => {});
+    }
+  }
+
   public generateAudio(path: string):void {
     const audio = new Audio();
     audio.src = `${this.backendURL}/${path}`;
@@ -175,12 +233,19 @@ export class AudioCallGamePageComponent implements OnInit, OnDestroy {
     const currentQuestion = this.currentQuestion;
     this.isAnswered = !this.isAnswered
     if( this.currentQuestion.wordTranslate === answer){
+      this.correct(this.currentQuestion)
       this.isCorrect = true;
+      this.currentStreak++;
+      if(this.maxStreak < this.currentStreak){
+        this.maxStreak = this.currentStreak
+      }
       correct.word.push(currentQuestion.word);
       correct.translation.push(currentQuestion.wordTranslate);
       correct.audioPath.push(currentQuestion.audio);
     }else{
+      this.wrong(this.currentQuestion)
       this.isCorrect = false;
+      this.currentStreak = 0;
       incorrect.word.push(currentQuestion.word);
       incorrect.translation.push(currentQuestion.wordTranslate);
       incorrect.audioPath.push(currentQuestion.audio);
@@ -188,6 +253,8 @@ export class AudioCallGamePageComponent implements OnInit, OnDestroy {
   }
 
   public nextQuestion():void {
+    const correct = this.statistic.correct;
+    const incorrect = this.statistic.incorrect;
     this.isAnswered = !this.isAnswered
     if(this.currentIndex < this.questionsList.length-1){
       this.currentIndex++;
@@ -195,13 +262,48 @@ export class AudioCallGamePageComponent implements OnInit, OnDestroy {
     }else{
       this.currentIndex = 0;
       this.section = sections.statistic;
+      this.percent = correct.word.length/(correct.word.length + incorrect.word.length) * 100;
+      this.statistics.addAudioStatistic(
+        this.questionsList.length,
+        this.percent,
+        this.maxStreak,
+        this.statistic.correct.word.length
+      )
     }
   }
 
   public startFromBook(): void {
     if(this.audioCallGameService.fromBook){
-      this.showQuestions(this.audioCallGameService.dataFromBook.group,this.audioCallGameService.dataFromBook.page)
+      this.showQuestions(this.audioCallGameService.dataFromBook.group,this.audioCallGameService.fromWordList,this.audioCallGameService.dataFromBook.page,this.isAuthenticated,this.userID)
       this.section = sections.answers
     }
   }
+
+  public startFromWorldList(): void {
+    if(this.audioCallGameService.fromWordList){
+      this.showQuestions(this.audioCallGameService.dataFromWordList.group,this.audioCallGameService.fromWordList,this.audioCallGameService.dataFromBook.page,this.isAuthenticated,this.userID,)
+      this.section = sections.answers
+    }
+  }
+
+  private endGame(): void {
+    this.currentIndex = 0;
+    this.currentStreak = 0;
+    this.percent = 0;
+    this.maxStreak = 0;
+    this.questionsList = [];
+    this.section = sections.questions;
+  }
+
+  public hideInfo(): void {
+    this.showInfo = false
+    console.log(this.showInfo)
+  }
+
+  public releaseInfo(): void {
+    event?.stopImmediatePropagation()
+    this.showInfo  = true
+    console.log(this.showInfo)
+  }
+
 }

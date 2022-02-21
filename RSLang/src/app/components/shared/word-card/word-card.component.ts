@@ -28,6 +28,7 @@ export class WordCardComponent implements OnInit {
   ngOnInit(): void {
     this.authenticated = this.authorizationService.checkLogin();
     this.cheakWord();
+    this.statistics.putStat();
   }
 
   playWord(src: string) {
@@ -43,11 +44,11 @@ export class WordCardComponent implements OnInit {
       difficulty: 'hard',
       optional: {},
     };
+    this.statistics.addToHard();
     this.userWordService.postUserWord(this.card._id, obj).subscribe(
       () => {
         this.hard = true;
         this.electronicBookPageComponent.getCards();
-
       },
       (error) => {
         this.hard = false;
@@ -60,6 +61,7 @@ export class WordCardComponent implements OnInit {
       difficulty: 'studied',
       optional: {},
     };
+    this.statistics.addToStudied();
     this.userWordService.postUserWord(this.card._id, obj).subscribe(
       () => {
         this.studied = true;

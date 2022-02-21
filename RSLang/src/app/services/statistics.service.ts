@@ -1,5 +1,5 @@
-import { error } from '@angular/compiler/src/util';
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 import {
   BookStatistic,
   GamesStatistic,
@@ -20,11 +20,13 @@ export class StatisticsService {
   wordStatistic: WordStatistic = {
     newWords: 0,
     studiedWords: 0,
+    studiedWordsDay: 0,
     correctAnswersPercentage: 0,
   };
   gamesStatistic: GamesStatistic = {
     newWords: 0,
     correctAnswersPercentageDay: [],
+    percentageDay: 0,
     gamesDay: 0,
     longestStreak: 0,
   };
@@ -52,7 +54,13 @@ export class StatisticsService {
     },
   };
 
-  lengthArr = this.statisticAll.optional.stat.days.length;
+  lengthArr = 0;
+
+  public stat$ = new Subject<Statistic>();
+
+  public getStatToComponent(stat: Statistic) {
+    this.stat$.next(stat);
+  }
   constructor(
     private api: ApiService,
     private authorizationService: AuthorizationService
@@ -67,6 +75,7 @@ export class StatisticsService {
         (res) => {
           this.statisticAll.optional = (res as Statistic).optional;
           this.statisticAll.learnedWords = (res as Statistic).learnedWords;
+          this.lengthArr = this.statisticAll.optional.stat.days.length;
           if (this.statisticAll.optional !== undefined) {
             if (
               this.statisticAll.optional.stat?.days.findIndex(
@@ -86,9 +95,11 @@ export class StatisticsService {
                 book: this.bookStatistic,
               };
               this.statisticAll.optional.stat?.days.push(newDate);
+              this.lengthArr = this.statisticAll.optional.stat.days.length;
             }
           }
-          console.log(res);
+          console.log(res as Statistic);
+          this.getStatToComponent(res as Statistic);
         },
         (error) => {
           if (error.status) {
@@ -99,7 +110,6 @@ export class StatisticsService {
   }
 
   putStat() {
-    console.log(this.statisticAll);
     this.api
       .put(
         `users/${this.authorizationService.userID}/statistics`,
@@ -126,21 +136,17 @@ export class StatisticsService {
   addSprintStatistics(
     newWords: number,
     percent: number,
-    longestStreak: number
+    longestStreak: number,
+    learnedWords: number
   ) {
     if (
       this.statisticAll.optional.stat.days[this.lengthArr - 1].sprint
         .gamesDay === 0
     ) {
-      this.statisticAll.optional.stat.days[this.lengthArr - 1].sprint.newWords =
-        newWords;
       this.statisticAll.optional.stat.days[
         this.lengthArr - 1
       ].sprint.longestStreak = longestStreak;
     } else {
-      this.statisticAll.optional.stat.days[
-        this.lengthArr - 1
-      ].sprint.newWords += newWords;
       if (
         this.statisticAll.optional.stat.days[this.lengthArr - 1].sprint
           .longestStreak < longestStreak
@@ -150,17 +156,168 @@ export class StatisticsService {
         ].sprint.longestStreak = longestStreak;
       }
     }
-    (
-      this.statisticAll.optional.stat.days[this.lengthArr - 1].sprint
-        .correctAnswersPercentageDay as Number[]
-    ).push(percent);
+
+    this.statisticAll.optional.stat.days[this.lengthArr - 1].sprint.newWords +=
+      newWords;
+
+    this.statisticAll.optional.stat.days[this.lengthArr - 1].words.newWords +=
+      newWords;
+
+    let percentArr: Array<number> = this.statisticAll.optional.stat.days[
+      this.lengthArr - 1
+    ].sprint.correctAnswersPercentageDay as Array<number>;
+    percentArr.push(percent);
+
+    this.statisticAll.optional.stat.days[
+      this.lengthArr - 1
+    ].sprint.percentageDay = Math.round(
+      percentArr.reduce((a, b) => a + b) / percentArr.length
+    );
+
+    if (
+      this.statisticAll.optional.stat.days[this.lengthArr - 1].audio
+        .percentageDay === 0
+    ) {
+      this.statisticAll.optional.stat.days[
+        this.lengthArr - 1
+      ].words.correctAnswersPercentage =
+        this.statisticAll.optional.stat.days[
+          this.lengthArr - 1
+        ].sprint.percentageDay;
+    } else {
+      this.statisticAll.optional.stat.days[
+        this.lengthArr - 1
+      ].words.correctAnswersPercentage = Math.round(
+        (this.statisticAll.optional.stat.days[this.lengthArr - 1].sprint
+          .percentageDay +
+          this.statisticAll.optional.stat.days[this.lengthArr - 1].audio
+            .percentageDay) /
+          2
+      );
+    }
+
     this.statisticAll.optional.stat.days[this.lengthArr - 1].sprint.gamesDay =
       this.statisticAll.optional.stat.days[
         this.lengthArr - 1
       ].sprint.correctAnswersPercentageDay.length;
+    this.statisticAll.learnedWords += learnedWords;
+    this.statisticAll.optional.stat.days[
+      this.lengthArr - 1
+    ].words.studiedWords = this.statisticAll.learnedWords;
+    this.statisticAll.optional.stat.days[
+      this.lengthArr - 1
+    ].words.studiedWordsDay += learnedWords;
     console.log(
+      this.lengthArr - 1,
       this.statisticAll.optional.stat.days[this.lengthArr - 1].sprint
     );
     this.putStat();
+  }
+
+  public addAudioStatistic(
+    newWords: number,
+    percent: number,
+    longestStreak: number,
+    learnedWords: number
+  ): void {
+    if (
+      this.statisticAll.optional.stat.days[this.lengthArr - 1].audio
+        .gamesDay === 0
+    ) {
+      this.statisticAll.optional.stat.days[
+        this.lengthArr - 1
+      ].audio.longestStreak = longestStreak;
+    } else {
+      if (
+        this.statisticAll.optional.stat.days[this.lengthArr - 1].audio
+          .longestStreak < longestStreak
+      ) {
+        this.statisticAll.optional.stat.days[
+          this.lengthArr - 1
+        ].audio.longestStreak = longestStreak;
+      }
+    }
+    this.statisticAll.optional.stat.days[this.lengthArr - 1].audio.newWords +=
+      newWords;
+
+    this.statisticAll.optional.stat.days[this.lengthArr - 1].words.newWords +=
+      newWords;
+
+    let percentArr: Array<number> = this.statisticAll.optional.stat.days[
+      this.lengthArr - 1
+    ].audio.correctAnswersPercentageDay as Array<number>;
+    percentArr.push(percent);
+
+    this.statisticAll.optional.stat.days[
+      this.lengthArr - 1
+    ].audio.percentageDay = Math.round(
+      percentArr.reduce((a, b) => a + b) / percentArr.length
+    );
+
+    if (
+      this.statisticAll.optional.stat.days[this.lengthArr - 1].sprint
+        .percentageDay === 0
+    ) {
+      this.statisticAll.optional.stat.days[
+        this.lengthArr - 1
+      ].words.correctAnswersPercentage =
+        this.statisticAll.optional.stat.days[
+          this.lengthArr - 1
+        ].audio.percentageDay;
+    } else {
+      this.statisticAll.optional.stat.days[
+        this.lengthArr - 1
+      ].words.correctAnswersPercentage = Math.round(
+        (this.statisticAll.optional.stat.days[this.lengthArr - 1].sprint
+          .percentageDay +
+          this.statisticAll.optional.stat.days[this.lengthArr - 1].audio
+            .percentageDay) /
+          2
+      );
+    }
+
+    this.statisticAll.optional.stat.days[this.lengthArr - 1].audio.gamesDay =
+      this.statisticAll.optional.stat.days[
+        this.lengthArr - 1
+      ].audio.correctAnswersPercentageDay.length;
+    this.statisticAll.learnedWords += learnedWords;
+    this.statisticAll.optional.stat.days[
+      this.lengthArr - 1
+    ].words.studiedWords = this.statisticAll.learnedWords;
+    this.statisticAll.optional.stat.days[
+      this.lengthArr - 1
+    ].words.studiedWordsDay += learnedWords;
+    console.log(
+      this.lengthArr - 1,
+      this.statisticAll.optional.stat.days[this.lengthArr - 1].sprint
+    );
+    this.putStat();
+  }
+
+  addToHard() {
+    this.statisticAll.optional.stat.days[this.lengthArr - 1].book.newWords += 1;
+    this.statisticAll.optional.stat.days[
+      this.lengthArr - 1
+    ].words.newWords += 1;
+    this.statisticAll.optional.stat.days[
+      this.lengthArr - 1
+    ].book.notedHard += 1;
+  }
+
+  addToStudied() {
+    this.statisticAll.learnedWords += 1;
+    this.statisticAll.optional.stat.days[
+      this.lengthArr - 1
+    ].words.studiedWordsDay += 1;
+    this.statisticAll.optional.stat.days[
+      this.lengthArr - 1
+    ].words.studiedWords = this.statisticAll.learnedWords;
+    this.statisticAll.optional.stat.days[this.lengthArr - 1].book.newWords += 1;
+    this.statisticAll.optional.stat.days[
+      this.lengthArr - 1
+    ].words.newWords += 1;
+    this.statisticAll.optional.stat.days[
+      this.lengthArr - 1
+    ].book.notedStudied += 1;
   }
 }

@@ -19,7 +19,9 @@
         <li routerLink="/book">Учебник</li>
         <li routerLink="/sprint-game">Спринт</li>
         <li routerLink="/audio-call-game">Аудиовызов</li>
-        <li routerLink="/word-list">Cловарь</li>
+        <li>
+          <a style="text-decoration: none; color: #e9f3ff; text-shadow: 1px 1px 1px #428aa8, 0 0 1em #428aa8, 0 0 0.2em #fa8d62;" href="#team">Разработчики</a>
+        </li>
       </ul>
     </div>
   </div>
@@ -52,20 +54,23 @@
       <h1 class="title">Как работает наше приложение</h1>
     </div>
     <div class="video-blackout">
-      <div class="video-frame"></div>
+      <div class="video-frame">
+        <h2 class="team-title title" style="margin-bottom: 25px;">Видео обзор приложения</h2>
+        <iframe width="760" height="400" src="https://www.youtube.com/embed/SNAYnGFva8Y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
     </div>
     <a href="#people-container"> <img src="assets/img/arrow-down.png" alt="arrow-down" class="arrow-down"></a>
   </div>
   <div class="main-container__team" id="people-container">
     <div class="team">
-      <h1 class="team-title title">Разработчики</h1>
+      <h1 class="team-title title" id="team">Разработчики</h1>
     </div>
     <div class="team-people">
       <div class="team-people__info">
         <div class="content">
           <a href="https://github.com/Satlykov" class="team-people__info-name">Рустам <img src="assets/img/github-2.png" alt="github"> </a>
-          <p class="team-people__info-job">team leader, frontend developer</p>
-          <p class="team-people__info-description">тут будет текст</p>
+          <p class="team-people__info-job">Team leader, frontend developer</p>
+          <p class="team-people__info-description">Руководил разработкой проекта, распределял таски между участниками команды. Занимался разработкой игры "Спринт" и авторизацией.</p>
         </div>
         <div class="developer__photo">
           <img src="assets/img/Photo-3.jpg" alt="developer__photo" class="photo-developer">
@@ -74,8 +79,8 @@
       <div class="team-people__info">
         <div class="content">
           <a href="https://github.com/Anesthesia92" class="team-people__info-name">Настя <img src="assets/img/github-2.png" alt="github"></a>
-          <p class="team-people__info-job">frontend developer</p>
-          <p class="team-people__info-description">тут будет текст</p>
+          <p class="team-people__info-job">Frontend developer</p>
+          <p class="team-people__info-description">Разработала дизайн приложения, принимала участие в разработке "Учебника" и "Статистики"</p>
         </div>
         <div class="developer__photo">
           <img src="assets/img/Photo-1.jpg" alt="developer__photo" class="photo-developer">
@@ -84,8 +89,8 @@
       <div class="team-people__info">
         <div class="content">
           <a href="https://github.com/SlikeX" class="team-people__info-name">Слава <img src="assets/img/github-2.png" alt="github"></a>
-          <p class="team-people__info-job">frontend developer</p>
-          <p class="team-people__info-description">тут будет текст</p>
+          <p class="team-people__info-job">Frontend developer</p>
+          <p class="team-people__info-description">Разработал игру "Аудиовызов" и раздел "Словарь"</p>
         </div>
         <div class="developer__photo">
           <img src="assets/img/Photo-2.jpg" alt="developer__photo" class="photo-developer">
