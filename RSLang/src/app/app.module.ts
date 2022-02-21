@@ -21,6 +21,7 @@ import { TokenInterceptor } from './classes/token.interceptor';
 import { WordListComponent } from './pages/word-list/word-list.component';
 import { WordCardComponent } from './components/shared/word-card/word-card.component';
 import { WordDictionaryCardComponent } from './components/shared/word-dictionary-card/word-dictionary-card.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { WordDictionaryCardComponent } from './components/shared/word-dictionary
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxChartsModule
   ],
   providers: [
     {

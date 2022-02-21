@@ -104,3 +104,8 @@ export interface AudioGameStatictic {
 export interface Paginated {
   paginatedResults: Word[];
 }
+
+export interface Chart {
+  name: string,
+  value: number
+}
