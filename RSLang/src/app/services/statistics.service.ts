@@ -67,7 +67,7 @@ export class StatisticsService {
   }
   constructor(
     private api: ApiService,
-    private authorizationService: AuthorizationService,
+    private authorizationService: AuthorizationService
   ) {
     this.getStat();
   }
@@ -174,27 +174,67 @@ export class StatisticsService {
 
     this.statisticAll.optional.stat.days[
       this.lengthArr - 1
-    ].sprint.percentageDay =
-    Math.round(percentArr.reduce((a, b) => a + b) / percentArr.length);
+    ].sprint.percentageDay = Math.round(
+      percentArr.reduce((a, b) => a + b) / percentArr.length
+    );
 
-    this.statisticAll.optional.stat.days[this.lengthArr - 1].words.correctAnswersPercentage =
-    Math.round((this.statisticAll.optional.stat.days[this.lengthArr - 1].sprint
+    this.statisticAll.optional.stat.days[
+      this.lengthArr - 1
+    ].words.correctAnswersPercentage = Math.round(
+      (this.statisticAll.optional.stat.days[this.lengthArr - 1].sprint
         .percentageDay +
         this.statisticAll.optional.stat.days[this.lengthArr - 1].audio
           .percentageDay) /
-      2);
+        2
+    );
 
     this.statisticAll.optional.stat.days[this.lengthArr - 1].sprint.gamesDay =
       this.statisticAll.optional.stat.days[
         this.lengthArr - 1
       ].sprint.correctAnswersPercentageDay.length;
     this.statisticAll.learnedWords += learnedWords;
-    this.statisticAll.optional.stat.days[this.lengthArr - 1].words.studiedWords = this.statisticAll.learnedWords;
-    this.statisticAll.optional.stat.days[this.lengthArr - 1].words.studiedWordsDay += learnedWords;
+    this.statisticAll.optional.stat.days[
+      this.lengthArr - 1
+    ].words.studiedWords = this.statisticAll.learnedWords;
+    this.statisticAll.optional.stat.days[
+      this.lengthArr - 1
+    ].words.studiedWordsDay += learnedWords;
     console.log(
       this.lengthArr - 1,
       this.statisticAll.optional.stat.days[this.lengthArr - 1].sprint
     );
     this.putStat();
+  }
+
+
+  addToHard() {
+    this.statisticAll.optional.stat.days[
+      this.lengthArr - 1
+    ].book.newWords += 1;
+    this.statisticAll.optional.stat.days[
+      this.lengthArr - 1
+    ].words.newWords += 1;
+    this.statisticAll.optional.stat.days[
+      this.lengthArr - 1
+    ].book.notedHard += 1;
+  }
+
+  addToStudied() {
+    this.statisticAll.learnedWords += 1;
+    this.statisticAll.optional.stat.days[
+      this.lengthArr - 1
+    ].words.studiedWordsDay += 1;
+    this.statisticAll.optional.stat.days[
+      this.lengthArr - 1
+    ].words.studiedWords = this.statisticAll.learnedWords;
+    this.statisticAll.optional.stat.days[
+      this.lengthArr - 1
+    ].book.newWords += 1;
+    this.statisticAll.optional.stat.days[
+      this.lengthArr - 1
+    ].words.newWords += 1;
+    this.statisticAll.optional.stat.days[
+      this.lengthArr - 1
+    ].book.notedStudied += 1;
   }
 }
