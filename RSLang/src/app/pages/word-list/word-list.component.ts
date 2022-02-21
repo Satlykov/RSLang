@@ -79,6 +79,11 @@ export class WordListComponent implements OnInit {
           );
       }
     }
+    this.cards.subscribe((cards) => {
+      if (cards.length > 0) {
+
+      }
+    })
   }
 
   changeLevel() {
