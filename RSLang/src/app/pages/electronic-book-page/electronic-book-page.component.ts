@@ -14,11 +14,10 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
   styleUrls: ['./electronic-book-page.component.scss'],
 })
 export class ElectronicBookPageComponent implements OnInit {
-  authenticated = false;
-  userID = '';
-  selected: string = 'group=0';
-  canPlay = true;
-
+  public authenticated = false;
+  public userID = '';
+  public selected: string = 'group=0';
+  public canPlay = true;
   levels = [
     { value: 'group=0', viewValue: 'A1 Elementary' },
     { value: 'group=1', viewValue: 'A2 Pre-Intermediate' },
@@ -40,11 +39,11 @@ export class ElectronicBookPageComponent implements OnInit {
 
   public cards!: Observable<any>;
 
-  numberPage:number = 0;
-  plusPage = true;
-  minusPage = false;
+  public numberPage:number = 0;
+  public plusPage = true;
+  public minusPage = false;
 
-  backColor = this.backColors[1];
+  public backColor = this.backColors[1];
 
   private subsCards: Subscription = new Subscription();
 
@@ -82,9 +81,6 @@ export class ElectronicBookPageComponent implements OnInit {
           ),
           catchError((err) => {
             console.log(err);
-            /*   if (err.status === 401) {
-              console.log(err);
-            } */
             return [];
           })
         );
@@ -92,11 +88,7 @@ export class ElectronicBookPageComponent implements OnInit {
         const index = cards.findIndex(
           (card: Word) => card.userWord === undefined
         );
-        if (index === -1) {
-          this.canPlay = false;
-        } else {
-          this.canPlay = true;
-        }
+        this.canPlay = index !== -1;
       });
     } else {
       this.cards = this.electronicBookService.getCards(
@@ -129,19 +121,10 @@ export class ElectronicBookPageComponent implements OnInit {
   }
 
   checkPage() {
-    if (this.numberPage === 29) {
-      this.plusPage = false;
-    } else {
-      this.plusPage = true;
-    }
-    if (this.numberPage === 0) {
-      this.minusPage = false;
-    } else {
-      this.minusPage = true;
-    }
+    this.plusPage = this.numberPage !== 29;
+    this.minusPage = this.numberPage !== 0;
     this.localStorageService.setItem('EBookPage', { page: this.numberPage, selected: this.selected });
   }
-
   changeLevel() {
     this.backColor = this.backColors[+this.selected.split('=')[1]];
     this.getCards();

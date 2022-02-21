@@ -53,7 +53,6 @@ export class WordDictionaryCardComponent implements OnInit {
   deleteHard() {
     this.userWordService.deleteUserWord(this.card._id).subscribe(() => {
       this.wordListComponent.getCards();
-      /* this.cards.splice(this.index, 1) */
     });
   }
 }

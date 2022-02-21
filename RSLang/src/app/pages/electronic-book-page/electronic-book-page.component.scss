@@ -27,7 +27,6 @@ mat-toolbar {
   justify-content: space-between;
   @include blueTheme;
   color: #fff;
-
   &.cant-play  {
     background-color: #008100;
   }
@@ -72,13 +71,11 @@ mat-icon {
   align-items: center;
   justify-content: space-between;
   min-width: 250px;
-
   button {
     transition: all .5s;
     &:hover {
       color: #49494b;
     }
-
     &:active {
       transform: scale(.5);
     }
