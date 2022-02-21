@@ -7,6 +7,7 @@ import { SprintGameService } from 'src/app/services/sprint-game.service';
 import { Paginated, Word } from 'src/app/models/interface';
 import { AudioCallGameService } from 'src/app/services/audio-call-game.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { StatisticsService } from 'src/app/services/statistics.service';
 
 @Component({
   selector: 'app-electronic-book-page',
@@ -39,7 +40,7 @@ export class ElectronicBookPageComponent implements OnInit {
 
   public cards!: Observable<any>;
 
-  public numberPage:number = 0;
+  public numberPage: number = 0;
   public plusPage = true;
   public minusPage = false;
 
@@ -53,7 +54,8 @@ export class ElectronicBookPageComponent implements OnInit {
     private router: Router,
     private sprintGameService: SprintGameService,
     private audioGameService: AudioCallGameService,
-    private localStorageService: LocalStorageService
+    private localStorageService: LocalStorageService,
+    private statisticsService: StatisticsService
   ) {}
 
   ngOnInit(): void {
@@ -78,11 +80,7 @@ export class ElectronicBookPageComponent implements OnInit {
         .pipe(
           switchMap((cards) =>
             of((cards as Array<Paginated>)[0].paginatedResults)
-          ),
-          catchError((err) => {
-            console.log(err);
-            return [];
-          })
+          )
         );
       this.cards.subscribe((cards) => {
         const index = cards.findIndex(
@@ -123,12 +121,18 @@ export class ElectronicBookPageComponent implements OnInit {
   checkPage() {
     this.plusPage = this.numberPage !== 29;
     this.minusPage = this.numberPage !== 0;
-    this.localStorageService.setItem('EBookPage', { page: this.numberPage, selected: this.selected });
+    this.localStorageService.setItem('EBookPage', {
+      page: this.numberPage,
+      selected: this.selected,
+    });
   }
   changeLevel() {
     this.backColor = this.backColors[+this.selected.split('=')[1]];
     this.getCards();
-    this.localStorageService.setItem('EBookPage', { page: this.numberPage, selected: this.selected });
+    this.localStorageService.setItem('EBookPage', {
+      page: this.numberPage,
+      selected: this.selected,
+    });
   }
 
   startSprint() {

@@ -2,7 +2,9 @@ import { Component, Input, OnInit } from '@angular/core';
 
 import { backendURL } from 'src/app/constants/backendURL';
 import { Word } from 'src/app/models/interface';
+import { ElectronicBookPageComponent } from 'src/app/pages/electronic-book-page/electronic-book-page.component';
 import { AuthorizationService } from 'src/app/services/authorization.service';
+import { StatisticsService } from 'src/app/services/statistics.service';
 import { UserWordService } from 'src/app/services/user-word.service';
 
 @Component({
@@ -18,12 +20,15 @@ export class WordCardComponent implements OnInit {
 
   constructor(
     private userWordService: UserWordService,
-    private authorizationService: AuthorizationService
+    private authorizationService: AuthorizationService,
+    private electronicBookPageComponent: ElectronicBookPageComponent,
+    private statistics: StatisticsService
   ) {}
 
   ngOnInit(): void {
     this.authenticated = this.authorizationService.checkLogin();
     this.cheakWord();
+    this.statistics.putStat();
   }
 
   playWord(src: string) {
@@ -39,9 +44,11 @@ export class WordCardComponent implements OnInit {
       difficulty: 'hard',
       optional: {},
     };
+    this.statistics.addToHard();
     this.userWordService.postUserWord(this.card._id, obj).subscribe(
       () => {
         this.hard = true;
+        this.electronicBookPageComponent.getCards();
       },
       (error) => {
         this.hard = false;
@@ -54,9 +61,11 @@ export class WordCardComponent implements OnInit {
       difficulty: 'studied',
       optional: {},
     };
+    this.statistics.addToStudied();
     this.userWordService.postUserWord(this.card._id, obj).subscribe(
       () => {
         this.studied = true;
+        this.electronicBookPageComponent.getCards();
       },
       (error) => {
         this.studied = false;
@@ -68,6 +77,7 @@ export class WordCardComponent implements OnInit {
     this.userWordService.deleteUserWord(this.card._id).subscribe(
       () => {
         this.hard = false;
+        this.electronicBookPageComponent.getCards();
       },
       (error) => {
         this.hard = true;
@@ -79,6 +89,7 @@ export class WordCardComponent implements OnInit {
     this.userWordService.deleteUserWord(this.card._id).subscribe(
       () => {
         this.studied = false;
+        this.electronicBookPageComponent.getCards();
       },
       (error) => {
         this.studied = true;
@@ -111,7 +122,11 @@ export class WordCardComponent implements OnInit {
 
   playAll() {
     let audioN = new Audio();
-    const tracks = [this.card.audio, this.card.audioMeaning, this.card.audioExample];
+    const tracks = [
+      this.card.audio,
+      this.card.audioMeaning,
+      this.card.audioExample,
+    ];
     let current = 0;
     audioN.src = backendURL + '/' + tracks[current];
     audioN.volume = 0.5;
