@@ -1,0 +1,34 @@
+@import '../../app.component.scss';
+
+.authoriztion-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: calc(100vh - 128px);
+  background-color: #E8F3FF;
+  color: #575757;
+}
+
+mat-card {
+  max-width: 400px;
+}
+
+form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+button {
+  @include button;
+}
+
+button:hover {
+  @include button-hover;
+}

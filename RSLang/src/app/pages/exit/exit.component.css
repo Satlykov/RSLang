@@ -1,0 +1,67 @@
+@import url("https://fonts.googleapis.com/css2?family=Neucha&family=Rubik:wght@300;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Neucha&family=Rubik:ital,wght@0,300;0,700;1,300&display=swap");
+.exit-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: calc(100vh - 128px);
+  background-color: #E8F3FF;
+  color: #575757;
+}
+
+mat-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 300px;
+  max-width: 400px;
+}
+
+button {
+  border-radius: 40px;
+  border: 1px solid #fa8d62;
+  color: #e9f3ff;
+  background-color: #fa8d62;
+  text-align: center;
+  vertical-align: middle;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Rubic, sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+  transition-duration: 600ms;
+}
+
+button:hover {
+  border-radius: 40px;
+  border: 1px solid #fa8d62;
+  color: #e9f3ff;
+  background-color: #fa8d62;
+  text-align: center;
+  vertical-align: middle;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Rubic, sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+  transition-duration: 600ms;
+  transition-duration: 600ms;
+  background: linear-gradient(to right, #fa8d62, #438aa8);
+  color: #e9f3ff;
+  filter: drop-shadow(0 0 0.2rem #438aa8);
+}
+
+.btn-container {
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+/*# sourceMappingURL=exit.component.css.map */

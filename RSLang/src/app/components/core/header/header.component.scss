@@ -1,0 +1,26 @@
+@import '../../../app.component';
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+button {
+  @include button;
+}
+
+button:hover{
+  @include button-hover;
+}
+
+mat-toolbar {
+  @include blueTheme;
+}
+
+.user-title {
+  color: #fff;
+  margin: 0 10px;
+}
+
+.logo {
+  margin-left: 10px;
+}
