@@ -7,7 +7,7 @@
     <h2 *ngIf="selected === 'chart-new-words'">График новых слов</h2>
     <h2 *ngIf="selected === 'chart-studied-words'">'График изученных слов</h2>
   </div>
-  <h2>Всего изученно слов: {{allLearnedWords}}</h2>
+  <h2>Всего изученно слов: {{ allLearnedWords }}</h2>
   <div class="selected-container">
     <span>Тип статистики:</span>
     <mat-form-field>
@@ -34,10 +34,10 @@
         <tr *ngFor="let day of days">
           <td>{{ day.studyDay }}</td>
           <td>{{ day.date }}</td>
-          <td>{{ day.words.newWords}}</td>
-          <td>{{ day.words.studiedWordsDay}}</td>
-          <td>{{ day.words.studiedWords}}</td>
-          <td>{{ day.words.correctAnswersPercentage}} %</td>
+          <td>{{ day.words.newWords }}</td>
+          <td>{{ day.words.studiedWordsDay }}</td>
+          <td>{{ day.words.studiedWords }}</td>
+          <td>{{ day.words.correctAnswersPercentage }} %</td>
         </tr>
       </tbody>
     </table>
@@ -99,5 +99,39 @@
         </tr>
       </tbody>
     </table>
+    <ngx-charts-bar-vertical
+      *ngIf="selected === 'chart-new-words'"
+      [results]="daysNewWords"
+      [gradient]="gradinet"
+      [xAxis]="xAxis"
+      [yAxis]="yAxis"
+      [legend]="legend"
+      [legendTitle]="legendTitle1"
+      [showXAxisLabel]="showXAxisLabel"
+      [showYAxisLabel]="showYAxisLabel"
+      [xAxisLabel]="xAxisLabel"
+      [yAxisLabel]="yAxisLabel"
+      [showDataLabel]="showDataLabel"
+      [showGridLines]="showGridLines"
+      [barPadding]="15"
+    >
+    </ngx-charts-bar-vertical>
+    <ngx-charts-bar-vertical
+    *ngIf="selected === 'chart-studied-words'"
+    [results]="daysLearnedWords"
+    [gradient]="gradinet"
+    [xAxis]="xAxis"
+    [yAxis]="yAxis"
+    [legend]="legend"
+    [legendTitle]="legendTitle1"
+    [showXAxisLabel]="showXAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    [xAxisLabel]="xAxisLabel"
+    [yAxisLabel]="yAxisLabel2"
+    [showDataLabel]="showDataLabel"
+    [showGridLines]="showGridLines"
+    [barPadding]="15"
+  >
+  </ngx-charts-bar-vertical>
   </mat-card>
 </div>

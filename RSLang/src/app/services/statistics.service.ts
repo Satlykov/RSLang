@@ -1,18 +1,14 @@
-import { error } from '@angular/compiler/src/util';
 import { Injectable } from '@angular/core';
-import { Observable, of, Subject, switchMap } from 'rxjs';
+import { Subject } from 'rxjs';
 import {
   BookStatistic,
-  Day,
   GamesStatistic,
-  Paginated,
   Statistic,
   StatisticDelete,
   WordStatistic,
 } from '../models/interface';
 import { ApiService } from './api.service';
 import { AuthorizationService } from './authorization.service';
-import { ElectronicBookService } from './electronic-book.service';
 
 @Injectable({
   providedIn: 'root',
@@ -178,15 +174,27 @@ export class StatisticsService {
       percentArr.reduce((a, b) => a + b) / percentArr.length
     );
 
-    this.statisticAll.optional.stat.days[
-      this.lengthArr - 1
-    ].words.correctAnswersPercentage = Math.round(
-      (this.statisticAll.optional.stat.days[this.lengthArr - 1].sprint
-        .percentageDay +
-        this.statisticAll.optional.stat.days[this.lengthArr - 1].audio
-          .percentageDay) /
-        2
-    );
+    if (
+      this.statisticAll.optional.stat.days[this.lengthArr - 1].audio
+        .percentageDay === 0
+    ) {
+      this.statisticAll.optional.stat.days[
+        this.lengthArr - 1
+      ].words.correctAnswersPercentage =
+        this.statisticAll.optional.stat.days[
+          this.lengthArr - 1
+        ].sprint.percentageDay;
+    } else {
+      this.statisticAll.optional.stat.days[
+        this.lengthArr - 1
+      ].words.correctAnswersPercentage = Math.round(
+        (this.statisticAll.optional.stat.days[this.lengthArr - 1].sprint
+          .percentageDay +
+          this.statisticAll.optional.stat.days[this.lengthArr - 1].audio
+            .percentageDay) /
+          2
+      );
+    }
 
     this.statisticAll.optional.stat.days[this.lengthArr - 1].sprint.gamesDay =
       this.statisticAll.optional.stat.days[
@@ -206,6 +214,8 @@ export class StatisticsService {
     this.putStat();
   }
 
+<<<<<<< HEAD
+=======
   public addAudioStatistic(
     newWords: number,
     percent: number,
@@ -274,10 +284,9 @@ export class StatisticsService {
     this.putStat();
       }
 
+>>>>>>> 34a3e32a89d834ef3fa23f54ecd1c46b58f072c5
   addToHard() {
-    this.statisticAll.optional.stat.days[
-      this.lengthArr - 1
-    ].book.newWords += 1;
+    this.statisticAll.optional.stat.days[this.lengthArr - 1].book.newWords += 1;
     this.statisticAll.optional.stat.days[
       this.lengthArr - 1
     ].words.newWords += 1;
@@ -294,9 +303,7 @@ export class StatisticsService {
     this.statisticAll.optional.stat.days[
       this.lengthArr - 1
     ].words.studiedWords = this.statisticAll.learnedWords;
-    this.statisticAll.optional.stat.days[
-      this.lengthArr - 1
-    ].book.newWords += 1;
+    this.statisticAll.optional.stat.days[this.lengthArr - 1].book.newWords += 1;
     this.statisticAll.optional.stat.days[
       this.lengthArr - 1
     ].words.newWords += 1;
