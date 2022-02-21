@@ -140,6 +140,7 @@ export class AuthorizationService {
             this.getUserName(this.userName);
             this.localStorageService.setItem(this.keyStorage, res);
             this.sessionStorageService.setItem(this.keyStorage, res);
+            this.getToken();
           }
         },
         (error) => {
