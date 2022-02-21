@@ -174,7 +174,7 @@ export class StatisticsService {
       percentArr.reduce((a, b) => a + b) / percentArr.length
     );
 
-    /* if (
+    if (
       this.statisticAll.optional.stat.days[this.lengthArr - 1].audio
         .percentageDay === 0
     ) {
@@ -193,7 +193,7 @@ export class StatisticsService {
           this.statisticAll.optional.stat.days[this.lengthArr - 1].audio
             .percentageDay) /
           2
-      ); */
+      );
     }
 
     this.statisticAll.optional.stat.days[this.lengthArr - 1].sprint.gamesDay =
