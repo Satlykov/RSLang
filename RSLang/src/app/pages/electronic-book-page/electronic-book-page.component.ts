@@ -56,7 +56,6 @@ export class ElectronicBookPageComponent implements OnInit {
     private sprintGameService: SprintGameService,
     private audioGameService: AudioCallGameService,
     private localStorageService: LocalStorageService,
-    private statisticsService: StatisticsService
   ) {}
 
   ngOnInit(): void {

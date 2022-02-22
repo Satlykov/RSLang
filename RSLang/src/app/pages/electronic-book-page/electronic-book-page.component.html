@@ -1,6 +1,6 @@
 <div class="book-container" [style.background]="backColor">
   <mat-toolbar [ngClass]="!canPlay ? 'cant-play' : ''">
-    <div class="game-btn-container" *ngIf="canPlay && authenticated">
+    <div class="game-btn-container" *ngIf="canPlay">
       <button mat-stroked-button class="btn-game" (click)="startSprint()">
         <mat-icon>videogame_asset</mat-icon>"Спринт"
       </button>
@@ -38,7 +38,7 @@
       "Словарь"
     </button>
     <div class="selected-container">
-      <span class="selected-title">Уровени:</span>
+      <span class="selected-title">Уровни:</span>
       <mat-form-field>
         <mat-select [(value)]="selected" (valueChange)="changeLevel()">
           <mat-option *ngFor="let level of levels" [value]="level.value">{{

@@ -69,43 +69,45 @@ export class StatisticsService {
   }
 
   getStat() {
-    this.api
-      .get(`users/${this.authorizationService.userID}/statistics`)
-      .subscribe(
-        (res) => {
-          this.statisticAll.optional = (res as Statistic).optional;
-          this.statisticAll.learnedWords = (res as Statistic).learnedWords;
-          this.lengthArr = this.statisticAll.optional.stat.days.length;
-          if (this.statisticAll.optional !== undefined) {
-            if (
-              this.statisticAll.optional.stat?.days.findIndex(
-                (item) => item.date === this.date
-              ) === -1
-            ) {
-              let newDate = {
-                date: this.date,
-                studyDay: +(
-                  this.statisticAll.optional.stat.days[
-                    this.statisticAll.optional.stat.days.length - 1
-                  ].studyDay + 1
-                ),
-                words: this.wordStatistic,
-                sprint: this.gamesStatistic,
-                audio: this.gamesStatistic,
-                book: this.bookStatistic,
-              };
-              this.statisticAll.optional.stat?.days.push(newDate);
-              this.lengthArr = this.statisticAll.optional.stat.days.length;
+    if (this.authorizationService.authenticated) {
+      this.api
+        .get(`users/${this.authorizationService.userID}/statistics`)
+        .subscribe(
+          (res) => {
+            this.statisticAll.optional = (res as Statistic).optional;
+            this.statisticAll.learnedWords = (res as Statistic).learnedWords;
+            this.lengthArr = this.statisticAll.optional.stat.days.length;
+            if (this.statisticAll.optional !== undefined) {
+              if (
+                this.statisticAll.optional.stat?.days.findIndex(
+                  (item) => item.date === this.date
+                ) === -1
+              ) {
+                let newDate = {
+                  date: this.date,
+                  studyDay: +(
+                    this.statisticAll.optional.stat.days[
+                      this.statisticAll.optional.stat.days.length - 1
+                    ].studyDay + 1
+                  ),
+                  words: this.wordStatistic,
+                  sprint: this.gamesStatistic,
+                  audio: this.gamesStatistic,
+                  book: this.bookStatistic,
+                };
+                this.statisticAll.optional.stat?.days.push(newDate);
+                this.lengthArr = this.statisticAll.optional.stat.days.length;
+              }
+            }
+            this.getStatToComponent(res as Statistic);
+          },
+          (error) => {
+            if (error.status) {
+              this.putStat();
             }
           }
-          this.getStatToComponent(res as Statistic);
-        },
-        (error) => {
-          if (error.status) {
-            this.putStat();
-          }
-        }
-      );
+        );
+    }
   }
 
   putStat() {

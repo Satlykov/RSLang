@@ -267,17 +267,19 @@ export class SprintGamePageComponent implements OnInit {
       difficulty: 'studied',
       optional: {},
     };
-    if (
-      (this.wordsSprint[this.indexWord] as Word).userWord?.difficulty !==
-      undefined
-    ) {
-      this.userWordService
-        .putUserWord((this.wordsSprint[this.indexWord] as Word)._id, obj)
-        .subscribe(() => {});
-    } else {
-      this.userWordService
-        .postUserWord((this.wordsSprint[this.indexWord] as Word)._id, obj)
-        .subscribe(() => {});
+    if (this.authenticated) {
+      if (
+        (this.wordsSprint[this.indexWord] as Word).userWord?.difficulty !==
+        undefined
+      ) {
+        this.userWordService
+          .putUserWord((this.wordsSprint[this.indexWord] as Word)._id, obj)
+          .subscribe(() => {});
+      } else {
+        this.userWordService
+          .postUserWord((this.wordsSprint[this.indexWord] as Word)._id, obj)
+          .subscribe(() => {});
+      }
     }
   }
 
@@ -291,17 +293,19 @@ export class SprintGamePageComponent implements OnInit {
       difficulty: 'hard',
       optional: {},
     };
-    if (
-      (this.wordsSprint[this.indexWord] as Word).userWord?.difficulty !==
-      undefined
-    ) {
-      this.userWordService
-        .putUserWord((this.wordsSprint[this.indexWord] as Word)._id, obj)
-        .subscribe(() => {});
-    } else {
-      this.userWordService
-        .postUserWord((this.wordsSprint[this.indexWord] as Word)._id, obj)
-        .subscribe(() => {});
+    if (this.authenticated) {
+      if (
+        (this.wordsSprint[this.indexWord] as Word).userWord?.difficulty !==
+        undefined
+      ) {
+        this.userWordService
+          .putUserWord((this.wordsSprint[this.indexWord] as Word)._id, obj)
+          .subscribe(() => {});
+      } else {
+        this.userWordService
+          .postUserWord((this.wordsSprint[this.indexWord] as Word)._id, obj)
+          .subscribe(() => {});
+      }
     }
   }
 
