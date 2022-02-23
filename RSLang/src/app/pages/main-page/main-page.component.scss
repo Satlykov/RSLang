@@ -778,10 +778,17 @@ button:focus {
   height: 100%;
 
   iframe {
-    width: 50%;
-    min-width: 32rem;
-    height: 70%;
-    max-height: 20rem;
+    width: 620px;
+    height: 350px;
+  }
+
+
+  @media (max-width: 750px) {
+    iframe {
+      width: 340px;
+      height: 190px;
+    }
   }
 }
+
 
