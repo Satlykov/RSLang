@@ -77,6 +77,9 @@ export class StatisticsService {
             this.statisticAll.optional = (res as Statistic).optional;
             this.statisticAll.learnedWords = (res as Statistic).learnedWords;
             this.lengthArr = this.statisticAll.optional.stat.days.length;
+            if (this.lengthArr === 0) {
+              this.lengthArr = 1;
+            }
             if (this.statisticAll.optional !== undefined) {
               if (
                 this.statisticAll.optional.stat?.days.findIndex(
@@ -86,9 +89,8 @@ export class StatisticsService {
                 let newDate = {
                   date: this.date,
                   studyDay: +(
-                    this.statisticAll.optional.stat.days[
-                      this.statisticAll.optional.stat.days.length - 1
-                    ].studyDay + 1
+                    this.statisticAll.optional.stat.days[this.lengthArr - 1]
+                      .studyDay + 1
                   ),
                   words: this.wordStatistic,
                   sprint: this.gamesStatistic,
@@ -97,12 +99,15 @@ export class StatisticsService {
                 };
                 this.statisticAll.optional.stat?.days.push(newDate);
                 this.lengthArr = this.statisticAll.optional.stat.days.length;
+                if (this.lengthArr === 0) {
+                  this.lengthArr = 1;
+                }
               }
             }
             this.getStatToComponent(res as Statistic);
           },
           (error) => {
-            if (error.status) {
+            if (error.status === 404) {
               this.putStat();
             }
           }
